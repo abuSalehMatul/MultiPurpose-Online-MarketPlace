@@ -1,0 +1,56 @@
+/*==============================
+** News Updates
+==============================*/
+.news-update-area {
+    padding-top: 30px;
+    padding-bottom: 120px;
+    background-color: #f7f8fc;
+    .section-title {
+        .bg-text {
+            color: #f0f0f0;
+        }
+    }
+    .single-news-item{
+        text-align: center;
+        .thumb {
+            background-color: #ddd;
+            background-position: center;
+            background-size: cover;
+            min-height: 280px;
+            &.thumb-1-bg{
+                background-image: url(../img/news/01.jpg);
+            }
+            &.thumb-2-bg{
+                background-image: url(../img/news/02.jpg);
+            }
+            &.thumb-3-bg{
+                background-image: url(../img/news/03.jpg);
+            }
+        }
+        .content{
+            padding: 33px 30px 25px 30px;
+            background-color: $white;
+            .meta-time{
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;
+                margin-bottom: 12px;
+                color: #666666;
+            }
+            h4{
+                display: inline-block;
+                font-size: 22px;
+                font-weight: 500;
+                padding-bottom: 15px;
+                @include transition($transition);
+                &:hover{
+                    color: $base-color;
+                }
+            }
+            p{
+                color: #666666;
+            }
+        }
+    } 
+}

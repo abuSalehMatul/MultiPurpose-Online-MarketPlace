@@ -1,0 +1,158 @@
+/*====================
+** Global Scss
+====================*/
+.remove-col-padding{
+    padding: 0;
+}
+.margin-bottom-0{
+    margin-bottom: 0;
+}
+.boxed-btn {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: $secondary-color;
+    text-transform: uppercase;
+    color: $white;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-top: -10px;
+    font-size: 10px;
+    @include transition($transition);
+    &:hover{
+        background-color: $black;
+        color: $white;
+    }
+    &:focus{
+        color: #fff;
+    }
+}
+input[type=submit] {
+    padding: 20px;
+    background-color: $base-color;
+    border-radius: none;
+    border: none;
+    width: 100%;
+    text-transform: uppercase;
+    border-radius: 5px;
+    color: $white;
+    font-weight: 700;
+    font-size: 10px;
+    @include transition($transition);
+    &:hover{
+        background-color: $black;
+    }
+}
+.section-title{
+    padding: 60px 0;
+    padding-bottom: 55px;
+    position: relative;
+    z-index: 1;
+    h2{
+        font-weight: 300;
+        strong{
+            font-weight: 700;
+        }
+    }
+    .bg-text{
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 100%;
+        height: 100%;
+        font-size: 180px;
+        z-index: -1;
+        color: #f8f8f8;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+    p{
+        color: #666666;
+    }
+}
+
+.goolge-map-content{
+    .thumb{
+        position: relative;
+        display: inline-block;
+        &:after{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            content: '';
+            background-color: #000;
+            opacity: .3;
+        }
+        .tag{
+            position: absolute;
+            display: inline-block;
+            top: 30px;
+            right: 30px;
+            z-index: 2;
+            font-size: 10px;
+            background-color: rgba(255,255,255,.3);
+            font-weight: 700;
+            padding: 5px 25px;
+            color: $white;
+            border-radius: 25px;
+            text-transform: uppercase;
+        }
+        .hover{
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1;
+            width: 100%;
+            padding-right: 60px;
+            .rating{
+                display: inline-block;
+                padding: 5px 15px;
+                color: $white;
+                background-color: $secondary-color;
+                border-radius: 25px;
+            }
+            .content-inner{
+                position: relative;
+                .icon{
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    @include transform(translateY(-50%));
+                    a{
+                        display: inline-block;
+                        color: $heading-color;
+                        background-color: rgba(0, 0, 0, .40);
+                        width: 40px;
+                        height: 40px;
+                        line-height: 45px;
+                        z-index: 1;
+                        color: $white;
+                        border-radius: 50%;
+                        text-align: center;
+                        @include transition($transition);
+                        &:hover{
+                            background-color: $secondary-color;
+
+                        }
+                    }
+                }
+                .content{
+                    h4{
+                        color: $white;
+                        font-weight: 500;
+                        font-size: 22px;
+                        display: block;
+                        margin-top: 15px;
+                    }
+                    .location{
+                        font-size: 10px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,88 @@
+/*===========================
+** Vacation Of Your Dreams
+============================*/
+.vacation-area{
+    padding-top: 30px;
+    padding-bottom: 105px;
+    .section-title{
+        .bg-text{
+            left: -12%;
+        }
+    }
+    .single-vacation-item{
+        text-align: center;
+        position: relative;
+        @include transition($transition);
+         &:hover {
+             .icon{
+                 border-color: $base-color;
+             }
+             .progress-separator {
+                 background-color: $base-color;
+                 span{
+                     background-color: $base-color;
+                     &:after{
+                        background-color: $base-color;
+                     }
+                 }
+             }
+         }
+        .progress-separator{
+            position: absolute;
+            right: -68px;
+            top: 25%;
+            width: 165px;
+            height: 2px;
+            background-color: #eeeeee;  
+              @include transition($transition);
+            span{
+                display: inline-block;
+                position: absolute;
+                content: '';
+                width: 20px;
+                height: 2px;
+                top: -10px;
+                right: 0;
+                background-color: #eee;
+                @include transform(skewY(45deg));
+                  @include transition($transition);
+                &:after{
+                    position: absolute;
+                    content: '';
+                    width: 20px;
+                    height: 2px;
+                    bottom: -19px;
+                    right: 0;
+                    background-color: #eee;
+                    @include transform(skewY(-63deg));
+                      @include transition($transition);
+                }
+            }
+        }
+        .icon{
+            display: inline-block;
+            width: 170px;
+            height: 170px;
+            line-height: 215px;
+            border: 2px solid #eee;
+            border-radius: 50%;
+            margin-bottom: 25px;
+              @include transition($transition);
+              svg{
+                  fill: $base-color;
+                  @include transition($transition);
+              }
+        }
+        .content{
+            h4{
+                font-size: 26px;
+                font-weight: 500;
+                margin-bottom: 20px;
+            }
+            p{
+                color: #666666;
+            }
+        }
+       
+    }
+}

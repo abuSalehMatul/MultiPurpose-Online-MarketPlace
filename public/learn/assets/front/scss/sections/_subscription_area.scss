@@ -1,0 +1,48 @@
+/*========================
+** Subscription Area
+=========================*/
+ .subscription-area{
+     background-color: #10111b;
+     padding: 60px 0;
+     .subscription-left{
+         span{
+             font-size: 12px;
+             font-weight: 700;
+             text-transform: uppercase;
+             color: #666666;
+         }
+         h2{
+            font-size: 38px;
+            font-weight: 500;
+            color: $white;
+            margin-top: 3px;
+            margin-bottom: 0;
+         }
+     }
+     .subscription-form{
+          padding: 10px 0;  
+          border: 2px solid rgba(238,238,238,.20);
+          border-radius: 5px;
+          .form-wrappe{
+              input[type=text]{
+                  padding: 15px 20px;
+                  border: none;
+                  background-color: transparent;
+                  font-size: 12px;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  color: $white;
+                  width: 75%;
+              }
+              input[type=submit]{
+                  width: 150px;
+                  font-size: 10px;
+                  background-color: $secondary-color;
+                  @include transition($transition);
+                  &:hover{
+                      background-color: #777;
+                  }
+              }
+          }
+     }
+ }

@@ -1,0 +1,28 @@
+
+/*==============================
+** Main Scss
+==============================*/
+@import "main/_variables";
+@import "main/_mixins";
+@import "main/_global";
+
+/*===============================
+** Normalize/Reset Scss File
+===============================*/
+@import "main/_normalize";
+
+/*=========================
+** Sections Scss File
+=========================*/
+@import "sections/_navbar";
+@import "sections/_support-bar";
+@import "sections/_header";
+@import "sections/_popular-category";
+@import "sections/_most_visited";
+@import "sections/_vacation_dreams";
+@import "sections/_news_update";
+@import "sections/_footer";
+@import "sections/_listings";
+@import "sections/_subscription_area";
+@import "sections/_blog";
+@import "sections/_listing_details";

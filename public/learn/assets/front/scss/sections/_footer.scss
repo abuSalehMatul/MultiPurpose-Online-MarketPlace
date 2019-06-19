@@ -1,0 +1,44 @@
+/*==============================
+** Footer area
+==============================*/
+.footer-area{
+    padding: 100px 0;
+    .widget-area{
+        .widget-header {
+            .logo{
+                display: block;
+                margin-bottom: 37px;
+            }
+            .sub-title{
+                display: block;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+            h4{
+                margin-top: 2px;
+                margin-bottom: 25px;
+                font-size: 22px;
+            }
+            &.empty-title{
+                min-height: 68px;
+            }
+        }
+        .widget-body {
+            p{
+                color: #666;
+            }
+            .boxed-btn {
+                margin-top: 17px;
+            }
+            li{
+                a{
+                    color: #666666;
+                    display: block;
+                    padding-bottom: 10px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }  
+}
