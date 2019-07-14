@@ -136,6 +136,11 @@
                                         @if(!empty($roles))
                                             <ul class="wt-accordionhold wt-formaccordionhold accordion">
                                                 @foreach ($roles as $key => $role)
+                                                @php
+                                                    if($role['role_type']!='employer' && $role['role_type']!='freelancer'){
+                                                        continue;
+                                                    }
+                                                @endphp
                                                     @if (!in_array($role['id'] == 1, $roles))
                                                         <li>
                                                             <div class="wt-accordiontitle" id="headingOne" data-toggle="collapse" data-target="#collapseOne">

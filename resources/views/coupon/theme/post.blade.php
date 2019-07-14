@@ -197,7 +197,7 @@
 											</div>
 											<div class="author-badge"><span>{{$post->user->is_admin == '1' ? 'Admin' : 'User'}}</span></div>
 											<div class="post-author-img">
-												<a href="{{url('profile/'.$post->user_id)}}" title="{{$post->user->name}}"><img src="{{asset('images/user/'.$post->user->image)}}" class="img-fluid" alt="Admin"></a>
+												<a href="{{url('profile/'.$post->user_id)}}" title="{{$post->user->name}}"><img src="{{asset('coupon/images/user/'.$post->user->image)}}" class="img-fluid" alt="Admin"></a>
 											</div>
 											<div class="post-author-footer">
 												<div class="post-author-dtl">{{count($post->user->coupon)}} Posts</div>
@@ -219,7 +219,7 @@
 													<div class="col-lg-3 text-center">
 														<div class="post-deal-dtl">
 															<div class="deal-img">
-																<img src="{{$post->image != null ? asset('images/coupon/'.$post->image) : asset('images/store/'.$post->store->image)}}" class="img-fluid" alt="Deal">
+																<img src="{{$post->image != null ? asset('coupon/images/coupon/'.$post->image) : asset('coupon/images/store/'.$post->store->image)}}" class="img-fluid" alt="Deal">
 															</div>
 															<div class="post-deal-btn">
 																<a href="{{$post->link != Null ? $post->link : $post->store->link}}" title="{{$post->store->title}}" target="_blank" data-id="{{$post->id}}" class="grab-now btn btn-primary">Buy Now</a>
@@ -286,7 +286,7 @@
 													</div>
 													<div class="author-badge"><span>{{$comment->users->is_admin == '1' ? 'Admin' : 'User'}}</span></div>
 													<div class="post-author-img">
-														<a href="{{url('profile/'.$comment->user_id)}}" title="Admin"><img src="{{asset('images/user/'.$comment->users->image)}}" class="img-fluid" alt="Admin"></a>
+														<a href="{{url('profile/'.$comment->user_id)}}" title="Admin"><img src="{{asset('coupon/images/user/'.$comment->users->image)}}" class="img-fluid" alt="Admin"></a>
 													</div>
 													<div class="post-author-footer">
 														<div class="post-author-dtl">{{count($comment->users->coupon)}} Posts</div>
@@ -338,9 +338,9 @@
 									<div class="col-lg-2 border-r text-center">
 										<div class="post-author-img">
 											@auth
-												<img src="{{asset('images/user/'.$auth->image)}}" class="img-fluid" alt="{{$auth->title}}">
+												<img src="{{asset('coupon/images/user/'.$auth->image)}}" class="img-fluid" alt="{{$auth->title}}">
 											@else
-												<img src="{{asset('images/user/user.png')}}" class="img-fluid" alt="user-img">
+												<img src="{{asset('coupon/images/user/user.png')}}" class="img-fluid" alt="user-img">
 											@endauth
 										</div>
 									</div>
@@ -414,7 +414,7 @@
 						@if(isset($post->type))
 							<div class="page-sidebar-widget brand-widget text-center">
 								<div class="brand-logo">
-									<a href="#" title="{{$post->store->title}}" target="_blank"><img src="{{asset('images/store/'.$post->store->image)}}" class="img-fluid" alt="Brand"></a>
+									<a href="#" title="{{$post->store->title}}" target="_blank"><img src="{{asset('coupon/images/store/'.$post->store->image)}}" class="img-fluid" alt="Brand"></a>
 								</div>
 								<div class="brand-visit-btn">
 									<a href="{{$post->store->link}}" title="{{$post->store->title}}" target="_blank" class="btn btn-primary">Visit Store</a>

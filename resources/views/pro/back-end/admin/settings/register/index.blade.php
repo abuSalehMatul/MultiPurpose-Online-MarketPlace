@@ -1,7 +1,7 @@
 <div class="wt-tabscontenttitle">
     <h2>{{{ trans('lang.register_form_settings') }}}</h2>
 </div>
-    {!! Form::open(['url' => 'admin/store/registration-settings', 'class' =>'wt-formtheme wt-userform', 'id'
+    {!! Form::open(['url' => 'Pro/admin/store/registration-settings', 'class' =>'wt-formtheme wt-userform', 'id'
         =>'registration-setting-form']) !!}
         <div class="wt-location wt-tabsinfo la-formstepone la-formsteps">
             <div class="wt-tabscontenttitle">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            @include('back-end.admin.settings.register.image')
+            @include('pro.back-end.admin.settings.register.image')
         </div>
         <div class="wt-location wt-tabsinfo la-formsteps">
             <div class="wt-tabscontenttitle">

@@ -117,8 +117,8 @@ Author: Media City
 								</form>
 								<li class="search-icon"><a href="#" title="Search"><i class="fas fa-search"></i></a></li>
 							@else  
-								<li><i class="flaticon-login"></i><a href="#" data-toggle="modal" data-target="#login" title="Login">Login</a></li>
-								<li><i class="flaticon-register"></i><a href="#" data-toggle="modal" data-target="#register" title="Register">Register</a></li>
+								<li><i class="flaticon-login"></i><a href="{{url('login')}}"  title="Login">Login</a></li>
+								<li><i class="flaticon-register"></i><a href="{{url('register')}}" title="Register">Register</a></li>
 								<li class="search-icon"><a href="#" title="Search"><i class="fas fa-search"></i></a></li>
 							@endif
 						</ul>
@@ -281,7 +281,7 @@ Author: Media City
 				<div class="col-lg-3 col-md-4">
 					<div class="logo">
 						@if($settings->logo != Null)
-							<a href="{{url('/')}}" title="Home"><img src="{{asset('images/'.$settings->logo)}}" class="img-fluid" alt="Logo"></a>
+							<a href="{{url('/')}}" title="Home"><img src="{{asset('coupon/images/'.$settings->logo)}}" class="img-fluid" alt="Logo"></a>
 						@else
 							<h2 class="logo-title">{{$settings->w_name ? $settings->w_name : 'Logo'}}</h2>
 						@endif
@@ -289,7 +289,7 @@ Author: Media City
 				</div>
 				<div class="col-lg-7 ml-lg-auto col-md-8 d-none d-md-block d-lg-block text-right">
 					<div class="top-ad">
-						<a href="#" title="Advertisement"><img src="{{$settings->navbar_img ? asset('images/'.$settings->navbar_img) : asset('images/ads/ad-01.jpg')}}" class="img-fluid" alt="Advertisement"></a>
+						<a href="#" title="Advertisement"><img src="{{$settings->navbar_img ? asset('coupon/images/'.$settings->navbar_img) : asset('coupon/images/ads/ad-01.jpg')}}" class="img-fluid" alt="Advertisement"></a>
 					</div>
 				</div>
 			</div>
@@ -334,7 +334,7 @@ Author: Media City
 		            					@foreach($f_coupon->take(10) as $item)
 			            					<div class="deal-block menu-deal-block">
 															<div class="deal-img">
-																<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{asset('images/coupon/'.$item->image)}}" class="img-fluid" alt="Deal"></a>
+																<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{asset('coupon/images/coupon/'.$item->image)}}" class="img-fluid" alt="Deal"></a>
 															</div>
 															<div class="deal-dtl text-center">
 																<h6 class="deal-title"><a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}">{{str_limit($item->title, 40)}}</a></h6>
@@ -411,7 +411,7 @@ Author: Media City
 			       	@auth
 			        	<a class="nav-link {{ Nav::urlDoesContain('/submit') }}" href="{{url('submit')}}">Submit Deals</a>
 			        @else
-			        	<a class="nav-link {{ Nav::urlDoesContain('/submit') }}" href="" data-toggle="modal" data-target="#login">Submit Deals</a>
+			        	<a class="nav-link {{ Nav::urlDoesContain('/submit') }}" href="{{url('login')}}" >Submit Deals</a>
 			        @endauth
 			      </li>
 			      <li class="nav-item">
@@ -517,12 +517,12 @@ Author: Media City
 	            @endif
 	            @if(isset($settings) && $settings->is_playstore)
 		            <div class="app-badge play-badge">
-		            	<a href="{{$settings->playstore_link}}" target="_blank" title="Google Play"><img src="{{asset('images/google-play.png')}}" class="img-fluid" alt="Google Play"></a>
+		            	<a href="{{$settings->playstore_link}}" target="_blank" title="Google Play"><img src="{{asset('coupon/images/google-play.png')}}" class="img-fluid" alt="Google Play"></a>
 		            </div>
 		          @endif
 		          @if(isset($settings) && $settings->is_app_icon)
 		            <div class="app-badge">
-		            	<a href="{{$settings->app_link}}" target="_blank" title="Apple App Store"><img src="{{asset('images/app-store.png')}}" class="img-fluid" alt="Apple App Store"></a>
+		            	<a href="{{$settings->app_link}}" target="_blank" title="Apple App Store"><img src="{{asset('coupon/images/app-store.png')}}" class="img-fluid" alt="Apple App Store"></a>
 		            </div>
 		          @endif
 						</div>
@@ -558,7 +558,7 @@ Author: Media City
 						<div class="footer-widget footer-subscribe">
 							<div class="logo">
 								@if($settings->footer_logo != Null)
-									<a href="{{url('/')}}" title="Home"><img src="{{asset('images/'.$settings->footer_logo)}}" class="img-fluid" alt="Footer Logo"></a>
+									<a href="{{url('/')}}" title="Home"><img src="{{asset('coupon/images/'.$settings->footer_logo)}}" class="img-fluid" alt="Footer Logo"></a>
 								@else
 									<h2 class="logo-title" style="color:#FFF;">{{$settings->w_name ? $settings->w_name : 'Logo'}}</h2>
 								@endif
@@ -657,14 +657,14 @@ Author: Media City
 									<li>
 										@if(isset($settings) && $settings->is_playstore)
 					            <div class="app-badge play-badge">
-					            	<a href="{{$settings->playstore_link}}" target="_blank" title="Google Play"><img src="{{asset('images/google-play.png')}}" class="img-fluid" alt="Google Play"></a>
+					            	<a href="{{$settings->playstore_link}}" target="_blank" title="Google Play"><img src="{{asset('coupon/images/google-play.png')}}" class="img-fluid" alt="Google Play"></a>
 					            </div>
 					          @endif
 					        </li>
 					        <li>
 					          @if(isset($settings) && $settings->is_app_icon)
 					            <div class="app-badge">
-					            	<a href="{{$settings->app_link}}" target="_blank" title="Apple App Store"><img src="{{asset('images/app-store.png')}}" class="img-fluid" alt="Apple App Store"></a>
+					            	<a href="{{$settings->app_link}}" target="_blank" title="Apple App Store"><img src="{{asset('coupon/images/app-store.png')}}" class="img-fluid" alt="Apple App Store"></a>
 					            </div>
 					          @endif
 					        </li>

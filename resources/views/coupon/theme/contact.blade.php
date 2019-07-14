@@ -23,7 +23,7 @@
 					<div class="row">
 						<div class="col-lg-9 col-md-8">
 							<div class="submit-deal-main-block">
-								<form id="submit-deal" class="submit-deal-form contact-form" action="{{ action('PageController@contact_post') }}" method="POST">
+								<form id="submit-deal" class="submit-deal-form contact-form" action="{{ action('CouponPageController@contact_post') }}" method="POST">
 									{{ csrf_field() }}
 									<input type="hidden" name="w_email" value="info@lootcoupon.com">
 									<div class="form-group">

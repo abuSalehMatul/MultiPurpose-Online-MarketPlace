@@ -1,10 +1,10 @@
 <div class="wt-tabscontenttitle">
     <h2>{{{ trans('lang.add_socials') }}}</h2>
 </div>
-    @include('back-end.admin.settings.footer.socials')
+    @include('pro.back-end.admin.settings.footer.socials')
     {!! Form::open(['url' => '', 'class' =>'wt-formtheme wt-userform', 'id'
         =>'footer-setting-form', '@submit.prevent'=>'submitFooterSettings']) !!}
-        @include('back-end.admin.settings.footer.logo')
+        @include('pro.back-end.admin.settings.footer.logo')
         <div class="wt-location wt-tabsinfo">
             <div class="wt-tabscontenttitle">
                 <h2>{{{ trans('lang.about_us_note') }}}</h2>
@@ -63,5 +63,5 @@
         </div>
     {!! Form::close() !!}
     <div class="wt-settingscontent">
-        @include('back-end.admin.settings.footer.search-menu')
+        @include('pro.back-end.admin.settings.footer.search-menu')
     </div>

@@ -7,7 +7,7 @@
             @php $image = '/uploads/users/'.Auth::user()->id.'/'.$banner; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_banner">
-                    <upload-image :id="'banner_id'" :img_ref="'banner_ref'" :url="'{{url('admin/upload-temp-image')}}'" :name="'hidden_banner_image'">
+                    <upload-image :id="'banner_id'" :img_ref="'banner_ref'" :url="'{{url('Pro/admin/upload-temp-image')}}'" :name="'hidden_banner_image'">
                     </upload-image>
                 </div>
                 <div class="wt-uploadingbox" v-else>
@@ -21,7 +21,7 @@
             </div>
         @else
             <div class="wt-formtheme wt-userform">
-                <upload-image :id="'banner_id'" :img_ref="'banner_ref'" :url="'{{url('admin/upload-temp-image')}}'" :name="'hidden_banner_image'">
+                <upload-image :id="'banner_id'" :img_ref="'banner_ref'" :url="'{{url('Pro/admin/upload-temp-image')}}'" :name="'hidden_banner_image'">
                 </upload-image>
                 <input type="hidden" name="hidden_banner_image" id="hidden_banner">
             </div>

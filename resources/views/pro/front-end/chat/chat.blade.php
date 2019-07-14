@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor']) 
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor']) 
 @section('content')
     <div class="wt-haslayout wt-innerbannerholder">
         <div class="container">

@@ -8,7 +8,7 @@
                     <upload-image
                         :id="'download_app_img'"
                         :img_ref="'download_app_ref'"
-                        :url="'{{url('admin/upload-temp-image/download_app_img')}}'"
+                        :url="'{{url('Pro/admin/upload-temp-image/download_app_img')}}'"
                         :name="'download_app_img'"
                         >
                     </upload-image>
@@ -27,7 +27,7 @@
                 <upload-image
                     :id="'download_app_img'"
                     :img_ref="'download_app'"
-                    :url="'{{url('admin/upload-temp-image/download_app_img')}}'"
+                    :url="'{{url('Pro/admin/upload-temp-image/download_app_img')}}'"
                     :name="'download_app_img'"
                     >
                 </upload-image>

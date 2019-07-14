@@ -197,7 +197,7 @@ class CouponPageController extends Controller
 
     $input = $request->all(); 
 
-    Mail::send('email.contact', ['input' => $input], function($message) {
+    Mail::send('coupon.email.contact', ['input' => $input], function($message) {
         $message->to(Input::get('w_email'))->from(Input::get('email'))->subject('Contact us');
     });
 

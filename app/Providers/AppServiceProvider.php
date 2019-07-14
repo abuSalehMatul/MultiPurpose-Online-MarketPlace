@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
 use Auth;
 
-use App\Model\Category;
+use App\Model\LearnCategory;
 use App\Model\Mining;
 use App\Model\Post;
 use App\Model\Testimonial;
@@ -68,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
         $data['goals'] =  Service::all();
 
         $data['blogs'] = Post::whereStatus(1)->latest()->take(6)->get();
-        $data['blogCategory'] = Category::whereStatus(1)->get();
+        $data['blogCategory'] = LearnCategory::whereStatus(1)->get();
 
 
         /*in Project*/

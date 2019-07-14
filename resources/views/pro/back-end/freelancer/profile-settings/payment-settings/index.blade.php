@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-dbsectionspace wt-haslayout la-pm-freelancer">
         <div class="row">
@@ -19,10 +19,10 @@
                             </ul>
                         @endif
                         <div class="wt-dashboardbox wt-dashboardtabsholder">
-                            @include('back-end.freelancer.profile-settings.tabs')
+                            @include('pro.back-end.freelancer.profile-settings.tabs')
                             <div class="wt-tabscontent tab-content">
                                 <div class="wt-educationholder" id="wt-education">
-                                    {!! Form::open(['url' => url('freelancer/store-payment-settings'), 'class' =>'wt-formtheme wt-userform', 'id' => 'payment_settings', '@submit.prevent'=>'submitPaymentSettings']) !!}
+                                    {!! Form::open(['url' => url('Pro/freelancer/store-payment-settings'), 'class' =>'wt-formtheme wt-userform', 'id' => 'payment_settings', '@submit.prevent'=>'submitPaymentSettings']) !!}
                                         <div class="wt-userexperience wt-tabsinfo">
                                             <div class="wt-tabscontenttitle">
                                                 <h2>{{{ trans('lang.payout_id') }}}</h2>

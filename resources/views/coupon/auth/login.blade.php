@@ -1,4 +1,4 @@
-@extends('layouts.theme')
+@extends('coupon.layouts.theme')
 @section('main-content')
 	<!-- Login -->
 	<section id="forum" class="coupon-page-main-block">

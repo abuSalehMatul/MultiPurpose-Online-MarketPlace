@@ -31,9 +31,13 @@
                         <span><?php echo e(!empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Auth::user()->getRoleNames()->first()); ?></span>
                     </div>
                     <?php if($role === 'employer'): ?>
-                        <div class="wt-btnarea"><a href="<?php echo e(url(route('employerPostJob'))); ?>" class="wt-btn"><?php echo e(trans('lang.post_job')); ?></a></div>
+                      
+                        <div class="wt-btnarea float-left"><a href="<?php echo e(url(route('employerPostJob'))); ?>" class=" float-left btn-sm"><?php echo e(trans('lang.post_job')); ?></a></div>
+                        <div class="wt-btnarea float-left"><a href="<?php echo e(url(route('pro_employerPostJob'))); ?>" class="float-left btn-sm"><?php echo e(trans('lang.post_service')); ?></a></div>
                     <?php elseif($role === 'freelancer'): ?>
                         <div class="wt-btnarea"><a href="<?php echo e(url(route('showUserProfile', ['slug' => Auth::user()->slug]))); ?>" class="wt-btn"><?php echo e(trans('lang.view_profile')); ?></a></div>
+                    <?php elseif($role=='pro'): ?>
+                        <div class="wt-btnarea"><a href="<?php echo e(url(route('pro_showUserProfile', ['slug' => Auth::user()->slug]))); ?>" class="wt-btn"><?php echo e(trans('lang.view_profile')); ?></a></div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -71,7 +75,7 @@
                                 <span><?php echo e(trans('lang.pages')); ?></span>
                             </a>
                             <ul class="sub-menu">
-                                <li><hr><a href="<?php echo e(route('pages')); ?>"><?php echo e(trans('lang.all_pages')); ?></a></li>
+                                <li><hr><a href="<?php echo e(url('admin/pages')); ?>"><?php echo e(trans('lang.all_pages')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('createPage')); ?>"><?php echo e(trans('lang.add_pages')); ?></a></li>
 
                             </ul>
@@ -101,7 +105,7 @@
                                 <span><?php echo e(trans('lang.settings')); ?></span>
                             </a>
                             <ul class="sub-menu">
-                                <li><hr><a href="<?php echo e(route('adminProfile')); ?>"><?php echo e(trans('lang.acc_settings')); ?></a></li>
+                                <li><hr><a href="<?php echo e(url('admin/profile')); ?>"><?php echo e(trans('lang.acc_settings')); ?></a></li>
                                 <li><hr><a href="<?php echo e(url('admin/settings')); ?>"><?php echo e(trans('lang.general_settings')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('resetPassword')); ?>"><?php echo e(trans('lang.reset_pass')); ?></a></li>
                             </ul>
@@ -155,8 +159,11 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><hr><a href="<?php echo e(route('employerManageJobs')); ?>"><?php echo e(trans('lang.manage_job')); ?></a></li>
+                                    <li><hr><a href="<?php echo e(route('pro_employerManageJobs')); ?>"><?php echo e(trans('lang.pro_manage_job')); ?></a></li>
                                     <li><hr><a href="<?php echo e(url('employer/jobs/completed')); ?>"><?php echo e(trans('lang.completed_jobs')); ?></a></li>
+                                    <li><hr><a href="<?php echo e(url('Pro/employer/jobs/completed')); ?>"><?php echo e(trans('lang.pro_completed_jobs')); ?></a></li>
                                     <li><hr><a href="<?php echo e(url('employer/jobs/hired')); ?>"><?php echo e(trans('lang.ongoing_jobs')); ?></a></li>
+                                    <li><hr><a href="<?php echo e(url('Pro/employer/jobs/hired')); ?>"><?php echo e(trans('lang.pro_ongoing_jobs')); ?></a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -168,6 +175,8 @@
                                 <ul class="sub-menu">
                                     <li><hr><a href="<?php echo e(url('employer/package/invoice')); ?>"><?php echo e(trans('lang.pkg_inv')); ?></a></li>
                                     <li><hr><a href="<?php echo e(url('employer/project/invoice')); ?>"><?php echo e(trans('lang.project_inv')); ?></a></li>
+                                    <li><hr><a href="<?php echo e(url('Pro/employer/package/invoice')); ?>"><?php echo e(trans('lang.pro_pkg_inv')); ?></a></li>
+                                    <li><hr><a href="<?php echo e(url('Pro/employer/project/invoice')); ?>"><?php echo e(trans('lang.pro_project_inv')); ?></a></li>
                                 </ul>
                             </li>
                         <?php elseif($role === 'freelancer'): ?>

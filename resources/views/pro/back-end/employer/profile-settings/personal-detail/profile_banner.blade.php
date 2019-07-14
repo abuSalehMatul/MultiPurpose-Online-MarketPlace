@@ -10,7 +10,7 @@
                     <upload-image 
                         :id="'banner_id'" 
                         :img_ref="'banner_ref'" 
-                        :url="'{{url('employer/upload-temp-image')}}'"
+                        :url="'{{url('Pro/employer/upload-temp-image')}}'"
                         :name="'hidden_banner_image'"
                         >
                     </upload-image>
@@ -29,7 +29,7 @@
                 <upload-image 
                     :id="'banner_id'" 
                     :img_ref="'banner_ref'" 
-                    :url="'{{url('employer/upload-temp-image')}}'"
+                    :url="'{{url('Pro/employer/upload-temp-image')}}'"
                     :name="'hidden_banner_image'"
                     >
                 </upload-image>

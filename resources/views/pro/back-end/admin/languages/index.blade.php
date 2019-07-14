@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="langs-listing" id="lang-list">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.add_lang') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open(['url' => url('admin/store-language'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory','id' =>
+                            {!! Form::open(['url' => url('Pro/admin/store-language'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory','id' =>
                             'languages']) !!}
                             <fieldset>
                                 <div class="form-group">
@@ -47,7 +47,7 @@
                     <div class="wt-dashboardbox">
                         <div class="wt-dashboardboxtitle wt-titlewithsearch">
                             <h2>{{{ trans('lang.langs') }}}</h2>
-                            {!! Form::open(['url' => url('admin/languages/search'), 'method' => 'get', 'class' =>'wt-formtheme wt-formsearch']) !!}
+                            {!! Form::open(['url' => url('Pro/admin/languages/search'), 'method' => 'get', 'class' =>'wt-formtheme wt-formsearch']) !!}
                                 <fieldset>
                                     <div class="form-group">
                                         <input type="text" name="keyword" value="{{{ !empty($_GET['keyword']) ? $_GET['keyword'] : '' }}}"
@@ -91,10 +91,10 @@
                                                 <td>{{{ $lang->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/languages/edit-langs') }}}/{{{ $lang->id }}}" class="wt-addinfo wt-skillsaddinfo">
+                                                        <a href="{{{ url('Pro/admin/languages/edit-langs') }}}/{{{ $lang->id }}}" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
-                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$lang->id}}'" :message="'{{trans("lang.ph_lang_delete_message")}}'" :url="'{{url('admin/languages/delete-langs')}}'"></delete>
+                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$lang->id}}'" :message="'{{trans("lang.ph_lang_delete_message")}}'" :url="'{{url('Pro/admin/languages/delete-langs')}}'"></delete>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -105,7 +105,7 @@
                                 @if( method_exists($langs,'links') ) {{ $langs->links('pagination.custom') }} @endif
                             </div>
                         @else
-                            @include('errors.no-record')
+                            @include('pro.errors.no-record')
                         @endif
                     </div>
                 </div>

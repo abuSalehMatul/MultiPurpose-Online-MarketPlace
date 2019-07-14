@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="pages-listing" id="pages-list">
         @if (Session::has('message'))
@@ -27,7 +27,7 @@
                             <h2>{{{ trans('lang.edit_page') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open([ 'url' => url('admin/pages/update-page/'.$page->id.''), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory','id' => 'pages']) !!}
+                            {!! Form::open([ 'url' => url('Pro/admin/pages/update-page/'.$page->id.''), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory','id' => 'pages']) !!}
                                 <fieldset>
                                     <div class="form-group">
                                         {!! Form::text( 'title', e($page->title), ['class' =>'form-control', 'placeholder' => trans('lang.ph_page_title')] ) !!}

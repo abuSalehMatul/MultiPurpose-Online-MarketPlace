@@ -12,7 +12,7 @@
 namespace App\Http\Controllers;
 
 use App\Page;
-use App\CouponPages;
+use App\Pages;
 use Illuminate\Http\Request;
 use View;
 use Illuminate\Support\Facades\Redirect;
@@ -131,11 +131,11 @@ class PageController extends Controller
     }
     public function page_show($page)
     {
-        $pages = CouponPages::where('slug', $page)->first();
+        $pages = DB::table('pages')->where('slug', $page)->first();
         if (!$pages) {
             return view('coupon.errors.404');
         }
-        return view('coupon.theme.pages', compact('pages'));
+        return view('theme.pages', compact('pages'));
     }
 
     /**

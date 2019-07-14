@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Model\LearnCategory;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -15,26 +15,26 @@ class PostController extends Controller
     public function category()
     {
         $data['page_title'] = 'Blog Category';
-        $data['events'] = Category::latest()->get();
-        return view('admin.post.post-category', $data);
+        $data['events'] = LearnCategory::latest()->get();
+        return view('learn.admin.post.post-category', $data);
     }
     public function UpdateCategory(Request $request)
     {
-        $macCount = Category::where('name', $request->name)->where('id', '!=', $request->id)->count();
+        $macCount = LearnCategory::where('name', $request->name)->where('id', '!=', $request->id)->count();
         if ($macCount > 0) {
             return back()->with('alert', 'This one Already Exist');
         }
         if ($request->id == 0) {
             $data['name'] = $request->name;
             $data['status'] = $request->status;
-            $res = Category::create($data);
+            $res = LearnCategory::create($data);
             if ($res) {
                 return back()->with('success', 'Saved Successfully!');
             } else {
                 return back()->with('alert', 'Problem With Adding New Category');
             }
         } else {
-            $mac = Category::findOrFail($request->id);
+            $mac = LearnCategory::findOrFail($request->id);
             $mac['name'] = $request->name;
             $mac['status'] = $request->status;
             $res = $mac->save();
@@ -51,14 +51,14 @@ class PostController extends Controller
     {
         $data['page_title'] = "All Blogs";
         $data['posts'] = Post::latest()->paginate(12);
-        return view('admin.post.index', $data);
+        return view('learn.admin.post.index', $data);
     }
 
     public function create()
     {
         $data['page_title'] = 'Add Blog';
-        $data['category'] = Category::whereStatus(1)->get();
-        return view('admin.post.add', $data);
+        $data['category'] = LearnCategory::whereStatus(1)->get();
+        return view('learn.admin.post.add', $data);
     }
 
     public function store(Request $request)
@@ -78,7 +78,7 @@ class PostController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = 'post_'.time().'.jpg';
-            $location = 'assets/images/post/' . $filename;
+            $location = 'learn/assets/images/post/' . $filename;
             Image::make($image)->resize(760,440)->save($location);
             $in['image'] = $filename;
         }
@@ -96,8 +96,8 @@ class PostController extends Controller
     {
         $data['page_title'] = 'Edit Blog';
         $data['post'] = Post::find($id);
-        $data['category'] = Category::whereStatus(1)->get();
-        return view('admin.post.edit', $data);
+        $data['category'] = LearnCategory::whereStatus(1)->get();
+        return view('learn.admin.post.edit', $data);
     }
     public function updatePost(Request $request)
     {
@@ -121,9 +121,9 @@ class PostController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = 'post_'.time().'.jpg';
-            $location = 'assets/images/post/' . $filename;
+            $location = 'learn/assets/images/post/' . $filename;
             Image::make($image)->resize(760,440)->save($location);
-            $path = './assets/images/post/';
+            $path = 'learn/assets/images/post/';
             File::delete($path.$data->image);
             $in['image'] = $filename;
         }
@@ -144,7 +144,7 @@ class PostController extends Controller
             'id' => 'required'
         ]);
         $data = Post::findOrFail($request->id);
-        $path = './assets/images/post/';
+        $path = 'learn/assets/images/post/';
         File::delete($path.$data->image);
         $res =  $data->delete();
 

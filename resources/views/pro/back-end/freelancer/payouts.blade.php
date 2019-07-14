@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace">
         <div class="row">

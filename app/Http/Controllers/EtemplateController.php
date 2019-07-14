@@ -22,7 +22,7 @@ class EtemplateController extends Controller
             $temp = Etemplate::first();
         }
 
-        return view('admin.mailsms.email', $data);
+        return view('learn.admin.mailsms.email', $data);
     }
     public function smsApi()
     {
@@ -39,7 +39,7 @@ class EtemplateController extends Controller
             Etemplate::create($default);
             $data['temp'] = Etemplate::first();
         }
-        return view('admin.mailsms.sms', $data);
+        return view('learn.admin.mailsms.sms', $data);
     }
 
     public function update(Request $request)

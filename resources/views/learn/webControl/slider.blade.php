@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('css')
 @stop
 @section('body')
@@ -67,7 +67,7 @@
                         @foreach($slider as $s)
                             <div class="col-md-6">
                                 <div class="images">
-                                    <img class="center-block" src="{{ asset('assets/images/slider') }}/{{ $s->image }}" alt="" style="margin-top: 20px;margin-bottom: 10px;width:100%;">
+                                    <img class="center-block" src="{{ asset('learn/assets/images/slider') }}/{{ $s->image }}" alt="" style="margin-top: 20px;margin-bottom: 10px;width:100%;">
                                     <button type="button" class="btn btn-danger btn-block btn-lg delete_button"
                                             data-toggle="modal" data-target="#DelModal"
                                             data-id="{{ $s->id }}">

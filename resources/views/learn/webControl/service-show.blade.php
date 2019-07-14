@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('body')
 	<div class="row">
 		<div class="col-md-12">
@@ -8,7 +8,7 @@
 						<div class="row">
 							@foreach($data as $m)
 								<div class="col-md-6 text-center">
-									<img src="{{asset('assets/images/'.$m->image)}}" alt="image">
+									<img src="{{asset('learn/assets/images/'.$m->image)}}" alt="image">
 									<h2 class="bold">{{$m->title}}</h2>
 									<p>
 										{!! $m->details !!}

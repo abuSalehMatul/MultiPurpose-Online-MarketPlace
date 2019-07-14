@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('title'){{ trans('lang.jobs') }} @stop
 @section('description', 'This is job view description tag')
 @section('content')
@@ -39,7 +39,7 @@
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-                            @include('front-end.jobs.filters')
+                            @include('pro.front-end.jobs.filters')
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                             <div class="wt-userlistingholder wt-haslayout">
@@ -51,7 +51,7 @@
                                 @if (!empty($jobs) && $jobs->count() > 0)
                                     @foreach ($jobs as $job)
                                         @php
-                                            $job = \App\Job::find($job->id);
+                                            $job = \App\ProModel\ProJob::find($job->id);
                                             $description = strip_tags(stripslashes($job->description));
                                             $featured_class = $job->is_featured == 'true' ? 'wt-featured' : '';
                                             $user = Auth::user() ? \App\User::find(Auth::user()->id) : '';
@@ -63,15 +63,15 @@
                                             <div class="wt-userlistingcontent">
                                                 <div class="wt-contenthead">
                                                     <div class="wt-title">
-                                                        <a href="{{ url('profile/'.$job->employer->slug) }}"><i class="fa fa-check-circle"></i> {{{ Helper::getUserName($job->employer->id) }}}</a>
-                                                        <h2><a href="{{ url('job/'.$job->slug) }}">{{{$job->title}}}</a></h2>
+                                                        <a href="{{ url('Pro/profile/'.$job->employer->slug) }}"><i class="fa fa-check-circle"></i> {{{ Helper::getUserName($job->employer->id) }}}</a>
+                                                        <h2><a href="{{ url('Pro/job/'.$job->slug) }}">{{{$job->title}}}</a></h2>
                                                     </div>
                                                     <div class="wt-description">
                                                         <p>{{ str_limit($description, 200) }}</p>
                                                     </div>
                                                     <div class="wt-tag wt-widgettag">
                                                         @foreach ($job->skills as $skill )
-                                                            <a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{$skill->title}}</a>
+                                                            <a href="{{{url('Pro/search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{$skill->title}}</a>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -84,7 +84,7 @@
                                                             <li><span><img src="{{{asset(Helper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.location') }}}"> {{{ $job->location->title }}}</span></li>
                                                         @endif
                                                         <li><span><i class="far fa-folder wt-viewjobfolder"></i>{{{ trans('lang.type') }}} {{{$job->project_type}}}</span></li>
-                                                        <li><span><i class="far fa-clock wt-viewjobclock"></i>{{{ \App\Helper::getJobDurationList($job->duration)}}}</span></li>
+                                                        <li><span><i class="far fa-clock wt-viewjobclock"></i>{{{ \App\ProModel\ProHelper::getJobDurationList($job->duration)}}}</span></li>
                                                         <li><span><i class="fa fa-tag wt-viewjobtag"></i>{{{ trans('lang.job_id') }}} {{{$job->code}}}</span></li>
                                                         @if (!empty($user->profile->saved_jobs) && in_array($job->id, unserialize($user->profile->saved_jobs)))
                                                             <li style=pointer-events:none;><a href="javascript:void(0);" class="wt-clicklike wt-clicksave"><i class="fa fa-heart"></i> {{trans("lang.saved")}}</a></li>
@@ -96,7 +96,7 @@
                                                                 </a>
                                                             </li>
                                                         @endif
-                                                        <li class="wt-btnarea"><a href="{{url('job/'.$job->slug)}}" class="wt-btn">{{{ trans('lang.view_job') }}}</a></li>
+                                                        <li class="wt-btnarea"><a href="{{url('Pro/job/'.$job->slug)}}" class="wt-btn">{{{ trans('lang.view_job') }}}</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -106,7 +106,7 @@
                                         {{ $jobs->links('pagination.custom') }}
                                     @endif
                                 @else
-                                    @include('errors.no-record')
+                                    @include('pro.errors.no-record')
                                 @endif
                             </div>
                         </div>

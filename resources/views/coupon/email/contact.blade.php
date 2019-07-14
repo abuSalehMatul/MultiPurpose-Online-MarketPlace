@@ -13,7 +13,7 @@
                 <li>Mobile: {{$input['mobile']}}</li>
                 <li>Category: {{$input['category']}}</li>
                 <li>Subject: {{$input['subject']}}</li>
-                <li>Website: {{$input['url']}}</li>
+             
                 <li>Message: {{$input['message']}}</li>
             </ul>
         </div>

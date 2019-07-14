@@ -82,6 +82,7 @@ class Kernel extends HttpKernel
         'is_admin' => \App\Http\Middleware\IsAdmin::class,
         'is_verified' => \App\Http\Middleware\IsVerified::class,
         'CheckStatus' => \App\Http\Middleware\CheckStatus::class,
+        'Master_access' => \App\Http\Middleware\Master_access::class,
 
         'demo' => \App\Http\Middleware\Demo::class,
         ];

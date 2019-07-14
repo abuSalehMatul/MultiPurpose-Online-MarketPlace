@@ -27,7 +27,7 @@
 									 {{ csrf_field() }}
 									<div class="row">
 										<div class="col-md-3 ac-profile-img">
-											<img src="{{asset('images/user/'.$auth->image)}}" alt="User">
+											<img src="{{asset('coupon/images/user/'.$auth->image)}}" alt="User">
 										</div>
 										<div class="col-md-9 form-group{{ $errors->has('image') ? ' has-error' : '' }} input-file-block">
 					            {!! Form::label('image', 'User Image') !!} - <p class="inline info">Help block text</p>

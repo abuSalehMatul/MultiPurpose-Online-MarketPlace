@@ -1,12 +1,27 @@
-@if (Schema::hasTable('pages') || Schema::hasTable('site_managements'))
+@if (Schema::hasTable('pages') || Schema::hasTable('pro_site_managements'))
     @php
+        
+        $url=url()->current();
+        if(strstr( $url, 'employer' )){
+            $role='employer';
+        }else {
+            $role='pro';
+        }
         $settings = array();
         $pages = App\Page::all();
-        $setting = \App\SiteManagement::getMetaValue('settings');
+        $setting = \App\ProModel\ProSiteManagement::getMetaValue('settings');
         $logo = !empty($setting[0]['logo']) ? Helper::getHeaderLogo($setting[0]['logo']) : '/images/logo.png';
         $inner_header = !empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' ? 'wt-headervtwo' : '';
     @endphp
 @endif
+@php
+    if(Auth::user()){
+        Auth::user()->syncRoles('pro');
+    }
+    
+    
+@endphp
+
 <header id="wt-header" class="wt-header wt-haslayout {{$inner_header}}">
     <div class="wt-navigationarea">
         <div class="container-fluid">
@@ -15,13 +30,13 @@
                     @auth
                         {{ Helper::displayEmailWarning() }}
                     @endauth
-                    @if (!empty($logo) || Schema::hasTable('site_managements'))
+                    @if (!empty($logo) || Schema::hasTable('pro_site_managements'))
                         <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset($logo) }}}" alt="{{{ trans('Logo') }}}"></a></strong>
                     @endif
-                    @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home')
+                    @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/pro-dashboard' && Route::getCurrentRoute()->uri() != 'home')
                         <search-form
                         :placeholder="'{{ trans('lang.looking_for') }}'"
-                        :freelancer_placeholder="'{{ trans('lang.search_filter_list.freelancer') }}'"
+                        :freelancer_placeholder="'{{ trans('lang.search_filter_list.pro') }}'"
                         :employer_placeholder="'{{ trans('lang.search_filter_list.employers') }}'"
                         :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
                         :no_record_message="'{{ trans('lang.no_record') }}'"
@@ -40,17 +55,17 @@
                                         @foreach ($pages as $key => $page)
                                             @php
                                                 $page_has_child = App\Page::pageHasChild($page->id); $pageID = Request::segment(2);
-                                                $show_page = \App\SiteManagement::where('meta_key', 'show-page-'.$page->id)->select('meta_value')->pluck('meta_value')->first();
+                                                $show_page = \App\ProModel\ProSiteManagement::where('meta_key', 'show-page-'.$page->id)->select('meta_value')->pluck('meta_value')->first();
                                             @endphp
                                             @if ($page->relation_type == 0 && $show_page == 'true')
                                                 <li class="{{!empty($page_has_child) ? 'menu-item-has-children page_item_has_children' : '' }} @if ($pageID == $page->slug ) current-menu-item @endif">
-                                                    <a href="{{url('page/'.$page->slug)}}">{{{$page->title}}}</a>
+                                                    <a href="{{url('Pro/page/'.$page->slug)}}">{{{$page->title}}}</a>
                                                     @if (!empty($page_has_child))
                                                         <ul class="sub-menu">
                                                             @foreach($page_has_child as $parent)
                                                                 @php $child = App\Page::getChildPages($parent->child_id);@endphp
                                                                 <li class="@if ($pageID == $child->slug ) current-menu-item @endif">
-                                                                    <a href="{{url('page/'.$child->slug.'/')}}">
+                                                                    <a href="{{url('Pro/page/'.$child->slug.'/')}}">
                                                                         {{{$child->title}}}
                                                                     </a>
                                                                 </li>
@@ -61,21 +76,26 @@
                                             @endif
                                         @endforeach
                                     @endif
+                                   
+                                   
                                     <li>
-                                        <a href="{{url('search-results?type=freelancer')}}">
-                                            {{{ trans('lang.view_freelancers') }}}
+                                        <a href="{{url('Pro/search-results?type=pro')}}">
+                                            {{{ trans('lang.view_pro') }}}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{url('search-results?type=employer')}}">
+                                        <a href="{{url('Pro/search-results?type=employer')}}">
                                             {{{ trans('lang.view_employers') }}}
                                         </a>
                                     </li>
+                                    @if($role=='employer')
                                     <li>
-                                        <a href="{{url('search-results?type=job')}}">
+                                        <a href="{{url('Pro/search-results?type=job')}}">
                                             {{{ trans('lang.browse_jobs') }}}
                                         </a>
                                     </li>
+                                    @endif
+                                    
                                 </ul>
                             </div>
                         </nav>
@@ -90,6 +110,10 @@
                                         </div>
                                         <form method="POST" action="{{ route('login') }}" class="wt-formtheme wt-loginform do-login-form">
                                             @csrf
+                                           <input type="hidden" name="user_role" value="pro">
+                                            @php
+                                              Session::put('pro_login_form',1);   
+                                            @endphp
                                             <fieldset>
                                                 <div class="form-group">
                                                     <input id="email" type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
@@ -135,18 +159,30 @@
                                 $role = !empty($user) ? $user->getRoleNames()->first() : array();
                                 $profile = \App\User::find($user->id)->profile;
                                 $user_image = !empty($profile) ? $profile->avater : '';
-                                $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
+                                $employer_job = \App\ProModel\ProJob::select('status')->where('user_id', Auth::user()->id)->first();
                                 $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
                             @endphp
                                 <div class="wt-userlogedin">
+                                    @php
+                                        $roles=$user->getRoleNames()->toArray();
+                                        // print_r($roles);
+                                        if(in_array('pro',$roles)){
+                                          // echo "Pro";
+                                        }else{
+                                            $url=url('/Pro/Activating/'.base64_encode(urlencode($user->id)));
+                                            echo '<a class="btn btn-info" href="'.$url.'">Activate your Pro Account</a>';
+                                        }
+                                       
+                                    @endphp
                                     <figure class="wt-userimg">
                                         <img src="{{{ asset($profile_image) }}}" alt="{{{ trans('lang.user_avatar') }}}">
                                     </figure>
                                     <div class="wt-username">
                                         <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
-                                        <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Auth::user()->getRoleNames()->first() }}}</span>
+                                        <span>{{{ !empty(Auth::user()->pro_profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Auth::user()->getRoleNames()->first() }}}</span>
                                     </div>
-                                    @include('back-end.includes.profile-menu')
+                                   
+                                    @include('pro.back-end.includes.profile-menu')
                                 </div>
                         @endauth
                         @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home')

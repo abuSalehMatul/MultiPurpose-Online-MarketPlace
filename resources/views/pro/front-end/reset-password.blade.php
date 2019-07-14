@@ -1,4 +1,4 @@
-@extends('front-end.master')
+@extends('pro.front-end.master')
 @section('content')
     <div class="container">
         <div class="wt-main-section wt-haslayout wt-forgotpassword-holder">
@@ -7,7 +7,7 @@
                     <div class="card">
                         <div class="card-header">{{ trans('lang.reset_pass') }}</div>
                         <div class="card-body">
-                            {!! Form::open(['url' => url('user/update/password'), 'class' =>'wt-formtheme wt-userform'])!!}
+                            {!! Form::open(['url' => url('Pro/user/update/password'), 'class' =>'wt-formtheme wt-userform'])!!}
                                 <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('lang.pass') }}</label>
                                     <div class="col-md-6">

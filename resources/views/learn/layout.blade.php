@@ -39,7 +39,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3">
-                <a href="{{route('homepage')}}" class="logo">
+                <a href="{{route('learn.homepage')}}" class="logo">
                     <img src="{{asset('learn/assets/images/logo/logo.png')}}" alt="logo">
                 </a>
             </div>

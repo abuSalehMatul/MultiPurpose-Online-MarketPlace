@@ -61,7 +61,7 @@
                 </td>
                 <td>
                   @if ($item->image != null)
-                    <img src="{{ asset('images/discussion/'.$item->image) }}" class="img-responsive" width="80" alt="image">
+                    <img src="{{ asset('coupon/images/discussion/'.$item->image) }}" class="img-responsive" width="80" alt="image">
                   @else
                     N/A  
                   @endif

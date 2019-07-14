@@ -198,6 +198,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Spatie\JsonApiPaginate\JsonApiPaginateServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -255,5 +256,6 @@ return [
         'Helper' => App\Helper::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
     ],
 ];

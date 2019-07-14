@@ -6,28 +6,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{{asset('assets/images/logo/favicon.png')}}" />
+    <link rel="icon" type="image/png" href="{{asset('learn/assets/images/logo/favicon.png')}}" />
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 
 
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('learn/assets/admin/css/main.css')}}">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('learn/assets/admin/css/font-awesome.min.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/fontawesome-iconpicker.min.css')}}">
-    <link href="{{asset('assets/admin/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/admin/css/bootstrap-fileinput.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/admin/css/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('assets/admin/css/table.css')}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('learn/assets/admin/css/fontawesome-iconpicker.min.css')}}">
+    <link href="{{asset('learn/assets/admin/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
+    <link href="{{asset('learn/assets/admin/css/bootstrap-fileinput.css')}}" rel="stylesheet">
+    <link href="{{asset('learn/assets/admin/css/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('learn/assets/admin/css/table.css')}}" rel="stylesheet" type="text/css"/>
 
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('learn/assets/admin/css/custom.css')}}">
 
 
-    <script src="{{asset('assets/admin/js/sweetalert.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('assets/admin/css/sweetalert.css')}}">
+    <script src="{{asset('learn/assets/admin/js/sweetalert.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('learn/assets/admin/css/sweetalert.css')}}">
 </head>
 <body class="app sidebar-mini rtl">
 <!-- Navbar-->
@@ -62,7 +62,9 @@
                         @endif">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Manage Category</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item @if(request()->path() == 'admin/category') active @endif" href="{{route('admin.category')}}"><i class="icon fa fa-desktop"></i> Category</a></li>
+                {{-- <li><a class="treeview-item " href="{{url('admin/category')}}"><i class="icon fa fa-desktop"></i> Category</a></li>
+                <li><a  href="{{route('admin.unit')}}"><i class="treeview-item active icon fa fa-th"></i> Sub Category</a></li> --}}
+                <li><a class="treeview-item @if(request()->path() == 'admin/learn_category') active @endif" href="{{url('admin/learn_category')}}"><i class="icon fa fa-desktop"></i> Category</a></li>
                 <li><a class="treeview-item @if(request()->path() == 'admin/sub-category') active @endif" href="{{route('admin.unit')}}"><i class="icon fa fa-th"></i> Sub Category</a></li>
 
             </ul>
@@ -87,7 +89,7 @@
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-newspaper"></i><span class="app-menu__label">Manage Blog</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item @if(request()->path() == 'admin/blog-category') active @endif" href="{{route('admin.cat')}}"><i class="icon fa fa-pencil"></i>  Category</a></li>
-                <li><a class="treeview-item @if(request()->path() == 'admin/blog') active @endif" href="{{route('admin.blog')}}"><i class="icon fa fa-newspaper-o"></i> All Blog</a></li>
+                <li><a class="treeview-item @if(request()->path() == 'admin/blog') active @endif" href="{{url('admin/blog')}}"><i class="icon fa fa-newspaper-o"></i> All Blog</a></li>
             </ul>
         </li>
         <li><a class="app-menu__item @if(request()->path() == 'admin/subscribers') active @endif" href="{{route('manage.subscribers')}}"><i class="app-menu__icon fa fa-thumbs-up"></i><span class="app-menu__label">All Subscribers</span></a></li>
@@ -155,16 +157,16 @@
 
 </main>
 <!-- Essential javascripts for application to work-->
-<script src="{{asset('assets/admin/js/jquery-3.2.1.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/popper.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/bootstrap-toggle.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/bootstrap-fileinput.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/admin/js/fontawesome-iconpicker.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/admin/js/toastr.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/admin/js/main.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/popper.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/bootstrap-toggle.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/bootstrap-fileinput.js')}}" type="text/javascript"></script>
+<script src="{{asset('learn/assets/admin/js/fontawesome-iconpicker.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('learn/assets/admin/js/toastr.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('learn/assets/admin/js/main.js')}}"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="{{asset('assets/admin/js/pace.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/pace.min.js')}}"></script>
 <!-- Page specific javascripts-->
 @yield('script')
 @if (session('success'))

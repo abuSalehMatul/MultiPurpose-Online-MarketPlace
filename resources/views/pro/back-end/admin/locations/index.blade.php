@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="locations-listing la-locations-listing" id="location">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.add_location') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open(['url' => url('admin/store-location'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id'=>'location_form'])!!}
+                            {!! Form::open(['url' => url('Pro/admin/store-location'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id'=>'location_form'])!!}
                             <fieldset>
                                 <div class="form-group">
                                     {!! Form::text( 'title', null, ['class' =>'form-control'.($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.ph_location_title'), 'id'=>'location_title']) !!}
@@ -49,7 +49,7 @@
                                         <upload-image
                                             :id="'location_image'"
                                             :img_ref="'location_ref'"
-                                            :url="'{{url('admin/locations/upload-temp-image')}}'"
+                                            :url="'{{url('Pro/admin/locations/upload-temp-image')}}'"
                                             :name="'uploaded_image'"
                                             >
                                         </upload-image>
@@ -116,8 +116,8 @@
                                                     <td>{{{ $location->slug }}}</td>
                                                     <td>
                                                         <div class="wt-actionbtn">
-                                                            <a href="{{{ url('admin/locations/edit-locations') }}}/{{{ $location->id }}}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
-                                                            <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$location->id}}'" :message="'{{trans("lang.ph_location_delete_message")}}'" :url="'{{url('admin/locations/delete-locations')}}'"></delete>
+                                                            <a href="{{{ url('Pro/admin/locations/edit-locations') }}}/{{{ $location->id }}}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                            <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$location->id}}'" :message="'{{trans("lang.ph_location_delete_message")}}'" :url="'{{url('Pro/admin/locations/delete-locations')}}'"></delete>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -130,7 +130,7 @@
                                 @endif
                             </div>
                         @else
-                            @include('errors.no-record')
+                            @include('pro.errors.no-record')
                         @endif
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('back-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.back-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
 <div class="wt-haslayout wt-dbsectionspace">
     <div class="row">
@@ -13,7 +13,7 @@
                             <div class="wt-managejobcontent wt-verticalscrollbar mCustomScrollbar _mCS_1">
                                 @foreach ($completed_jobs as $job)
                                     @php
-                                        $accepted_proposal = \App\Job::find($job->id)->proposals()->where('status', 'completed')->first();
+                                        $accepted_proposal = \App\ProModel\ProJob::find($job->id)->proposals()->where('status', 'completed')->first();
                                         $profile = \App\User::find($accepted_proposal->freelancer_id)->profile;
                                         $user_image = !empty($profile) ? $profile->avater : '';
                                         $verified_user = \App\User::select('user_verified')->where('id', $job->employer->id)->pluck('user_verified')->first();
@@ -25,7 +25,7 @@
                                         <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
                                             <div class="wt-contenthead">
                                                 <div class="wt-title">
-                                                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">
+                                                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
                                                         @if ($verified_user === 1)
                                                             <i class="fa fa-check-circle"></i>
                                                         @endif
@@ -53,7 +53,7 @@
                                             <div class="wt-rightarea">
                                                 <div class="wt-btnarea">
                                                     <span> {{ trans('lang.project_completed') }}</span>
-                                                    <a href="{{{ url('proposal/'.$job->slug.'/'.$job->status) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                    <a href="{{{ url('Pro/proposal/'.$job->slug.'/'.$job->status) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
                                                 </div>
                                                 <div class="wt-hireduserstatus">
                                                     <h4>{{ trans('lang.hired') }}</h4><span>{{{ Helper::getUserName($accepted_proposal->freelancer_id) }}}</span>

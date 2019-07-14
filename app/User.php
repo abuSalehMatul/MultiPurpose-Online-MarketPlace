@@ -20,9 +20,17 @@ use Spatie\Permission\Models\Role;
 use DB;
 use App\Location;
 use App\Profile;
+use App\ProModel\ProLocation;
+use App\ProModel\ProProfile;
+use App\JobModel\JobLocation;
+use App\JobModel\JobProfile;
 use Auth;
 use App\Package;
 use App\Helper;
+use App\ProModel\ProPackage;
+use App\ProModel\ProHelper;
+use App\JobModel\JobPackage;
+use App\JobModel\JobHelper;
 use App\Job;
 use Carbon\Carbon;
 use canResetPassword;
@@ -84,6 +92,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Skill')->withPivot('skill_rating');
     }
+    public function pro_skills()
+    {
+        return $this->belongsToMany('App\ProModel\ProSkill')->withPivot('skill_rating');
+    }
+    public function job_skills()
+    {
+        return $this->belongsToMany('App\JobModel\JobSkill')->withPivot('skill_rating');
+    }
 
     /**
      * Get all of the categories for the user.
@@ -93,6 +109,14 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->morphToMany('App\Category', 'catable');
+    }
+    public function pro_categories()
+    {
+        return $this->morphToMany('App\ProModel\ProCategory', 'catable');
+    }
+    public function job_categories()
+    {
+        return $this->morphToMany('App\JobModel\JobCategory', 'catable');
     }
 
     /**
@@ -114,6 +138,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Location');
     }
+    public function pro_location()
+    {
+        return $this->belongsTo('App\ProModel\ProLocation');
+    }
+    public function job_location()
+    {
+        return $this->belongsTo('App\JobModel\JobLocation');
+    }
 
     /**
      * Get the profile record associated with the user.
@@ -123,6 +155,14 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne('App\Profile');
+    }
+    public function pro_profile()
+    {
+        return $this->hasOne('App\ProModel\ProProfile');
+    }
+    public function job_profile()
+    {
+        return $this->hasOne('App\JobModel\JobProfile');
     }
 
     /**
@@ -144,6 +184,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Job');
     }
+    public function pro_jobs()
+    {
+        return $this->hasMany('App\ProModel\ProJob');
+    }
+    public function job_jobs()
+    {
+        return $this->hasMany('App\JobModel\JobJob');
+    }
 
     /**
      * Get the proposals for the freelancer.
@@ -153,6 +201,14 @@ class User extends Authenticatable
     public function proposals()
     {
         return $this->hasMany('App\Proposal', 'freelancer_id');
+    }
+    public function pro_proposals()
+    {
+        return $this->hasMany('App\ProModel\ProProposal', 'freelancer_id');
+    }
+    public function job_proposals()
+    {
+        return $this->hasMany('App\JobModel\JobProposal', 'freelancer_id');
     }
 
     /**
@@ -174,6 +230,14 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Offer');
     }
+    public function pro_offers()
+    {
+        return $this->hasOne('App\ProModel\ProOffer');
+    }
+    public function job_offers()
+    {
+        return $this->hasOne('App\JobModel\JobOffer');
+    }
 
     /**
      * Get all of reported employers.
@@ -183,6 +247,14 @@ class User extends Authenticatable
     public function reports()
     {
         return $this->morphMany('App\Report', 'reportable');
+    }
+    public function pro_reports()
+    {
+        return $this->morphMany('App\ProModel\ProReport', 'reportable');
+    }
+    public function job_reports()
+    {
+        return $this->morphMany('App\JobModel\JobReport', 'reportable');
     }
 
     /**
@@ -203,6 +275,14 @@ class User extends Authenticatable
     public function item()
     {
         return $this->hasMany('App\item', 'subscriber');
+    }
+    public function pro_item()
+    {
+        return $this->hasMany('App\ProModel\Proitem', 'subscriber');
+    }
+    public function job_item()
+    {
+        return $this->hasMany('App\JobModel\Jobitem', 'subscriber');
     }
 
     /**
@@ -339,7 +419,10 @@ class User extends Authenticatable
     ) {
         $json = array();
         $user_id = array();
+        // print_r( $type);
+        // exit();
         $user_by_role =  User::role($type)->select('id')->get()->pluck('id')->toArray();
+      //  return $user_by_role;
         $users = !empty($user_by_role) ? User::whereIn('id', $user_by_role) : array();
         $filters = array();
         if (!empty($users)) {
@@ -355,11 +438,25 @@ class User extends Authenticatable
                 $filters['locations'] = $search_locations;
                 $locations = Location::select('id')->whereIn('slug', $search_locations)
                     ->get()->pluck('id')->toArray();
+                if($type=='pro'){
+                    $locations = ProLocation::select('id')->whereIn('slug', $search_locations)
+                        ->get()->pluck('id')->toArray();
+                }elseif($type=='candidate'){
+                    $locations = JobLocation::select('id')->whereIn('slug', $search_locations)
+                        ->get()->pluck('id')->toArray();
+                }
+               
                 $users->whereIn('location_id', $locations);
             }
             if (!empty($search_employees)) {
                 $filters['employees'] = $search_employees;
                 $employees = Profile::whereIn('no_of_employees', $search_employees)->get();
+                if($type=='pro'){
+                    $employees = ProProfile::whereIn('no_of_employees', $search_employees)->get();
+                }elseif($type=='candidate'){
+                    $employees = JobProfile::whereIn('no_of_employees', $search_employees)->get();
+                }
+               
                 foreach ($employees as $key => $employee) {
                     if (!empty($employee->user_id)) {
                         $user_id[] = $employee->user_id;
@@ -369,7 +466,13 @@ class User extends Authenticatable
             }
             if (!empty($search_skills)) {
                 $filters['skills'] = $search_skills;
+
                 $skills = Skill::whereIn('slug', $search_skills)->get();
+                if($type=='pro'){
+                    $skills = ProSkill::whereIn('slug', $search_skills)->get();
+                }elseif($type=='candidate'){
+                    $skills = JobSkill::whereIn('slug', $search_skills)->get();
+                }
                 foreach ($skills as $key => $skill) {
                     if (!empty($skill->freelancers[$key]->id)) {
                         $user_id[] = $skill->freelancers[$key]->id;
@@ -389,12 +492,24 @@ class User extends Authenticatable
                     }
                     $user_id = Profile::select('user_id')->whereIn('user_id', $user_by_role)
                         ->whereBetween('hourly_rate', [$min, $max])->get()->pluck('user_id')->toArray();
+                    if($type=='pro'){
+                        $user_id = ProProfile::select('user_id')->whereIn('user_id', $user_by_role)
+                            ->whereBetween('hourly_rate', [$min, $max])->get()->pluck('user_id')->toArray();
+                    }elseif($type=='candidate'){
+                        $user_id = JobProfile::select('user_id')->whereIn('user_id', $user_by_role)
+                            ->whereBetween('hourly_rate', [$min, $max])->get()->pluck('user_id')->toArray();
+                    } 
                 }
                 $users->whereIn('id', $user_id);
             }
             if (!empty($search_freelaner_types)) {
                 $filters['freelaner_type'] = $search_freelaner_types;
                 $freelancers = Profile::whereIn('freelancer_type', $search_freelaner_types)->get();
+                if($type=='pro'){
+                    $freelancers = ProProfile::whereIn('freelancer_type', $search_freelaner_types)->get();
+                }elseif($type=='candidate'){
+                    $freelancers = JobProfile::whereIn('freelancer_type', $search_freelaner_types)->get();
+                }
                 foreach ($freelancers as $key => $freelancer) {
                     if (!empty($freelancer->user_id)) {
                         $user_id[] = $freelancer->user_id;
@@ -405,6 +520,11 @@ class User extends Authenticatable
             if (!empty($search_english_levels)) {
                 $filters['english_level'] = $search_english_levels;
                 $freelancers = Profile::whereIn('english_level', $search_english_levels)->get();
+                if($type=='pro'){
+                    $freelancers = ProProfile::whereIn('english_level', $search_english_levels)->get();
+                }elseif($type=='candidate'){
+                    $freelancers = JobProfile::whereIn('english_level', $search_english_levels)->get();
+                }
                 foreach ($freelancers as $key => $freelancer) {
                     if (!empty($freelancer->user_id)) {
                         $user_id[] = $freelancer->user_id;
@@ -422,7 +542,7 @@ class User extends Authenticatable
                 }
                 $users->whereIn('id', $user_id);
             }
-            if ($type = 'freelancer') {
+            if ($type = 'freelancer' || $type=='pro' || $type=='candidate') {
                 $users = $users->orderByRaw('-badge_id DESC')->orderBy('expiry_date', 'DESC');
             } else {
                 $users = $users->orderBy('created_at', 'DESC');

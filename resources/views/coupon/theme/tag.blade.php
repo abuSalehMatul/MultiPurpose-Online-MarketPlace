@@ -27,7 +27,7 @@
 									<div class="col-lg-4 col-md-6">
 										<div class="blog-post-main">
 											<div class="blog-img">
-												<a href="{{url('blog-dtl/'.$blog->uni_id.'/'.$blog->slug)}}" title="Blog Post"><img src="{{asset('images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post"></a>
+												<a href="{{url('blog-dtl/'.$blog->uni_id.'/'.$blog->slug)}}" title="Blog Post"><img src="{{asset('coupon/images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post"></a>
 											</div>
 											<div class="blog-post-dtl">
 												<h6 class="blog-post-heading"><a href="{{url('blog-dtl/'.$blog->uni_id.'/'.$blog->slug)}}" title="Blog Post">{{$blog->title}}</a></h6>

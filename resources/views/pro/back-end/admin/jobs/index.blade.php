@@ -1,4 +1,4 @@
-@extends('back-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.back-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
     <div class="wt-haslayout wt-dbsectionspace" id="jobs">
         <div class="row">
@@ -13,8 +13,8 @@
                                 <div class="wt-managejobcontent">
                                     @foreach ($jobs as $job)
                                         @php
-                                            $duration = !empty($job->duration) ? \App\Helper::getJobDurationList($job->duration) : '';
-                                            $user_name = !empty($job->employer->id) ? \App\Helper::getUserName($job->employer->id) : '';
+                                            $duration = !empty($job->duration) ? \App\ProModel\ProHelper::getJobDurationList($job->duration) : '';
+                                            $user_name = !empty($job->employer->id) ? \App\ProModel\ProHelper::getUserName($job->employer->id) : '';
                                             $verified_user = !empty($job->employer->id) ? $job->employer->user_verified : '';
                                         @endphp
                                         <div class="wt-userlistinghold wt-featured wt-userlistingvtwo del-job-{{ $job->id }}">
@@ -26,7 +26,7 @@
                                                     @if (!empty($user_name) || !empty($job->title) )
                                                         <div class="wt-title">
                                                             @if (!empty($user_name))
-                                                                <a href="{{{ url('profile/'.$job->employer->slug) }}}">
+                                                                <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
                                                                 @if ($verified_user === 1)
                                                                     <i class="fa fa-check-circle"></i>
                                                                 @endif
@@ -56,19 +56,19 @@
                                                 </div>
                                                 <div class="wt-rightarea la-pending-jobs">
                                                     <div class="wt-btnarea">
-                                                        <a href="{{{ url('job/edit-job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.edit_job') }}</a>
+                                                        <a href="{{{ url('Pro/job/edit-job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.edit_job') }}</a>
                                                         <a href="javascript:void(0);" v-on:click.prevent="deleteJob({{$job->id}})" class="wt-btn">{{ trans('lang.del_job') }}</a>
                                                     </div>
                                                     @if ($job->proposals->count() > 0)
                                                         <div class="wt-hireduserstatus">
                                                             @if ($job->status == 'hired' || $job->status == 'completed')
                                                                 <h4>{{{ $job->status }}}</h4>
-                                                                <a href="{{{ url('proposal/'.$job->slug . '/'. $job->proposals[0]->status) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                                <a href="{{{ url('Pro/proposal/'.$job->slug . '/'. $job->proposals[0]->status) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
                                                             @else
                                                                 @foreach ($job->proposals as $proposals)
                                                                     @if ($proposals->status == 'cancelled')
                                                                         <h4>{{{ $proposals->status }}}</h4>
-                                                                        <a href="{{{ url('proposal/'.$job->slug . '/cancelled') }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                                        <a href="{{{ url('Pro/proposal/'.$job->slug . '/cancelled') }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
                                                                     @elseif ($proposals->status == 'pending')
                                                                         <h4>{{{ $job->status }}}</h4>
                                                                     @endif
@@ -86,7 +86,7 @@
                                     @endforeach
                                 </div>
                             @else
-                                @include('errors.no-record')
+                                @include('pro.errors.no-record')
                             @endif
                         </div>
                     </div>

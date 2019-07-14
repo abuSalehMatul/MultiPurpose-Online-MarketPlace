@@ -214,6 +214,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $json = array();
+        return $json;
         $server = Helper::worketicIsDemoSiteAjax();
         if (!empty($server)) {
             $response['message'] = $server->getData()->message;

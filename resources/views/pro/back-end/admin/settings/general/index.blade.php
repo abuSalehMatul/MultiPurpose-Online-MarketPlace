@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    @include('back-end.admin.settings.general.logo')
+    @include('pro.back-end.admin.settings.general.logo')
     <div class="wt-location wt-tabsinfo">
         <div class="wt-tabscontenttitle">
             <h2>{{{ trans('lang.no_of_credit') }}}</h2>

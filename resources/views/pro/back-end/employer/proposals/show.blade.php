@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     @php
         $count = 0;
@@ -39,7 +39,7 @@
                                             @if (!empty($employer_name) || !empty($job->title) )
                                                 <div class="wt-title">
                                                     @if (!empty($employer_name))
-                                                        <a href="{{{ url('profile/'.$job->employer->slug) }}}">@if ($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $employer_name }}}</a>
+                                                        <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">@if ($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $employer_name }}}</a>
                                                     @endif
                                                     @if (!empty($job->title))
                                                         <h2>{{{ $job->title }}}</h2>
@@ -53,7 +53,7 @@
                                                         <li><span class="wt-dashboraddoller"><i>{{ !empty($symbol) ? $symbol['symbol'] : '$' }}</i> {{{ $job->price }}}</span></li>
                                                     @endif
                                                     @if (!empty($job->location->title))
-                                                        <li><span><img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $job->location->title }}}</span></li>
+                                                        <li><span><img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($job->location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $job->location->title }}}</span></li>
                                                     @endif
                                                     @if (!empty($job->project_type))
                                                         <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> {{ trans('lang.type') }} {{{ $job->project_type }}}</a></li>
@@ -103,7 +103,7 @@
                                             @if (!empty($freelancer_name))
                                                 <div class="wt-contenthead">
                                                     <div class="wt-title">
-                                                        <a href="{{ url('profile/'.$user_slug) }}">{{{ $freelancer_name }}}</a>
+                                                        <a href="{{ url('Pro/profile/'.$user_slug) }}">{{{ $freelancer_name }}}</a>
                                                     </div>
                                                 </div>
                                             @endif
@@ -138,7 +138,7 @@
                                             @if (!empty($attachments))
                                             <div class="wt-hireduserstatus">
                                                 <i class="fa fa-paperclip"></i>
-                                                {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$accepted_proposal->freelancer_id]) !!}
+                                                {!! Form::open(['url' => url('Pro/proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$accepted_proposal->freelancer_id]) !!}
                                                     @foreach ($attachments as $attachment)
                                                         @if (Storage::disk('local')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachment))
                                                             {!! Form::hidden('attachments['.$count.']', $attachment, []) !!}
@@ -160,7 +160,7 @@
                                 <h2>{{ trans('lang.project_history') }}</h2>
                             </div>
                             <div class="wt-historycontent la-jobdetails-holder">
-                                <private-message :placeholder="'{{ trans('lang.ph_job_dtl') }}'" :upload_tmp_url="'{{url('proposal/upload-temp-image')}}'" :id="'{{$accepted_proposal->id}}'" :recipent_id="'{{$accepted_proposal->freelancer_id}}'"></private-message>
+                                <private-message :placeholder="'{{ trans('lang.ph_job_dtl') }}'" :upload_tmp_url="'{{url('Pro/proposal/upload-temp-image')}}'" :id="'{{$accepted_proposal->id}}'" :recipent_id="'{{$accepted_proposal->freelancer_id}}'"></private-message>
                             </div>
                         </div>
                     </div>

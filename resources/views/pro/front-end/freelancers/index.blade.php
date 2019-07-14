@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @push('stylesheets')
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
 @endpush
@@ -38,14 +38,14 @@
             <div id="wt-categoriesslider" class="wt-categoriesslider owl-carousel">
                 @foreach ($categories as $cat)
                     @php
-                        $category = \App\Category::find($cat->id);
+                        $category = \App\ProModel\ProCategory::find($cat->id);
                         $active = (!empty($_GET['category']) && in_array($cat->id, $_GET['category'])) ? 'active-category' : '';
                         $active_wrapper = ( !empty($_GET['category']) && in_array($cat->id, $_GET['category'])) ? 'active-category-wrapper' : '';
                     @endphp
                     <div class="wt-categoryslidercontent item {{$active_wrapper}}">
                         <figure><img src="{{{ asset(Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure>
                         <div class="wt-cattitle">
-                        <h3><a href="{{{url('search-results?type=job&category%5B%5D='.$cat->slug)}}}" class="{{$active}}">{{{ $cat->title }}}</a></h3>
+                        <h3><a href="{{{url('Pro/search-results?type=job&category%5B%5D='.$cat->slug)}}}" class="{{$active}}">{{{ $cat->title }}}</a></h3>
                             <span>Items: {{{$category->jobs->count()}}}</span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-                            @include('front-end.freelancers.filters')
+                            @include('pro.front-end.freelancers.filters')
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                             <div class="wt-userlistingholder wt-userlisting wt-haslayout">
@@ -110,14 +110,14 @@
                                             <div class="wt-userlistingcontent">
                                                 <div class="wt-contenthead">
                                                     <div class="wt-title">
-                                                        <a href="{{{ url('profile/'.$freelancer->slug) }}}">
+                                                        <a href="{{{ url('Pro/profile/'.$freelancer->slug) }}}">
                                                             @if ($verified_user == 1)
                                                                 <i class="fa fa-check-circle"></i>
                                                             @endif
                                                             {{{ Helper::getUserName($freelancer->id) }}}
                                                         </a>
                                                         @if (!empty($freelancer->profile->tagline))
-                                                            <h2><a href="{{{ url('profile/'.$freelancer->slug) }}}">{{{ $freelancer->profile->tagline }}}</a></h2>
+                                                            <h2><a href="{{{ url('Pro/profile/'.$freelancer->slug) }}}">{{{ $freelancer->profile->tagline }}}</a></h2>
                                                         @endif
                                                     </div>
                                                     <ul class="wt-userlisting-breadcrumb">
@@ -159,7 +159,7 @@
                                             @if (!empty($freelancer->skills))
                                                 <div class="wt-tag wt-widgettag">
                                                     @foreach($freelancer->skills as $skill)
-                                                        <a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a>
+                                                        <a href="{{{url('Pro/search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a>
                                                     @endforeach
                                                 </div>
                                             @endif
@@ -169,7 +169,7 @@
                                         {{ $users->links('pagination.custom') }}
                                     @endif
                                 @else
-                                    @include('errors.no-record')
+                                    @include('pro.errors.no-record')
                                 @endif
                             </div>
                         </div>

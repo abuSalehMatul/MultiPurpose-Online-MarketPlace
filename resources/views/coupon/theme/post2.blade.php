@@ -28,9 +28,9 @@
 								<div class="col-md-4">
 									<div class="post-body-block-logo">
 										@if($post->type == 'c' || $post->type == 'd')
-											<img src="{{$post->image != null ? asset('images/coupon/'.$post->image) : asset('images/store/'.$post->store->image)}}" class="img-fluid" alt="Deal">
+											<img src="{{$post->image != null ? asset('coupon/images/coupon/'.$post->image) : asset('coupon/images/store/'.$post->store->image)}}" class="img-fluid" alt="Deal">
 										@else
-											<img src="{{asset('images/discussion/'.$post->image)}}" class="img-fluid" alt="Discussion">
+											<img src="{{asset('coupon/images/discussion/'.$post->image)}}" class="img-fluid" alt="Discussion">
 										@endif
 									</div>
 								</div>
@@ -179,7 +179,7 @@
 								@if($post->type == 'c' || $post->type == 'd')
 									<div class="col-lg-4 text-center">
 										<div class="post-body-block-logo">
-											<a href="#" title="{{$post->store->title}}" target="_blank"><img src="{{asset('images/store/'.$post->store->image)}}" class="img-fluid" alt="Brand"></a>
+											<a href="#" title="{{$post->store->title}}" target="_blank"><img src="{{asset('coupon/images/store/'.$post->store->image)}}" class="img-fluid" alt="Brand"></a>
 										</div>                           
 										<div class="post-brand-content">
 											<h6 class="page-block-heading">{{$post->store->title}}</h6>
@@ -202,7 +202,7 @@
 									@foreach($comments as $comment)
 										<div class="media">
 											<div class="media-left mr-3">
-												<a href="{{url('profile/'.$comment->user_id)}}" title="{{$comment->users->is_admin ? 'Admin' : 'User'}}"><img src="{{asset('images/user/'.$comment->users->image)}}" class="img-fluid media-object" alt="Admin"></a>
+												<a href="{{url('profile/'.$comment->user_id)}}" title="{{$comment->users->is_admin ? 'Admin' : 'User'}}"><img src="{{asset('coupon/images/user/'.$comment->users->image)}}" class="img-fluid media-object" alt="Admin"></a>
 											</div>
 											<div class="media-body">
 												<h6 class="media-heading"><a href="{{url('profile/'.$comment->user_id)}}" title="{{$comment->users->name}}">{{$comment->users->name}}</a> - <span>{{$comment->created_at->diffForHumans()}}</span></h6>
@@ -213,7 +213,7 @@
 													<div class="media-reply"><a class="reply-btn1" data-toggle="modal" data-target="#login" href="#" title="Reply"><i class="fa fa-reply"></i> Reply</a></div>
 												@endauth
 												@if($comment->replies()->count()>0)
-													@include('theme.childcomment', ['comments' => $comment->replies])
+													@include('coupon.theme.childcomment', ['comments' => $comment->replies])
 												@endif
 											</div>
 										</div>
@@ -232,9 +232,9 @@
 							<div class="col-lg-2">
 								<div class="post-author-img">
 									@auth
-										<img src="{{asset('images/user/'.$auth->image)}}" class="img-fluid" alt="{{$auth->title}}">
+										<img src="{{asset('coupon/images/user/'.$auth->image)}}" class="img-fluid" alt="{{$auth->title}}">
 									@else
-										<img src="{{asset('images/user/user.png')}}" class="img-fluid" alt="user-img">
+										<img src="{{asset('coupon/images/user/user.png')}}" class="img-fluid" alt="user-img">
 									@endauth
 								</div>
 							</div>

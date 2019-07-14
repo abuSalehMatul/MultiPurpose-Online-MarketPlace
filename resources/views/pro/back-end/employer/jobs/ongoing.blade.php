@@ -1,4 +1,4 @@
-@extends('back-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.back-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
     @if (session()->has('type'))
         @php session()->forget('type'); @endphp
@@ -17,10 +17,10 @@
                                     @foreach ($ongoing_jobs as $job)
                                         @php
                                             $accepted_proposal = array();
-                                            $duration  =  \App\Helper::getJobDurationList($job->duration);
+                                            $duration  =  \App\ProModel\ProHelper::getJobDurationList($job->duration);
                                             $user_name = $job->employer->first_name.' '.$job->employer->last_name;
-                                            $accepted_proposal = \App\Job::find($job->id)->proposals()->where('status', 'hired')->first();
-                                            $freelancer_name = \App\Helper::getUserName($accepted_proposal->freelancer_id);
+                                            $accepted_proposal = \App\ProModel\ProJob::find($job->id)->proposals()->where('status', 'hired')->first();
+                                            $freelancer_name = \App\ProModel\ProHelper::getUserName($accepted_proposal->freelancer_id);
                                             $profile = \App\User::find($accepted_proposal->freelancer_id)->profile;
                                             $user_image = !empty($profile) ? $profile->avater : '';
                                             $profile_image = !empty($user_image) ? '/uploads/users/'.$accepted_proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
@@ -35,7 +35,7 @@
                                                     @if (!empty($user_name) || !empty($job->title) )
                                                         <div class="wt-title">
                                                             @if (!empty($user_name))
-                                                                <a href="{{{ url('profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $user_name }}}</a>
+                                                                <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $user_name }}}</a>
                                                             @endif
                                                             @if (!empty($job->title))
                                                                 <h2>{{{ $job->title }}}</h2>
@@ -52,7 +52,7 @@
                                                                 <li><span class="wt-dashboraddoller"><i>{{ !empty($symbol) ? $symbol['symbol'] : '$' }}</i> {{{ $job->price }}}</span></li>
                                                             @endif
                                                             @if (!empty($job->location->title))
-                                                                <li><span><img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.locations') }}}"> {{{ $job->location->title }}}</span></li>
+                                                                <li><span><img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.locations') }}}"> {{{ $job->location->title }}}</span></li>
                                                             @endif
                                                             @if (!empty($job->project_type))
                                                                 <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> {{ trans('lang.type') }} {{{ $job->project_type }}}</a></li>

@@ -69,7 +69,7 @@
               </div>
               <div class="col-md-6">
                 <div class="image-block">
-                  <img src="{{asset('images/'.$general_settings->logo)}}" class="img-responsive" alt="" width="150">
+                  <img src="{{asset('coupon/images/'.$general_settings->logo)}}" class="img-responsive" alt="" width="150">
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@
               </div>
               <div class="col-md-6">
                 <div class="image-block">
-                  <img src="{{asset('images/favicon/' . $general_settings->favicon)}}" class="img-responsive" alt="">
+                  <img src="{{asset('coupon/images/favicon/' . $general_settings->favicon)}}" class="img-responsive" alt="">
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@
               </div>
               <div class="col-md-6">
                 <div class="image-block">
-                  <img src="{{asset('images/'.$general_settings->preloader)}}" class="img-responsive" alt="" width="150">
+                  <img src="{{asset('coupon/images/'.$general_settings->preloader)}}" class="img-responsive" alt="" width="150">
                 </div>
               </div>
             </div>
@@ -166,7 +166,7 @@
               </div>
               <div class="col-md-6">
                 <div class="image-block">
-                  <img src="{{asset('images/' . $general_settings->footer_logo)}}" class="img-responsive" alt="">
+                  <img src="{{asset('coupon/images/' . $general_settings->footer_logo)}}" class="img-responsive" alt="">
                 </div>
               </div>
             </div>
@@ -409,7 +409,7 @@
               </div>
               <div class="col-md-6">
                 <div class="image-block">
-                  <img src="{{asset('images/'.$general_settings->navbar_img)}}" class="img-responsive" alt="" width="150">
+                  <img src="{{asset('coupon/images/'.$general_settings->navbar_img)}}" class="img-responsive" alt="" width="150">
                 </div>
               </div>
             </div>

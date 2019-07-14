@@ -1,17 +1,17 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 
 @section('body')
 
     @php
-        $subscriber = App\Subscriber::count();
-        $category = App\Mining::count();
-        $subCategory = App\Unit::count();
-        $topics = App\PricingPlan::count();
+        $subscriber = App\Model\LearnSubscriber::count();
+        $category = App\Model\Mining::count();
+        $subCategory = App\Model\Unit::count();
+        $topics = App\Model\PricingPlan::count();
     @endphp
     <div class="row">
 
         <div class="col-md-6 col-lg-3">
-            <a href="{{route('admin.category')}}" class="text-decoration">
+            <a href="{{url('admin/category')}}" class="text-decoration">
                 <div class="widget-small warning coloured-icon"><i class="icon fa fa-th fa-3x"></i>
                     <div class="info">
                         <h5>Category</h5>
@@ -70,7 +70,7 @@
     @php
 
 
-    $sell =  \App\PricingPlan::whereYear('created_at', '=', date('Y'))->get()->groupBy(function($d) {
+    $sell =  \App\Model\PricingPlan::whereYear('created_at', '=', date('Y'))->get()->groupBy(function($d) {
           return $d->created_at->format('F');
        });
        $monthly_sell = [];
@@ -86,7 +86,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{asset('assets/admin/js/chart.js')}}"></script>
+    <script type="text/javascript" src="{{asset('learn/assets/admin/js/chart.js')}}"></script>
     <script type="text/javascript">
         var data = {
             labels:  {!! json_encode($month) !!},

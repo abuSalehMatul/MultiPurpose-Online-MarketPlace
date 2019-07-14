@@ -1,4 +1,4 @@
-@extends('front-end.master')
+@extends('pro.front-end.master')
 @section('content')
 <div class="wt-haslayout wt-innerbannerholder">
     <div class="container">
@@ -29,7 +29,7 @@
                 <div class="wt-registerformhold">
                     <div class="wt-registerformmain">
                         <div class="wt-joinformc">
-                                <form method="POST" action="{{ url('user/verify/emailcode') }}" class="wt-formtheme wt-formregister" id="verification_form">
+                                <form method="POST" action="{{ url('Pro/user/verify/emailcode') }}" class="wt-formtheme wt-formregister" id="verification_form">
                                     <div class="wt-registerhead">
                                         <div class="wt-title">
                                             <h3>{{{ $reg_three_title }}}</h3>

@@ -1,4 +1,4 @@
-@extends('back-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.back-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="wt-dashboardbox">
@@ -11,8 +11,8 @@
                         <div class="wt-managejobcontent wt-verticalscrollbar mCustomScrollbar _mCS_1">
                             @foreach ($cancelled_jobs as $job_id)
                                 @php
-                                    $job = \App\Job::where('id', $job_id->job_id)->first();
-                                    $duration  =  \App\Helper::getJobDurationList($job->duration);
+                                    $job = \App\ProModel\ProJob::where('id', $job_id->job_id)->first();
+                                    $duration  =  \App\ProModel\ProHelper::getJobDurationList($job->duration);
                                     $user_name = $job->employer->first_name.' '.$job->employer->last_name;
                                     $verified_user = \App\User::select('user_verified')->where('id', $job->employer->id)->pluck('user_verified')->first();
                                 @endphp
@@ -25,7 +25,7 @@
                                             @if (!empty($user_name) || !empty($job->title) )
                                                 <div class="wt-title">
                                                     @if (!empty($user_name))
-                                                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $user_name }}}</a>
+                                                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $user_name }}}</a>
                                                     @endif
                                                     @if (!empty($job->title))
                                                         <h2>{{{ $job->title }}}</h2>
@@ -42,7 +42,7 @@
                                                         <li><span class="wt-dashboraddoller"><i>{{ !empty($symbol) ? $symbol['symbol'] : '$' }}</i> {{{ $job->price }}}</span></li>
                                                     @endif
                                                     @if (!empty($job->location->title))
-                                                        <li><span><img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.locations') }}}"> {{{ $job->location->title }}}</span></li>
+                                                        <li><span><img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.locations') }}}"> {{{ $job->location->title }}}</span></li>
                                                     @endif
                                                     @if (!empty($job->project_type))
                                                         <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> {{ trans('lang.type') }} {{{ $job->project_type }}}</a></li>
@@ -55,8 +55,8 @@
                                         </div>
                                         <div class="wt-rightarea">
                                             <div class="wt-btnarea">
-                                                <a href="{{{ url('freelancer/job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
-                                                <a href="{{{ url('freelancer/dispute/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.raise_dispute') }}</a>
+                                                <a href="{{{ url('Pro/freelancer/job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                <a href="{{{ url('Pro/freelancer/dispute/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.raise_dispute') }}</a>
                                             </div>
                                         </div>
                                     </div>

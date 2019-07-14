@@ -23,9 +23,9 @@
             </div>
         </div>
     </div>
-        @include('back-end.admin.settings.email.logo')
-        @include('back-end.admin.settings.email.banner')
-        @include('back-end.admin.settings.email.signature')
+        @include('pro.back-end.admin.settings.email.logo')
+        @include('pro.back-end.admin.settings.email.banner')
+        @include('pro.back-end.admin.settings.email.signature')
     <div class="wt-updatall la-updateall-holder">
         {!! Form::submit(trans('lang.btn_save'), ['class' => 'wt-btn']) !!}
     </div>  

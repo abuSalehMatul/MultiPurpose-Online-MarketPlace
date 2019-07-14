@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="pages-listing" id="pages-list">
         @if (Session::has('message'))
@@ -17,7 +17,7 @@
                         <div class="wt-dashboardboxtitle wt-titlewithsearch">
                             <h2>{{{ trans('lang.add_page') }}}</h2>
                             <div class="wt-rightarea">
-                                <a href="{{{ url('admin/create/pages') }}}" class="wt-btn">{{{ trans('lang.create_page') }}}</a>
+                                <a href="{{{ url('Pro/admin/create/pages') }}}" class="wt-btn">{{{ trans('lang.create_page') }}}</a>
                             </div>
                             <a href="javascript:void(0);" v-if="this.is_show" @click="deleteChecked('{{ trans('lang.ph_delete_confirm_title') }}', '{{ trans('lang.ph_page_delete_message') }}')" class="wt-skilldel">
                                 <i class="lnr lnr-trash"></i>
@@ -54,7 +54,7 @@
                                                 <td>{{{ $page->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/pages/edit-page') }}}/{{{ $page->id }}}" class="wt-addinfo wt-pages">
+                                                        <a href="{{{ url('Pro/admin/pages/edit-page') }}}/{{{ $page->id }}}" class="wt-addinfo wt-pages">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
                                                         <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$page->id}}'" :message="'{{trans("lang.ph_page_delete_message")}}'" :url="'{{url('admin/pages/delete-page')}}'"></delete>
@@ -68,7 +68,7 @@
                                 @if( method_exists($pages,'links') ) {{ $pages->links('pagination.custom') }} @endif
                             </div>
                         @else
-                            @include('errors.no-record')
+                            @include('pro.errors.no-record')
                         @endif
                     </div>
                 </div>

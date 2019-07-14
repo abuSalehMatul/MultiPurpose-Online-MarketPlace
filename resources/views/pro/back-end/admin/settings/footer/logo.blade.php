@@ -10,7 +10,7 @@
                     <upload-image 
                         :id="'footer_logo'" 
                         :img_ref="'footer_logo_ref'" 
-                        :url="'{{url('admin/upload-temp-image/footer_logo')}}'" 
+                        :url="'{{url('Pro/admin/upload-temp-image/footer_logo')}}'" 
                         :name="'footer_logo'"
                         >
                     </upload-image>
@@ -29,7 +29,7 @@
                 <upload-image 
                     :id="'footer_logo'" 
                     :img_ref="'footer_logo_ref'" 
-                    :url="'{{url('admin/upload-temp-image/footer_logo')}}'" 
+                    :url="'{{url('Pro/admin/upload-temp-image/footer_logo')}}'" 
                     :name="'footer_logo'"
                     >
                 </upload-image>

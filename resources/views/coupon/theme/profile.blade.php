@@ -27,7 +27,7 @@
 									<div class="col-lg-3">
 										<div class="ac-profile-block">
 											<div class="ac-profile-img">
-												<img src="{{asset('images/user/'.$user->image)}}" alt="User">
+												<img src="{{asset('coupon/images/user/'.$user->image)}}" alt="User">
 											</div>
 											<h6 class="ac-username">{{$user->name}}</h6>
 											<div class="ac-post">{{$user->is_admin == '1' ? 'Administrator' : 'User'}}</div>
@@ -93,7 +93,7 @@
 											<div class="col-lg-4 col-md-6">
 												<div class="deal-block recent-deals">
 													<div class="deal-img">
-														<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{$item->image != null ? asset('images/coupon/'.$item->image) : asset('images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
+														<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{$item->image != null ? asset('coupon/images/coupon/'.$item->image) : asset('coupon/images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
 													</div>
 													<div class="deal-dtl">
 														@if($item->is_featured == 1)
@@ -139,7 +139,7 @@
 																	<div class="row">
 																		<div class="col-4">
 																			<div class="user-img">
-																				<a href="{{url('profile/'.$item->user_id)}}" title="User"><img src="{{asset('images/user/'.$item->user->image)}}" class="img-fluid" alt="User"></a>
+																				<a href="{{url('profile/'.$item->user_id)}}" title="User"><img src="{{asset('coupon/images/user/'.$item->user->image)}}" class="img-fluid" alt="User"></a>
 																			</div>
 																		</div>
 																		<div class="col-sm-8">

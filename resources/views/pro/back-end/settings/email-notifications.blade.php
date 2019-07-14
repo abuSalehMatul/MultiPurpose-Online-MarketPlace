@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-haslayout wt-email-notification-settings wt-dbsectionspace" id="profile_settings">
         @if (Session::has('message'))
@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                 <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
-                    @include('back-end.settings.tabs')
+                    @include('pro.back-end.settings.tabs')
                     <div class="wt-tabscontent tab-content">
                         <div class="wt-emailnotiholder" id="wt-emailnoti">
                             <div class="wt-emailnoti">
@@ -20,7 +20,7 @@
                                     <div class="wt-description">
                                         <p>{{{ trans('lang.email_notifications_note') }}}</p>
                                     </div>
-                                    {!! Form::open(['url' => url('profile/settings/save-email-settings'), 'class' =>'wt-formtheme wt-userform', 'id'=>'notifications'])!!}
+                                    {!! Form::open(['url' => url('Pro/profile/settings/save-email-settings'), 'class' =>'wt-formtheme wt-userform', 'id'=>'notifications'])!!}
                                         <fieldset>
                                             <div class="form-group form-disabeld">
                                                 <input type="email" name="user_email" class="form-control" placeholder="{{{ $user_email }}}" disabled="">

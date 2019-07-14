@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="skills-listing" id="skill-list">
         @if (Session::has('message'))
@@ -19,7 +19,7 @@
                         </div>
                         <div class="wt-dashboardboxcontent">
                             {!! Form::open([
-                                'url' => url('admin/store-skill'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory',
+                                'url' => url('Pro/admin/store-skill'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory',
                                 'id' => 'skills'
                                 ])
                             !!}
@@ -50,7 +50,7 @@
                     <div class="wt-dashboardbox">
                         <div class="wt-dashboardboxtitle wt-titlewithsearch">
                             <h2>{{{ trans('lang.skills') }}}</h2>
-                            {!! Form::open(['url' => url('admin/skills/search'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
+                            {!! Form::open(['url' => url('Pro/admin/skills/search'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
                             <fieldset>
                                 <div class="form-group">
                                     <input type="text" name="keyword" value="{{{ !empty($_GET['keyword']) ? $_GET['keyword'] : '' }}}"
@@ -94,10 +94,10 @@
                                                 <td>{{{ $skill->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/skills/edit-skills') }}}/{{{ $skill->id }}}" class="wt-addinfo wt-skillsaddinfo">
+                                                        <a href="{{{ url('Pro/admin/skills/edit-skills') }}}/{{{ $skill->id }}}" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
-                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$skill->id}}'" :message="'{{trans("lang.ph_skill_delete_message")}}'" :url="'{{url('admin/skills/delete-skills')}}'"></delete>
+                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$skill->id}}'" :message="'{{trans("lang.ph_skill_delete_message")}}'" :url="'{{url('Pro/admin/skills/delete-skills')}}'"></delete>
                                                     </div>
                                                 </td>
                                             </tr>

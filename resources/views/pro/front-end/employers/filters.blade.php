@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
+{!! Form::open(['url' => url('Pro/search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
     <input type="hidden" value="{{$type}}" name="type">
     <aside id="wt-sidebar" class="wt-sidebar">
         <div class="wt-widget wt-startsearch">
@@ -34,7 +34,7 @@
                                     @php $checked = ( !empty($_GET['locations']) && in_array($location->slug, $_GET['locations'])) ? 'checked' : '' @endphp
                                     <span class="wt-checkbox">
                                         <input id="location-{{{ $location->slug }}}" type="checkbox" name="locations[]" value="{{{$location->slug}}}" {{$checked}}>
-                                        <label for="location-{{{ $location->slug }}}"> <img src="{{{asset(App\Helper::getLocationFlag($location->flag))}}}" alt="{{ trans('lang.img') }}"> 
+                                        <label for="location-{{{ $location->slug }}}"> <img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($location->flag))}}}" alt="{{ trans('lang.img') }}"> 
                                             {{{ $location->title }}}
                                         </label>
                                     </span>

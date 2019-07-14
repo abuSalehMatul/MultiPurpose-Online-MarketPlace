@@ -67,7 +67,7 @@ class StoreController extends Controller
 		if ($file = $request->file('image')) {
 			
 			$optimizeImage = Image::make($file);
-      $optimizePath = public_path().'coupon/images/store/';
+      $optimizePath = public_path().'/coupon/images/store/';
       $name = time().$file->getClientOriginalName();
       $optimizeImage->save($optimizePath.$name, 72);
 
@@ -148,16 +148,16 @@ class StoreController extends Controller
 
 			if ($store->image != null) {
 				
-				$image_file = @file_get_contents(public_path().'coupon/images/store/'.$store->image);
+				$image_file = @file_get_contents(public_path().'/coupon/images/store/'.$store->image);
 
 				if($image_file){
-					unlink(public_path().'coupon/images/store/'.$store->image);
+					unlink(public_path().'/coupon/images/store/'.$store->image);
 				}
 
 			}
 
 			$optimizeImage = Image::make($file);
-      $optimizePath = public_path().'coupon/images/store/';
+      $optimizePath = public_path().'/coupon/images/store/';
       $name = time().$file->getClientOriginalName();
       $optimizeImage->save($optimizePath.$name, 72);
 
@@ -215,12 +215,12 @@ class StoreController extends Controller
 
 		if ($store->image != null) {
 				
-			$image_file = @file_get_contents(public_path().'coupon/images/store/'.$store->image);
+			$image_file = @file_get_contents(public_path().'/coupon/images/store/'.$store->image);
 
 			if($image_file){        
-				$image_file = @file_get_contents(public_path().'coupon/images/store/'.$store->image);
+				$image_file = @file_get_contents(public_path().'/coupon/images/store/'.$store->image);
 				if($image_file){
-					unlink(public_path().'coupon/images/store/'.$store->image);
+					unlink(public_path().'/coupon/images/store/'.$store->image);
 				}
 			}
 

@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('import-css')
-    <link href="{{ asset('assets/admin/css/bootstrap-fileinput.css') }}" rel="stylesheet">
+    <link href="{{ asset('learn/assets/admin/css/bootstrap-fileinput.css') }}" rel="stylesheet">
 @stop
 @section('body')
     <div class="row">
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <img class="img-responsive" src="{{ asset('assets/images/logo/testimonial.jpg') }}"
+                                <img class="img-responsive" src="{{ asset('learn/assets/images/logo/testimonial.jpg') }}"
                                      alt="logo" width="100%">
                             </div>
                         </div>
@@ -69,5 +69,5 @@
 @stop
 
 @section('import-script')
-    <script src="{{ asset('assets/admin/js/bootstrap-fileinput.js') }}"></script>
+    <script src="{{ asset('learn/assets/admin/js/bootstrap-fileinput.js') }}"></script>
 @stop

@@ -1,11 +1,11 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-dbsectionspace wt-haslayout la-ps-freelancer">
         <div class="freelancer-profile" id="user_profile">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
                     <div class="wt-dashboardbox wt-dashboardtabsholder">
-                        @include('back-end.freelancer.profile-settings.tabs')
+                        @include('pro.back-end.freelancer.profile-settings.tabs')
                         <div class="wt-tabscontent tab-content">
                             @if (Session::has('message'))
                                 <div class="flash_msg">
@@ -24,21 +24,21 @@
                             <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
                                 {!! Form::open(['url' => '', 'class' =>'wt-userform', 'id' => 'freelancer_profile', '@submit.prevent'=>'submitFreelancerProfile']) !!}
                                     <div class="wt-yourdetails wt-tabsinfo">
-                                        @include('back-end.freelancer.profile-settings.personal-detail.detail')
+                                        @include('pro.back-end.freelancer.profile-settings.personal-detail.detail')
                                     </div>
                                     <div class="wt-profilephoto wt-tabsinfo">
-                                        @include('back-end.freelancer.profile-settings.personal-detail.profile_photo') 
+                                        @include('pro.back-end.freelancer.profile-settings.personal-detail.profile_photo') 
                                     </div>
                                     @if (!empty($options) && $options['banner_option'] === 'true')
                                         <div class="wt-bannerphoto wt-tabsinfo">
-                                            @include('back-end.freelancer.profile-settings.personal-detail.profile_banner')
+                                            @include('pro.back-end.freelancer.profile-settings.personal-detail.profile_banner')
                                         </div>
                                     @endif
                                     <div class="wt-location wt-tabsinfo">
-                                        @include('back-end.freelancer.profile-settings.personal-detail.location')
+                                        @include('pro.back-end.freelancer.profile-settings.personal-detail.location')
                                     </div>
                                     <div class="wt-skills la-skills-holder">
-                                        @include('back-end.freelancer.profile-settings.personal-detail.skill')   
+                                        @include('pro.back-end.freelancer.profile-settings.personal-detail.skill')   
                                     </div>
                                     <div class="wt-updatall">
                                         <i class="ti-announcement"></i>

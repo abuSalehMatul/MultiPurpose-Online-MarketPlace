@@ -30,9 +30,13 @@
                         <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Auth::user()->getRoleNames()->first() }}}</span>
                     </div>
                     @if ($role === 'employer')
-                        <div class="wt-btnarea"><a href="{{{ url(route('employerPostJob')) }}}" class="wt-btn">{{{ trans('lang.post_job') }}}</a></div>
+                      
+                        <div class="wt-btnarea float-left"><a href="{{{ url(route('employerPostJob')) }}}" class=" float-left btn-sm">{{{ trans('lang.post_job') }}}</a></div>
+                        <div class="wt-btnarea float-left"><a href="{{{ url(route('pro_employerPostJob')) }}}" class="float-left btn-sm">{{{ trans('lang.post_service') }}}</a></div>
                     @elseif ($role === 'freelancer')
                         <div class="wt-btnarea"><a href="{{{ url(route('showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
+                    @elseif($role=='pro')
+                        <div class="wt-btnarea"><a href="{{{ url(route('pro_showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @endif
                 </div>
             </div>
@@ -70,7 +74,7 @@
                                 <span>{{ trans('lang.pages') }}</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><hr><a href="{{{ route('pages') }}}">{{ trans('lang.all_pages') }}</a></li>
+                                <li><hr><a href="{{{ url('admin/pages') }}}">{{ trans('lang.all_pages') }}</a></li>
                                 <li><hr><a href="{{{ route('createPage') }}}">{{ trans('lang.add_pages') }}</a></li>
 
                             </ul>
@@ -100,7 +104,7 @@
                                 <span>{{ trans('lang.settings') }}</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><hr><a href="{{{ route('adminProfile') }}}">{{ trans('lang.acc_settings') }}</a></li>
+                                <li><hr><a href="{{{ url('admin/profile') }}}">{{ trans('lang.acc_settings') }}</a></li>
                                 <li><hr><a href="{{{ url('admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
                                 <li><hr><a href="{{{ route('resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
                             </ul>
@@ -154,8 +158,11 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><hr><a href="{{{ route('employerManageJobs') }}}">{{ trans('lang.manage_job') }}</a></li>
+                                    <li><hr><a href="{{{ route('pro_employerManageJobs') }}}">{{ trans('lang.pro_manage_job') }}</a></li>
                                     <li><hr><a href="{{{ url('employer/jobs/completed') }}}">{{ trans('lang.completed_jobs') }}</a></li>
+                                    <li><hr><a href="{{{ url('Pro/employer/jobs/completed') }}}">{{ trans('lang.pro_completed_jobs') }}</a></li>
                                     <li><hr><a href="{{{ url('employer/jobs/hired') }}}">{{ trans('lang.ongoing_jobs') }}</a></li>
+                                    <li><hr><a href="{{{ url('Pro/employer/jobs/hired') }}}">{{ trans('lang.pro_ongoing_jobs') }}</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -167,6 +174,8 @@
                                 <ul class="sub-menu">
                                     <li><hr><a href="{{{ url('employer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
                                     <li><hr><a href="{{{ url('employer/project/invoice') }}}">{{ trans('lang.project_inv') }}</a></li>
+                                    <li><hr><a href="{{{ url('Pro/employer/package/invoice') }}}">{{ trans('lang.pro_pkg_inv') }}</a></li>
+                                    <li><hr><a href="{{{ url('Pro/employer/project/invoice') }}}">{{ trans('lang.pro_project_inv') }}</a></li>
                                 </ul>
                             </li>
                         @elseif ($role === 'freelancer')

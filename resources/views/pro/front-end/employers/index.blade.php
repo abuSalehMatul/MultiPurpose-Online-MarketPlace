@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
     @php $breadcrumbs = Breadcrumbs::generate('searchResults'); @endphp
     <div class="wt-haslayout wt-innerbannerholder">
@@ -37,7 +37,7 @@
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-                            @include('front-end.employers.filters')
+                            @include('pro.front-end.employers.filters')
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                             <div class="wt-userlistingtitle">
@@ -60,20 +60,20 @@
                                                     <div class="wt-companysinfo">
                                                         <figure><img src="{{{ asset(Helper::getProfileImage($employer->id)) }}}" alt="Company"></figure>
                                                         <div class="wt-title">
-                                                            <a href="{{{ url('profile/'.$employer->slug) }}}">
+                                                            <a href="{{{ url('Pro/profile/'.$employer->slug) }}}">
                                                             @if ($verified_user === 1)
                                                                 <i class="fa fa-check-circle"></i> {{ trans('lang.verified_company') }}</a>
                                                             @endif
-                                                            <a href="{{{ url('profile/'.$employer->slug) }}}"><h2>{{{ Helper::getUserName($employer->id) }}}</h2></a>
+                                                            <a href="{{{ url('Pro/profile/'.$employer->slug) }}}"><h2>{{{ Helper::getUserName($employer->id) }}}</h2></a>
                                                         </div>
                                                         <ul class="wt-postarticlemeta">
                                                             <li>
-                                                                <a href="{{ url('profile/'.$employer->slug) }}">
+                                                                <a href="{{ url('Pro/profile/'.$employer->slug) }}">
                                                                     <span>{{ trans('lang.open_jobs') }}</span>
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{{ url('profile/'.$employer->slug) }}}">
+                                                                <a href="{{{ url('Pro/profile/'.$employer->slug) }}}">
                                                                     <span>{{ trans('lang.full_profile') }}</span>
                                                                 </a>
                                                             </li>
@@ -101,7 +101,7 @@
                                             </div>
                                         @endif
                                     @else
-                                        @include('errors.no-record')
+                                        @include('pro.errors.no-record')
                                     @endif
                                 </div>
                             </div>

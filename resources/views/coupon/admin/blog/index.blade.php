@@ -59,7 +59,7 @@
                 </td>
                 <td>
                   @if ($item->image)
-                    <img src="{{ asset('images/blog/'.$item->image) }}" class="img-responsive" width="80" height="80" alt="image">
+                    <img src="{{ asset('coupon/images/blog/'.$item->image) }}" class="img-responsive" width="80" height="80" alt="image">
                   @else
                     N/A  
                   @endif

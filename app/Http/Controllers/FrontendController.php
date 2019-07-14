@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Category;
+use App\Model\LearnCategory;
 use App\Model\LiveClass;
 use App\Model\Post;
 use App\Model\PricingPlan;
-use App\Model\Subscriber;
+use App\Model\LearnSubscriber;
 use App\Model\Unit;
 use Illuminate\Http\Request;
 use Auth;
 use App\Model\Menu;
-use App\Model\Faq;
+use App\Model\LearnFaq;
 use App\Model\Advertisment;
 use App\Model\Mining;
 use App\Model\GeneralSettings;
@@ -46,7 +46,7 @@ class FrontendController extends Controller
 
     public function faqs()
     {
-        $data['faqs'] = Faq::all();
+        $data['faqs'] = LearnFaq::all();
         $data['page_title'] = "Faqs";
         return view('learn.layouts.faqs', $data);
     }
@@ -87,11 +87,11 @@ class FrontendController extends Controller
         $request->validate([
             'email' => 'required|email|max:255',
         ]);
-        $macCount = Subscriber::where('email', $request->email)->count();
+        $macCount = LearnSubscriber::where('email', $request->email)->count();
         if ($macCount > 0) {
             return back()->with('alert', 'This Email Already Subscribed !!');
         } else {
-            Subscriber::create($request->all());
+            LearnSubscriber::create($request->all());
             return back()->with('success', ' Subscribe Successfully!');
         }
     }
@@ -119,7 +119,7 @@ class FrontendController extends Controller
     public function liveClass()
     {
 
-         $data['topics'] = LiveClass::latest()->whereStatus(1)->get();
+        $data['topics'] = LiveClass::latest()->whereStatus(1)->get();
         $data['page_title'] = "Live Class";
         return view('learn.front.live-class', $data);
     }
@@ -132,7 +132,7 @@ class FrontendController extends Controller
     }
     public function blogCategory($id)
     {
-        $cat= Category::whereId($id)->first();
+        $cat= LearnCategory::whereId($id)->first();
         $data['posts'] = Post::where('cat_id',$id)->whereStatus(1)->paginate(4);
          $data['page_title'] = $cat->name;
         return view('learn.front.blog-category', $data);

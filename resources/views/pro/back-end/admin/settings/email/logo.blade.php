@@ -10,7 +10,7 @@
                     <upload-image 
                         :id="'email_logo'" 
                         :img_ref="'email_ref'"
-                        :url="'{{url('admin/upload-temp-image/email_logo')}}'" 
+                        :url="'{{url('Pro/admin/upload-temp-image/email_logo')}}'" 
                         :name="'email_logo'"
                     >
                     </upload-image>
@@ -29,7 +29,7 @@
                 <upload-image 
                     :id="'email_logo'" 
                     :img_ref="'email_ref'" 
-                    :url="'{{url('admin/upload-temp-image/email_logo')}}'" 
+                    :url="'{{url('Pro/admin/upload-temp-image/email_logo')}}'" 
                     :name="'email_logo'"
                 >
                 </upload-image>

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('learn.layout')
 @section('css')
 <style>
     .menubar-m{
@@ -9,7 +9,7 @@
 </style>
 @stop
 @section('content')
-@include('partials.menubar')
+@include('learn.partials.menubar')
 
     <section class="faq-section pad-t-b-40" >
         <div class="container">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </section>
-    @include('partials.subscribe')
+    @include('learn.partials.subscribe')
 
 
 @stop

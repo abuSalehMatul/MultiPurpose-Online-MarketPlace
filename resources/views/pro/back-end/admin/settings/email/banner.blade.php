@@ -13,7 +13,7 @@
                     <upload-image 
                         :id="'email_banner'" 
                         :img_ref="'email_ref'" 
-                        :url="'{{url('admin/upload-temp-image/email_banner')}}'" 
+                        :url="'{{url('Pro/admin/upload-temp-image/email_banner')}}'" 
                         :name="'email_banner'">
                     </upload-image>
                 </div>
@@ -31,7 +31,7 @@
                 <upload-image 
                     :id="'email_banner'" 
                     :img_ref="'email_ref'" 
-                    :url="'{{url('admin/upload-temp-image/email_banner')}}'" 
+                    :url="'{{url('Pro/admin/upload-temp-image/email_banner')}}'" 
                     :name="'email_banner'">
                 </upload-image>
                 <input type="hidden" name="email_data[0][email_banner]" id="hidden_banner">

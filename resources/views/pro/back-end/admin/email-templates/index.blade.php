@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace" id="settings">
         <div class="row">
@@ -15,7 +15,7 @@
                 <div class="wt-dashboardbox">
                     <div class="wt-dashboardboxtitle wt-titlewithsearch">
                         <h2>{{{ trans('lang.email_templates') }}}</h2>
-                        {!! Form::open(['url' => url('admin/email-templates'),
+                        {!! Form::open(['url' => url('Pro/admin/email-templates'),
                             'method' => 'get', 'class' => 'wt-formtheme wt-formsearch'])
                         !!}
                             <fieldset>
@@ -47,7 +47,7 @@
                                         <td>{{{ Helper::getRoleNameByRoleID($template->role_id) }}}</td>
                                         <td>
                                             <div class="wt-actionbtn">
-                                                <a href="{{{url('admin/email-templates/'.$template->id)}}}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                <a href="{{{url('Pro/admin/email-templates/'.$template->id)}}}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
                                                 <a href="javascript:void(0);" v-on:click.prevent="emailContent('myModalRef-{{$key}}')" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-eye"></i></a>
                                             </div>
                                         </td>

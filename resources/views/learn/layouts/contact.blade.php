@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('learn.layout')
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/front/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('learn/assets/front/css/custom.css')}}">
 <style>
     .menubar-m{
         
@@ -9,7 +9,7 @@
 </style>
 @stop
 @section('content')
-@include('partials.menubar')
+@include('learn.partials.menubar')
     <!-- contact area start -->
     <section class="contact-area">
         <div class="container">
@@ -103,6 +103,6 @@
         </div>
     </section>
     <!-- contact area end -->
-    @include('partials.subscribe')
+    @include('learn.partials.subscribe')
 
 @stop

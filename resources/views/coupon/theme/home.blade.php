@@ -9,7 +9,7 @@
 @endphp
 @section('main-content')
 <!-- slider start -->
-	<section id="slider" class="slider {{$slider->is_parallax ? 'parallax' : ''}}" style="background-image: url('{{asset('images/'.$slider->image)}}">
+	<section id="slider" class="slider {{$slider->is_parallax ? 'parallax' : ''}}" style="background-image: url('{{asset('coupon/images/'.$slider->image)}}">
 		@if($slider->is_overlay)
 			<div class="overlay-bg"></div>
 		@endif
@@ -117,7 +117,7 @@
 						<div id="featured-deal-slider" class="featured-deal-slider owl-carousel">	 @foreach($feat_deal as $key => $item)
 								<div class="deal-block menu-deal-block">
 									<div class="deal-img">
-										<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="Deal"><img src="{{$item->image != null ? asset('images/coupon/'.$item->image) : asset('images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
+										<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="Deal"><img src="{{$item->image != null ? asset('coupon/images/coupon/'.$item->image) : asset('coupon/images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
 									</div>
 									<div class="deal-dtl text-center">
 										<h6 class="deal-title"><a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="Deal">{{str_limit($item->title, 30)}}</a></h6>
@@ -137,7 +137,7 @@
 								<div class="col-lg-3 col-md-4 col-sm-6">
 									<div class="deal-block recent-deals">
 										<div class="deal-img">
-											<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{$item->image != null ? asset('images/coupon/'.$item->image) : asset('images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
+											<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{$item->image != null ? asset('coupon/images/coupon/'.$item->image) : asset('coupon/images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
 										</div>
 										<div class="deal-dtl">
 											@if($item->is_featured == 1)
@@ -183,7 +183,7 @@
 														<div class="row">
 															<div class="col-4">
 																<div class="user-img">
-																	<a href="{{url('profile/'.$item->user_id)}}" title="User"><img src="{{asset('images/user/'.$item->user->image)}}" class="img-fluid" alt="User"></a>
+																	<a href="{{url('profile/'.$item->user_id)}}" title="User"><img src="{{asset('coupon/images/user/'.$item->user->image)}}" class="img-fluid" alt="User"></a>
 																</div>
 															</div>
 															<div class="col-sm-8">
@@ -233,7 +233,7 @@
 												@if($item->icon)
 													<i class="fa {{$item->icon}}"></i>
 												@else
-													<img src="{{asset('images/category/'.$item->image)}}" class="img-fluid" alt="category">
+													<img src="{{asset('coupon/images/category/'.$item->image)}}" class="img-fluid" alt="category">
 												@endif
 											</div>
 											<h5 class="cat-title">{{strtok($item->title,' ')}}</h5>
@@ -263,7 +263,7 @@
 							<div class="col-lg-4 col-md-6">
 								<div class="blog-post-main">
 									<div class="blog-img">
-										<a href="{{url('blog-dtl/'.$blog->uni_id.'/'.$blog->slug)}}" title="Blog Post"><img src="{{asset('images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post"></a>
+										<a href="{{url('blog-dtl/'.$blog->uni_id.'/'.$blog->slug)}}" title="Blog Post"><img src="{{asset('coupon/images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post"></a>
 									</div>
 									<div class="blog-post-dtl">
 										<h6 class="blog-post-heading"><a href="blog-post.html" title="Blog Post">{{$blog->title}}</a></h6>
@@ -299,7 +299,7 @@
 				<div id="featured-store-slider" class="featured-stores-slider owl-carousel">
 					@foreach($store as $key => $item)
 						<div class="store-img">
-							<a href="{{url('store-dtl/'.$item->slug)}}" title="Store"><img src="{{asset('images/store/'.$item->image)}}" class="img-fluid" alt="Store"></a>
+							<a href="{{url('store-dtl/'.$item->slug)}}" title="Store"><img src="{{asset('coupon/images/store/'.$item->image)}}" class="img-fluid" alt="Store"></a>
 						</div>
 					@endforeach
 				</div>

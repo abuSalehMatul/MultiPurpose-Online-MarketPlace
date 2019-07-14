@@ -1,11 +1,11 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-dbsectionspace wt-haslayout la-aw-freelancer">
         <div class="freelancer-profile" id="user_profile">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
                     <div class="wt-dashboardbox wt-dashboardtabsholder">
-                        @include('back-end.freelancer.profile-settings.tabs')
+                        @include('pro.back-end.freelancer.profile-settings.tabs')
                         <div class="wt-tabscontent tab-content">
                             @if (Session::has('message'))
                                 <div class="flash_msg">
@@ -22,12 +22,12 @@
                                 </ul>
                             @endif
                             <div class="wt-awardsholder" id="wt-awards">
-                                {!! Form::open(['url' => url('freelancer/store-project-award-settings'), 'class' =>'wt-formtheme wt-userform wt-formprojectinfo', 'id' => 'awards_projects', '@submit.prevent' => 'submitAwardsProjects']) !!}
+                                {!! Form::open(['url' => url('Pro/freelancer/store-project-award-settings'), 'class' =>'wt-formtheme wt-userform wt-formprojectinfo', 'id' => 'awards_projects', '@submit.prevent' => 'submitAwardsProjects']) !!}
                                     <div class="wt-addprojectsholder wt-tabsinfo">
-                                        @include('back-end.freelancer.profile-settings.projects-awards.projects')
+                                        @include('pro.back-end.freelancer.profile-settings.projects-awards.projects')
                                     </div>
                                     <div class="wt-addprojectsholder wt-tabsinfo la-awards">
-                                        @include('back-end.freelancer.profile-settings.projects-awards.awards') 
+                                        @include('pro.back-end.freelancer.profile-settings.projects-awards.awards') 
                                     </div>
                                     <div class="wt-updatall">
                                         <i class="ti-announcement"></i>

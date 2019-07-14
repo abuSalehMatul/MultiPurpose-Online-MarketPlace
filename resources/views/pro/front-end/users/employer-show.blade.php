@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('title'){{ $user_name }} | {{ $tagline }} @stop
 @section('description', "$desc")
 @section('content')
@@ -39,14 +39,14 @@
                                     <figure><img src="{{{ asset($avatar) }}}" alt="{{ trans('lang.img') }}"></figure>
                                     <div class="wt-title">
                                         @if ($user->user_verified === 1)
-                                            <a href="{{{ url('profile/'.$user->slug) }}}"><i class="fa fa-check-circle"></i> {{ trans('lang.verified_company') }}</a>
+                                            <a href="{{{ url('Pro/profile/'.$user->slug) }}}"><i class="fa fa-check-circle"></i> {{ trans('lang.verified_company') }}</a>
                                         @endif
                                         <h2>{{{ $user_name }}}</h2>
                                     </div>
                                 </div>
                                 <div class="tg-authorcodescan">
                                     <figure class="tg-qrcodeimg">
-                                        {!! QrCode::size(100)->generate(Request::url('profile/'.$user->slug)); !!}
+                                        {!! QrCode::size(100)->generate(Request::url('Pro/profile/'.$user->slug)); !!}
                                     </figure>
                                     <div class="tg-qrcodedetail">
                                         <span class="lnr lnr-laptop-phone"></span>
@@ -83,12 +83,12 @@
                                         <ul>
                                             @foreach ($followers as $follower)
                                                 @php
-                                                    $profile = \App\Profile::all()->where('user_id', $follower->follower)->first();
+                                                    $profile = \App\ProModel\ProProfile::all()->where('user_id', $follower->follower)->first();
                                                     $role_id = Helper::getRoleByUserID($follower->follower);
                                                 @endphp
                                                 @if (Helper::getRoleName($role_id) !== 'admin' && $follower->follower <> $user->id)
                                                     <li>
-                                                        <a href="{{{url('profile/'.$profile->user->slug)}}}">
+                                                        <a href="{{{url('Pro/profile/'.$profile->user->slug)}}}">
                                                             <span><img src="{{{asset(Helper::getProfileImage($follower->follower))}}}" alt="Follower"></span>
                                                             <span>{{{Helper::getUserName($follower->follower)}}}</span>
                                                         </a>
@@ -164,7 +164,7 @@
                             @if (!empty($jobs) && $jobs->count() > 0)
                                 @foreach ($jobs as $job)
                                     @php
-                                        $job = \App\Job::find($job->id);
+                                        $job = \App\ProModel\ProJob::find($job->id);
                                         $description = strip_tags(stripslashes($job->description));
                                         $featured_class = $job->is_featured == 'true' ? 'wt-featured' : '';
                                     @endphp
@@ -175,7 +175,7 @@
                                         <div class="wt-userlistingcontent">
                                             <div class="wt-contenthead">
                                                 <div class="wt-title">
-                                                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">
+                                                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
                                                         @if ($job->employer->user_verified === 1)
                                                             <i class="fa fa-check-circle"></i>
                                                         @endif
@@ -188,7 +188,7 @@
                                                 </div>
                                                 <div class="wt-tag wt-widgettag">
                                                     @foreach ($job->skills as $skill )
-                                                        <a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{$skill->title}}</a>
+                                                        <a href="{{{url('Pro/search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{$skill->title}}</a>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -196,7 +196,7 @@
                                                 <ul>
                                                     <li><span><i class="wt-viewjobdollar">{{ !empty($symbol) ? $symbol['symbol'] : '$' }}</i>{{{$job->price}}}</span></li>
                                                     @if (!empty($job->location->title))
-                                                        <li><span><img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.location') }}}"> {{{ $job->location->title }}}</span></li>
+                                                        <li><span><img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.location') }}}"> {{{ $job->location->title }}}</span></li>
                                                     @endif
                                                     <li><span><i class="far fa-folder wt-viewjobfolder"></i>{{{ trans('lang.type') }}} {{{$job->project_type}}}</span></li>
                                                     <li><span><i class="far fa-clock wt-viewjobclock"></i>{{{ Helper::getJobDurationList($job->duration) }}}</span></li>
@@ -214,7 +214,7 @@
                                                             </a>
                                                         </li>
                                                     @endif
-                                                    <li class="wt-btnarea"><a href="{{url('job/'.$job->slug)}}" class="wt-btn">{{{ trans('lang.view_job') }}}</a></li>
+                                                    <li class="wt-btnarea"><a href="{{url('Pro/job/'.$job->slug)}}" class="wt-btn">{{{ trans('lang.view_job') }}}</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -224,7 +224,7 @@
                                     {{ $jobs->links('pagination.custom') }}
                                 @endif
                             @else
-                                @include('errors.no-record')
+                                @include('pro.errors.no-record')
                             @endif
                         </div>
                     </div>

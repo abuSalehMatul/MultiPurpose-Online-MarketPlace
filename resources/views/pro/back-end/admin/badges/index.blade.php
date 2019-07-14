@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="cats-listing" id="badge-list">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.add_badge') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open([ 'url' => url('admin/store-badge'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory','id'=> 'categories'])!!}
+                            {!! Form::open([ 'url' => url('Pro/admin/store-badge'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory','id'=> 'categories'])!!}
                                 <fieldset>
                                     <div class="form-group">
                                         {!! Form::text( 'badge_title', null, ['class' =>'form-control'.($errors->has('badge_title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.ph_badge_title')] ) !!}
@@ -34,7 +34,7 @@
                                             <upload-image
                                                 :id="'badge_image'"
                                                 :img_ref="'badge_ref'"
-                                                :url="'{{url('admin/badges/upload-temp-image')}}'"
+                                                :url="'{{url('Pro/admin/badges/upload-temp-image')}}'"
                                                 :name="'uploaded_image'"
                                                 >
                                             </upload-image>
@@ -62,7 +62,7 @@
                     <div class="wt-dashboardbox">
                         <div class="wt-dashboardboxtitle wt-titlewithsearch">
                             <h2>{{{ trans('lang.badges') }}}</h2>
-                            {!! Form::open(['url' => url('admin/badges/search'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
+                            {!! Form::open(['url' => url('Pro/admin/badges/search'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
                                 <fieldset>
                                     <div class="form-group">
                                         <input type="search" name="s" value="{{{ !empty($_GET['s']) ? $_GET['s'] : '' }}}" class="form-control" placeholder="{{{ trans('lang.ph_search_badges') }}}">
@@ -107,10 +107,10 @@
                                                 <td>{{{ $badge->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/badges/edit-badges') }}}/{{{ $badge->id }}}" class="wt-addinfo wt-skillsaddinfo">
+                                                        <a href="{{{ url('Pro/admin/badges/edit-badges') }}}/{{{ $badge->id }}}" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
-                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{ $badge->id }}'" :message="'{{trans("lang.ph_badge_delete_message")}}'" :url="'{{url('admin/badges/delete-badges')}}'"></delete>
+                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{ $badge->id }}'" :message="'{{trans("lang.ph_badge_delete_message")}}'" :url="'{{url('Pro/admin/badges/delete-badges')}}'"></delete>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -123,7 +123,7 @@
                                 @endif
                             </div>
                         @else
-                            @include('errors.no-record')
+                            @include('pro.errors.no-record')
                         @endif
                     </div>
                 </div>

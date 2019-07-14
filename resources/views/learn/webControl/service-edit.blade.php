@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('css')
 
 @stop
@@ -18,7 +18,7 @@
 									 style="width: 200px; height: 150px;"
 									 data-trigger="fileinput">
 									<img style="width: 120px"
-										 src="{{asset('assets/images/'.$service->image)}}"
+										 src="{{asset('learn/assets/images/'.$service->image)}}"
 										 alt="...">
 
 								</div>

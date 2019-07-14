@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     @php
         $verified_user = \App\User::select('user_verified')
@@ -42,7 +42,7 @@
                                             @if (!empty($employer_name) || !empty($job->title) )
                                                 <div class="wt-title">
                                                     @if (!empty($employer_name))
-                                                        <a href="{{{ url('profile/'.$job->employer->slug) }}}">
+                                                        <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
                                                             @if($verified_user === 1)
                                                                 <i class="fa fa-check-circle"></i>&nbsp;
                                                             @endif
@@ -82,7 +82,7 @@
                                 <h2>{{ trans('lang.project_history') }}</h2>
                             </div>
                             <div class="wt-historycontent">
-                                <private-message :ph_job_dtl="'{{ trans('lang.ph_job_dtl') }}'" :upload_tmp_url="'{{url('proposal/upload-temp-image')}}'" :id="'{{$proposal->id}}'" :recipent_id="'{{$job->user_id}}'"></private-message>
+                                <private-message :ph_job_dtl="'{{ trans('lang.ph_job_dtl') }}'" :upload_tmp_url="'{{url('Pro/proposal/upload-temp-image')}}'" :id="'{{$proposal->id}}'" :recipent_id="'{{$job->user_id}}'"></private-message>
                             </div>
                         </div>
                     </div>

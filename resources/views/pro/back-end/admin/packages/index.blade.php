@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="packages-listing" id="packages">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.add_packages') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open([ 'url' => url('admin/store/package'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'packages', '@submit.prevent' => 'submitPackage', 'id' => 'package_form' ]) !!}
+                            {!! Form::open([ 'url' => url('Pro/admin/store/package'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'packages', '@submit.prevent' => 'submitPackage', 'id' => 'package_form' ]) !!}
                                 <fieldset>
                                     <div class="form-group">
                                         {!! Form::text( 'package_title', null, ['class' =>'form-control'.($errors->has('package_title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.ph_pkg_title')] ) !!}
@@ -144,7 +144,7 @@
                     <div class="wt-dashboardbox">
                         <div class="wt-dashboardboxtitle wt-titlewithsearch">
                             <h2>{{{ trans('lang.packages') }}}</h2>
-                            {!! Form::open(['url' => url('admin/packages/search'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
+                            {!! Form::open(['url' => url('Pro/admin/packages/search'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
                                 <fieldset>
                                     <div class="form-group">
                                         <input type="text" name="keyword" value="{{{ !empty($_GET['keyword']) ? $_GET['keyword'] : '' }}}" class="form-control" placeholder="{{{ trans('lang.ph_search_packages') }}}">
@@ -173,11 +173,11 @@
                                                 <td>{{{ Helper::getRoleName($package->role_id) }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/packages/edit') }}}/{{{ $package->slug }}}" class="wt-addinfo wt-packagesaddinfo">
+                                                        <a href="{{{ url('Pro/admin/packages/edit') }}}/{{{ $package->slug }}}" class="wt-addinfo wt-packagesaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
                                                         @if ($package->trial != 1)
-                                                            <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$package->id}}'" :message="'{{trans("lang.ph_pkg_delete_message")}}'" :url="'{{url('admin/packages/delete-package')}}'"></delete>
+                                                            <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$package->id}}'" :message="'{{trans("lang.ph_pkg_delete_message")}}'" :url="'{{url('Pro/admin/packages/delete-package')}}'"></delete>
                                                         @endif
                                                     </div>
                                                 </td>
@@ -189,7 +189,7 @@
                                 @if ( method_exists($packages,'links') ) {{ $packages->links('pagination.custom') }} @endif
                             </div>
                         @else
-                            @include('errors.no-record')
+                            @include('pro.errors.no-record')
                         @endif
                     </div>
                 </div>

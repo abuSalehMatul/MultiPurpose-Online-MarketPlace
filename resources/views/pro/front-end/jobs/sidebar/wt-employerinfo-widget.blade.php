@@ -7,18 +7,18 @@
             <figure><img src="{{{asset(Helper::getProfileImage($job->employer->id))}}}" alt="{{ trans('lang.profile_img') }}"></figure>
             <div class="wt-title">
                 @if ($job->employer->user_verified === 1)
-                    <a href="{{{ url('profile/'.$job->employer->slug) }}}"><i class="fa fa-check-circle"></i> {{ trans('lang.verified_company') }}</a>
+                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}"><i class="fa fa-check-circle"></i> {{ trans('lang.verified_company') }}</a>
                 @endif
-                <a href="{{{ url('profile/'.$job->employer->slug) }}}"><h2>{{{ Helper::getUserName($job->employer->id) }}}</h2></a>
+                <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}"><h2>{{{ Helper::getUserName($job->employer->id) }}}</h2></a>
             </div>
             <ul class="wt-postarticlemeta">
                 <li>
-                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">
+                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
                         <span>{{ trans('lang.open_jobs') }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">
+                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
                         <span>{{ trans('lang.full_profile') }}</span>
                     </a>
                 </li>

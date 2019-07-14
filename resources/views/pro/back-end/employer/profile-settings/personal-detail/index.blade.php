@@ -1,10 +1,10 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="freelancer-profile wt-dbsectionspace" id="user_profile">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
                 <div class="wt-dashboardbox wt-dashboardtabsholder">
-                    @include('back-end.employer.profile-settings.tabs')
+                    @include('pro.back-end.employer.profile-settings.tabs')
                     <div class="wt-tabscontent tab-content">
                         @if (Session::has('message'))
                             <div class="flash_msg">
@@ -21,21 +21,21 @@
                             </ul>
                         @endif
                         <div class="wt-personalskillshold lare-employer-profile tab-pane active fade show" id="wt-profile">
-                            {!! Form::open(['url' => url('employer/store-profile-settings'), 'class' =>'wt-userform', 'id' => 'employer_data', '@submit.prevent' => 'submitEmployerProfile']) !!}
+                            {!! Form::open(['url' => url('Pro/employer/store-profile-settings'), 'class' =>'wt-userform', 'id' => 'employer_data', '@submit.prevent' => 'submitEmployerProfile']) !!}
                                 <div class="wt-yourdetails wt-tabsinfo">
-                                    @include('back-end.employer.profile-settings.personal-detail.detail')
+                                    @include('pro.back-end.employer.profile-settings.personal-detail.detail')
                                 </div>
                                 <div class="wt-profilephoto wt-tabsinfo">
-                                    @include('back-end.employer.profile-settings.personal-detail.profile_photo') 
+                                    @include('pro.back-end.employer.profile-settings.personal-detail.profile_photo') 
                                 </div>
                                 <div class="wt-bannerphoto wt-tabsinfo">
-                                    @include('back-end.employer.profile-settings.personal-detail.profile_banner')
+                                    @include('pro.back-end.employer.profile-settings.personal-detail.profile_banner')
                                 </div>
                                 <div class="wt-skills">
-                                    @include('back-end.employer.profile-settings.personal-detail.employer-detail')   
+                                    @include('pro.back-end.employer.profile-settings.personal-detail.employer-detail')   
                                 </div>
                                 <div class="wt-location wt-tabsinfo">
-                                    @include('back-end.employer.profile-settings.personal-detail.location')
+                                    @include('pro.back-end.employer.profile-settings.personal-detail.location')
                                 </div>
                                 <div class="wt-updatall">
                                     <i class="ti-announcement"></i>

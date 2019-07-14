@@ -8,7 +8,7 @@
                     <upload-image 
                         :id="'home_banner'" 
                         :img_ref="'home_ref'" 
-                        :url="'{{url('admin/upload-temp-image/home_banner')}}'"
+                        :url="'{{url('Pro/admin/upload-temp-image/home_banner')}}'"
                         :name="'home_banner'"
                         >
                     </upload-image>
@@ -27,7 +27,7 @@
                 <upload-image 
                     :id="'home_banner'" 
                     :img_ref="'home_ref'" 
-                    :url="'{{url('admin/upload-temp-image/home_banner')}}'"
+                    :url="'{{url('Pro/admin/upload-temp-image/home_banner')}}'"
                     :name="'home_banner'"
                     >
                 </upload-image>

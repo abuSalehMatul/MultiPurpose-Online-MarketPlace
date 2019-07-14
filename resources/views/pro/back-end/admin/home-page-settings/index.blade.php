@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-haslayout wt-manage-account wt-dbsectionspace la-setting-holder" id="settings">
         <div class="row">
@@ -17,7 +17,7 @@
                     <div class="wt-tabscontent tab-content">
                         <div class="wt-securityhold tab-pane active la-banner-settings" id="wt-banner">
                             {!! Form::open(['url' => '', 'class' =>'wt-formtheme wt-userform', 'id' =>'home-settings-form', '@submit.prevent'=>'submitHomeSettings'])!!}
-                                @include('back-end.admin.home-page-settings.banner-settings.index')
+                                @include('pro.back-end.admin.home-page-settings.banner-settings.index')
                                 <div class="wt-updatall la-btn-setting">
                                     {!! Form::submit(trans('lang.btn_save'), ['class' => 'wt-btn']) !!}
                                 </div>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="wt-securityhold tab-pane la-section-settings" id="wt-sections">
                             {!! Form::open(['url' => '', 'class' =>'wt-formtheme wt-userform', 'id' =>'section-settings-form', '@submit.prevent'=>'submitSectionSettings'])!!}
-                                @include('back-end.admin.home-page-settings.sections.index')
+                                @include('pro.back-end.admin.home-page-settings.sections.index')
                                 <div class="wt-updatall la-btn-setting">
                                     {!! Form::submit(trans('lang.btn_save'), ['class' => 'wt-btn']) !!}
                                 </div>

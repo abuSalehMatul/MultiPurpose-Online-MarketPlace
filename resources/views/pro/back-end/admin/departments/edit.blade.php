@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="dpts-listing" id="dpt-list"></div>
         @if (Session::has('message'))
@@ -19,7 +19,7 @@
                         </div>
                         <div class="wt-dashboardboxcontent">
                             {!! Form::open([
-                                'url' => url('admin/departments/update-dpts/'.$departments->id.''), 'class' =>'wt-formtheme
+                                'url' => url('Pro/admin/departments/update-dpts/'.$departments->id.''), 'class' =>'wt-formtheme
                                 wt-formprojectinfo wt-formcategory','id' => 'departments'])
                             !!}
                                 <fieldset>

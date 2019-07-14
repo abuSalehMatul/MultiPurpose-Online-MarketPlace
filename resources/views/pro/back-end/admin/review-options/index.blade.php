@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="dpts-listing" id="reviews">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.add_review_option') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open([ 'url' => 'admin/store-review-options', 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'review_options']) !!}
+                            {!! Form::open([ 'url' => 'Pro/admin/store-review-options', 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'review_options']) !!}
                             <fieldset>
                                 <div class="form-group">
                                     {!! Form::text( 'review_option_title', null, ['class' =>'form-control'.($errors->has('review_option_title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.ph_review_option_title')]) !!}
@@ -75,7 +75,7 @@
                                                 <td>{{{ $option->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/review-options/edit-review-options') }}}/{{{ $option->id }}}" class="wt-addinfo wt-dpts">
+                                                        <a href="{{{ url('Pro/admin/review-options/edit-review-options') }}}/{{{ $option->id }}}" class="wt-addinfo wt-dpts">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
                                                         <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$option->id}}'" :message="'{{trans("lang.ph_review_delete_message")}}'" :url="'{{url('admin/review-options/delete-review-options')}}'"></delete>

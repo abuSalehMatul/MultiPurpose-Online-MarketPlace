@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('import-css')
 @stop
 @section('body')
@@ -136,7 +136,7 @@
 @section('import-script')
 @stop
 @section('script')
-<script src="{{ asset('assets/admin/js/nicEdit-latest.js') }}"></script>
+<script src="{{ asset('learn/assets/admin/js/nicEdit-latest.js') }}"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function() { new nicEditor({fullPanel : true}).panelInstance('area1'); });
     </script>

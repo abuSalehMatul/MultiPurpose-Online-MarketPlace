@@ -1,9 +1,9 @@
-@extends('layout')
+@extends('learn.layout')
 
 @section('content')
     <style type="text/css">
         .breadcrumb-section {
-            background-image: url({{asset('assets/images/logo/breadcrumb.png')}});
+            background-image: url({{asset('learn/assets/images/logo/breadcrumb.png')}});
         }
         .vh{
             height: 70vh;

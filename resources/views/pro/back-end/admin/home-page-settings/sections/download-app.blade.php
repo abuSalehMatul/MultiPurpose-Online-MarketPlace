@@ -1,4 +1,4 @@
-@include('back-end.admin.home-page-settings.sections.download-app-image')
+@include('pro.back-end.admin.home-page-settings.sections.download-app-image')
 <div class="wt-location wt-tabsinfo">
     <h6>{{{ trans('lang.app_sec_title') }}}</h6>
     <div class="wt-settingscontent">

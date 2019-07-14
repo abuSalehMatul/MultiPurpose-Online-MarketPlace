@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-dbsectionspace wt-haslayout la-ed-freelancer">
         <div class="row">
@@ -19,15 +19,15 @@
                         </ul>
                     @endif
                     <div class="wt-dashboardbox wt-dashboardtabsholder">
-                        @include('back-end.freelancer.profile-settings.tabs')
+                        @include('pro.back-end.freelancer.profile-settings.tabs')
                         <div class="wt-tabscontent tab-content">
                             <div class="wt-educationholder" id="wt-education">
-                                {!! Form::open(['url' => url('freelancer/store-experience-settings'), 'class' =>'wt-formtheme wt-userform', 'id' => 'experience_form', '@submit.prevent'=>'submitExperienceEduction']) !!}
+                                {!! Form::open(['url' => url('Pro/freelancer/store-experience-settings'), 'class' =>'wt-formtheme wt-userform', 'id' => 'experience_form', '@submit.prevent'=>'submitExperienceEduction']) !!}
                                     <div class="wt-userexperience wt-tabsinfo">
-                                        @include('back-end.freelancer.profile-settings.experience-education.experience')
+                                        @include('pro.back-end.freelancer.profile-settings.experience-education.experience')
                                     </div>
                                     <div class="wt-userexperience wt-tabsinfo">
-                                        @include('back-end.freelancer.profile-settings.experience-education.education')
+                                        @include('pro.back-end.freelancer.profile-settings.experience-education.education')
                                     </div>
                                     <div class="wt-updatall">
                                         <i class="ti-announcement"></i>

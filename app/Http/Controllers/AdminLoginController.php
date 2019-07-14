@@ -21,7 +21,7 @@ class AdminLoginController extends Controller
 		}
 		
 		$data['page_title'] = "Admin";
-		return view('admin.loginform', $data);
+		return view('learn.admin.loginform', $data);
 	}
 
 	public function authenticate(Request $request){

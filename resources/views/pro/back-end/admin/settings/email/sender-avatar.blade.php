@@ -10,7 +10,7 @@
                     <upload-image 
                         :id="'sender_avatar'" 
                         :img_ref="'email_ref'" 
-                        :url="'{{url('admin/upload-temp-image/sender_avatar')}}'" 
+                        :url="'{{url('Pro/admin/upload-temp-image/sender_avatar')}}'" 
                         :name="'sender_avatar'"
                     >
                     </upload-image>
@@ -29,7 +29,7 @@
                 <upload-image 
                     :id="'sender_avatar'" 
                     :img_ref="'email_ref'" 
-                    :url="'{{url('admin/upload-temp-image/sender_avatar')}}'" 
+                    :url="'{{url('Pro/admin/upload-temp-image/sender_avatar')}}'" 
                     :name="'sender_avatar'">
                 </upload-image>
                 <input type="hidden" name="email_data[0][sender_avatar]" id="hidden_avatar">

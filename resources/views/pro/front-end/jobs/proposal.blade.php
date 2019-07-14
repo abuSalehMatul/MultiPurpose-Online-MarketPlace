@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
     @php $breadcrumbs = Breadcrumbs::generate('createProposal', $job->slug); @endphp
     <div class="wt-haslayout wt-innerbannerholder">
@@ -91,7 +91,7 @@
                             <div class="wt-title">
                                 <h2>{{{ trans('lang.proposal_amount') }}}</h2>
                             </div>
-                            {!! Form::open(['url' => url('proposal/submit-proposal'), 'class' =>'wt-haslayout', 'id' => 'send-propsal',  '@submit.prevent'=>'submitJobProposal('.$job->id.')']) !!}
+                            {!! Form::open(['url' => url('Pro/proposal/submit-proposal'), 'class' =>'wt-haslayout', 'id' => 'send-propsal',  '@submit.prevent'=>'submitJobProposal('.$job->id.')']) !!}
                                 <div class="wt-proposalamount accordion">
                                     <div class="form-group">
                                         <span>( <i>{{ !empty($symbol) ? $symbol['symbol'] : '$' }}</i> )</span>
@@ -135,7 +135,7 @@
                                             <div class="wt-title">
                                                 <h3>{{{ trans('lang.upload_file') }}}</h3>
                                             </div>
-                                            <job_attachments :temp_url="'{{url('proposal/upload-temp-image')}}'"></job_attachments>
+                                            <job_attachments :temp_url="'{{url('Pro/proposal/upload-temp-image')}}'"></job_attachments>
                                             <div class="form-group input-preview">
                                                 <ul class="wt-attachfile dropzone-previews">
 

@@ -1,6 +1,6 @@
 {{-- <div class="deal-block">
 	<div class="ad-img">
-		<a href="#" title="Ad"><img src="{{asset('images/ads/ad-02.jpg')}}" class="img-fluid" alt="Ad"></a>
+		<a href="#" title="Ad"><img src="{{asset('coupon/images/ads/ad-02.jpg')}}" class="img-fluid" alt="Ad"></a>
 	</div>
 	<div class="ad-footer text-center">Advertisement</div>
 </div> --}}
@@ -13,7 +13,7 @@
 		<div id="sidebar-store-slider" class="sidebar-store-slider owl-carousel text-center">
 			@foreach($p_store as $key => $item)
 				<div class="brand-img-two">
-					<a href="{{url('store-dtl/'.$item->slug)}}" title="{{$item->title}}"><img src="{{asset('images/store/'.$item->image)}}" class="img-fluid" alt="Store"></a>
+					<a href="{{url('store-dtl/'.$item->slug)}}" title="{{$item->title}}"><img src="{{asset('coupon/images/store/'.$item->image)}}" class="img-fluid" alt="Store"></a>
 				</div>
 			@endforeach
 		</div>

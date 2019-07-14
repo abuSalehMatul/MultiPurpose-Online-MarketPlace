@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace">
         <div class="row">
@@ -71,7 +71,7 @@
                                 @foreach ($payment_gateway as $gatway)
                                     <li>
                                         @if ($gatway == "paypal")
-                                            <a href="{{{url('paypal/ec-checkout')}}}">
+                                            <a href="{{{url('Pro/paypal/ec-checkout')}}}">
                                                 <i class="fa fa-paypal"></i>
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                             </a>

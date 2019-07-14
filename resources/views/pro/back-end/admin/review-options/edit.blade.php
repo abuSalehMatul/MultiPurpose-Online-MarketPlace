@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="dpts-listing" id="reviews">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.edit_review_options') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open([ 'url' => url('admin/review-options/update-review-options/'.$review_options->id.''), 'class' =>'wt-formtheme
+                            {!! Form::open([ 'url' => url('Pro/admin/review-options/update-review-options/'.$review_options->id.''), 'class' =>'wt-formtheme
                             wt-formprojectinfo wt-formcategory','id' => 'review_options']) !!}
                             <fieldset>
                                 <div class="form-group">

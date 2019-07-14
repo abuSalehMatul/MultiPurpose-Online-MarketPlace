@@ -27,13 +27,13 @@
                 </li>
                 <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                    <a href="{{{  url('admin/pages') }}}">
+                    <a href="{{{  url('Pro/admin/pages') }}}">
                         <i class="ti-layers"></i>
                         <span>{{ trans('lang.pages') }}</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{{ url('admin/pages') }}}">{{ trans('lang.all_pages') }}</a></li>
-                        <li><a href="{{{ route('createPage') }}}">{{ trans('lang.add_pages') }}</a></li>
+                        <li><a href="{{{ url('Pro/admin/pages') }}}">{{ trans('lang.all_pages') }}</a></li>
+                        <li><a href="{{{ route('pro_createPage') }}}">{{ trans('lang.add_pages') }}</a></li>
                     </ul>
                 </li>
                 <li>
@@ -56,14 +56,14 @@
                 </li>
                 <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                    <a href="{{{ url('admin/profile') }}}">
+                    <a href="{{{ url('Pro/admin/profile') }}}">
                         <i class="ti-settings"></i>
                         <span>{{ trans('lang.settings') }}</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{{ url('admin/profile') }}}">{{ trans('lang.acc_settings') }}</a></li>
-                        <li><a href="{{{ url('admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
-                        <li><a href="{{{ route('resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
+                        <li><a href="{{{ url('Pro/admin/profile') }}}">{{ trans('lang.acc_settings') }}</a></li>
+                        <li><a href="{{{ url('Pro/admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
+                        <li><a href="{{{ route('pro_resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children">
@@ -73,18 +73,18 @@
                         <span>{{ trans('lang.cats') }}</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
-                        <li><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
-                        <li><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
-                        <li><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
-                        <li><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>
-                        <li><a href="{{{ route('badges') }}}">{{ trans('lang.badges') }}</a></li>
+                        <li><a href="{{{ route('pro_skills') }}}">{{ trans('lang.skills') }}</a></li>
+                        <li><a href="{{{ route('pro_categories') }}}">{{ trans('lang.job_cats') }}</a></li>
+                        <li><a href="{{{ route('pro_departments') }}}">{{ trans('lang.dpts') }}</a></li>
+                        <li><a href="{{{ route('pro_languages') }}}">{{ trans('lang.langs') }}</a></li>
+                        <li><a href="{{{ route('pro_locations') }}}">{{ trans('lang.locations') }}</a></li>
+                        <li><a href="{{{ route('pro_badges') }}}">{{ trans('lang.badges') }}</a></li>
                     </ul>
                 </li>
             @endif
-            @if ($role === 'employer' || $role === 'freelancer' )
+            @if ($role === 'employer' || $role === 'pro' )
                 <li>
-                    <a href="{{{ url($role.'/dashboard') }}}">
+                    <a href="{{{ url('Pro/'.$role.'/dashboard') }}}">
                         <i class="ti-desktop"></i>
                         <span>{{ trans('lang.dashboard') }}</span>
                     </a>
@@ -102,7 +102,7 @@
                         <span>{{ trans('lang.settings') }}</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{{ url($role.'/profile') }}}">{{ trans('lang.profile_settings') }}</a></li>
+                        <li><a href="{{{ url('Pro/'.$role.'/profile') }}}">{{ trans('lang.profile_settings') }}</a></li>
                         <li><a href="{{{ route('manageAccount') }}}">{{ trans('lang.acc_settings') }}</a></li>
                     </ul>
                 </li>
@@ -120,8 +120,8 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a href="{{{ route('employerManageJobs') }}}">{{ trans('lang.manage_job') }}</a></li>
-                            <li><a href="{{{ url('employer/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
-                            <li><a href="{{{ url('employer/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
+                            <li><a href="{{{ url('Pro/employer/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
+                            <li><a href="{{{ url('Pro/employer/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children">
@@ -130,30 +130,30 @@
                             <span>{{ trans('lang.invoices') }}</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="{{{ url('employer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
-                            <li><a href="{{{ url('employer/project/invoice') }}}">{{ trans('lang.project_inv') }}</a></li>
+                            <li><a href="{{{ url('Pro/employer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+                            <li><a href="{{{ url('Pro/employer/project/invoice') }}}">{{ trans('lang.project_inv') }}</a></li>
                         </ul>
                     </li>
-                @elseif ($role === 'freelancer')
+                @elseif ($role === 'pro')
                     <li class="menu-item-has-children page_item_has_children">
                         <a href="{{{ route('jobs') }}}">
                             <i class="ti-briefcase"></i>
                             <span>{{ trans('lang.all_projects') }}</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="{{{ url('freelancer/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
-                            <li><a href="{{{ url('freelancer/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
-                            <li><a href="{{{ url('freelancer/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
+                            <li><a href="{{{ url('Pro/freelancer/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
+                            <li><a href="{{{ url('Pro/freelancer/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
+                            <li><a href="{{{ url('Pro/freelancer/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="{{{ route('showFreelancerProposals') }}}">
+                        <a href="{{{ route('pro_showFreelancerProposals') }}}">
                             <i class="ti-bookmark-alt"></i>
                             <span>{{ trans('lang.proposals') }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{{ route('getFreelancerPayouts') }}}">
+                        <a href="{{{ route('pro_getFreelancerPayouts') }}}">
                             <i class="ti-money"></i>
                             <span>{{ trans('lang.payouts') }}</span>
                         </a>
@@ -164,18 +164,18 @@
                             <span>{{ trans('lang.invoices') }}</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="{{{ url('freelancer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+                            <li><a href="{{{ url('Pro/freelancer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
                         </ul>
                     </li>
                 @endif
                 <li>
-                    <a href="{{{ url('dashboard/packages/'.$role) }}}">
+                    <a href="{{{ url('Pro/dashboard/packages/'.$role) }}}">
                         <i class="ti-package"></i>
                         <span>{{ trans('lang.packages') }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{{ url($role.'/saved-items') }}}">
+                    <a href="{{{ url('Pro/'.$role.'/saved-items') }}}">
                         <i class="ti-heart"></i>
                         <span>{{ trans('lang.saved_items') }}</span>
                     </a>

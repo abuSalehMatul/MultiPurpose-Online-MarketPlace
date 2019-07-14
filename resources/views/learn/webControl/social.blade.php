@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/admin/css/table.css')}}">
+    <link rel="stylesheet" href="{{asset('learn/assets/admin/css/table.css')}}">
 @stop
 
 @section('body')

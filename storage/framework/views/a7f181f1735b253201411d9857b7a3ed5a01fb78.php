@@ -6,7 +6,7 @@
     <link href="<?php echo e(asset('css/basictable.css')); ?>" rel="stylesheet">
 <?php $__env->stopPush(); ?>
 <?php $__env->startSection('header'); ?>
-	<?php echo $__env->make('includes.header', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('back-end.header', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('main'); ?>
 

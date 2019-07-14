@@ -188,7 +188,7 @@
 							<div class="coupon-sidebar">
 								<div class="page-sidebar-widget brand-widget text-center">
 									<div class="brand-logo">
-										<a href="{{$store->link}}" title="{{$store->title}}" target="_blank"><img src="{{asset('images/store/'.$store->image)}}" class="img-fluid" alt="store"></a>
+										<a href="{{$store->link}}" title="{{$store->title}}" target="_blank"><img src="{{asset('coupon/images/store/'.$store->image)}}" class="img-fluid" alt="store"></a>
 									</div>
 									<div class="brand-visit-btn">
 										<a href="{{$store->link}}" title="{{$store->title}}" target="_blank" class="btn btn-primary">Visit Store</a>

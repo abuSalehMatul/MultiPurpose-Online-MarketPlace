@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
 	<div class="wt-haslayout wt-dbsectionspace la-manage-jobs-holder">
 		<div class="manage-jobs float-left">
@@ -18,10 +18,10 @@
 										@foreach ($job_details as $job)
 											@php
 												$image = '';
-												$duration  =  \App\Helper::getJobDurationList($job->duration);
+												$duration  =  \App\ProModel\ProHelper::getJobDurationList($job->duration);
 												$user_name = $job->employer->first_name.' '.$job->employer->last_name;
-												$proposals = \App\Proposal::where('job_id', $job->id)->where('status', '!=', 'cancelled')->get();
-												$employer_img = \App\Profile::select('avater')->where('user_id', $job->employer->id)->first();
+												$proposals = \App\ProModel\ProProposal::where('job_id', $job->id)->where('status', '!=', 'cancelled')->get();
+												$employer_img = \App\ProModel\ProProfile::select('avater')->where('user_id', $job->employer->id)->first();
 												$image = !empty($employer_img->avater) ? '/uploads/users/'.$job->employer->id.'/'.$employer_img->avater : '';
 												$verified_user = \App\User::select('user_verified')->where('id', $job->employer->id)->pluck('user_verified')->first();
 											@endphp
@@ -34,14 +34,14 @@
 														@if (!empty($user_name) || !empty($job->title) )
 															<div class="wt-title">
 																@if (!empty($user_name))
-																	<a href="{{{ url('profile/'.$job->employer->slug) }}}">
+																	<a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
 																	@if ($verified_user === 1)
 																		<i class="fa fa-check-circle"></i>&nbsp;
 																	@endif
 																	{{{ $user_name }}}</a>
 																@endif
 																@if (!empty($job->title))
-																	<h2><a href="{{{ url('job/'.$job->slug) }}}">{{{ $job->title }}}</a></h2>
+																	<h2><a href="{{{ url('Pro/job/'.$job->slug) }}}">{{{ $job->title }}}</a></h2>
 																@endif
 															</div>
 														@endif
@@ -68,10 +68,10 @@
 													</div>
 													<div class="wt-rightarea">
 														<div class="wt-btnarea">
-															<a href="{{{ url('job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
-															<a href="{{{ url('job/edit-job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.edit_job') }}</a>
+															<a href="{{{ url('Pro/job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+															<a href="{{{ url('Pro/job/edit-job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.edit_job') }}</a>
 															@if ($proposals->count() > 0)
-																<a href="{{{ url('employer/dashboard/job/'.$job->slug.'/proposals') }}}" class="wt-btn">{{ trans('lang.view_proposals') }}</a>
+																<a href="{{{ url('Pro/employer/dashboard/job/'.$job->slug.'/proposals') }}}" class="wt-btn">{{ trans('lang.view_proposals') }}</a>
 															@endif
 														</div>
 														<div class="wt-hireduserstatus">

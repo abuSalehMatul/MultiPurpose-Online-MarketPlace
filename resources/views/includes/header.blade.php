@@ -7,6 +7,18 @@
         $inner_header = !empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' ? 'wt-headervtwo' : '';
     @endphp
 @endif
+@php
+    if(Auth::user()){
+        Auth::user()->syncRoles('freelancer');
+    }
+    // if(Auth::user()->hasRole('pro')){
+    //     echo 'pro';
+    // }
+    // if(Auth::user()->hasRole('candidate')){
+    //     echo 'candidate';
+    // }
+    
+@endphp
 <header id="wt-header" class="wt-header wt-haslayout {{$inner_header}}">
     <div class="wt-navigationarea">
         <div class="container-fluid">
@@ -66,6 +78,7 @@
                                             {{{ trans('lang.view_freelancers') }}}
                                         </a>
                                     </li>
+                                    
                                     <li>
                                         <a href="{{url('search-results?type=employer')}}">
                                             {{{ trans('lang.view_employers') }}}
@@ -73,7 +86,7 @@
                                     </li>
                                     <li>
                                         <a href="{{url('search-results?type=job')}}">
-                                            {{{ trans('lang.browse_jobs') }}}
+                                            {{{ trans('lang.browse_project') }}}
                                         </a>
                                     </li>
                                 </ul>
@@ -90,6 +103,7 @@
                                         </div>
                                         <form method="POST" action="{{ route('login') }}" class="wt-formtheme wt-loginform do-login-form">
                                             @csrf
+                                            <input type="hidden" name="user_role" value="freelancers">
                                             <fieldset>
                                                 <div class="form-group">
                                                     <input id="email" type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"

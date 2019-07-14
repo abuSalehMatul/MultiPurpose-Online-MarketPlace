@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace">
         <div class="row">
@@ -51,7 +51,7 @@
                                                 <td>{{ !empty($symbol) ? $symbol['symbol'] : '$' }}{{{ $invoice->price }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a class="print-window wt-addinfo wt-skillsaddinfo" href="{{ url('show/invoice/'.$invoice->id) }}">{{ trans('lang.view_invoice') }}</a>
+                                                        <a class="print-window wt-addinfo wt-skillsaddinfo" href="{{ url('Pro/show/invoice/'.$invoice->id) }}">{{ trans('lang.view_invoice') }}</a>
                                                     </div>
                                                 </td>
                                             </tr>

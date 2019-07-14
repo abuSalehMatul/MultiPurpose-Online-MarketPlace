@@ -38,7 +38,7 @@ Author: Media City
 <link rel="stylesheet" type="text/css" href="{{asset('vendor/datatables/css/responsive.datatables.min.css')}}"/> <!-- datatables responsive -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-bs4.css"/> <!-- summernote css -->
 <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css"/> <!-- custom css -->
-<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script> <!-- jquery library js -->
+<script src="{{asset('coupon/js/jquery-3.3.1.min.js')}}"></script> <!-- jquery library js -->
 <script>
   window.Laravel =  <?php echo json_encode([
       'csrfToken' => csrf_token(),
@@ -88,14 +88,14 @@ Author: Media City
 		</section>
 	<!-- end 404 page -->
 <!-- jquery -->
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script> <!-- bootstrap js -->
-<script src="{{asset('vendor/owl/js/owl.carousel.min.js')}}"></script> <!-- owl carousel js -->
-<script src="{{asset('vendor/mailchimp/jquery.ajaxchimp.min.js')}}"></script> <!-- mailchimp js -->
-<script src="{{asset('vendor/datatables/js/jquery.datatables.min.js')}}"></script> <!-- datatables bootstrap js -->		
-<script src="{{asset('vendor/datatables/js/datatables.responsive.min.js')}}"></script> <!-- datatables bootstrap js -->		
-<script src="{{asset('vendor/datatables/js/datatables.min.js')}}"></script> <!-- datatables bootstrap js -->		
-<script src="{{asset('vendor/summernote/js/summernote-bs4.min.js')}}"></script> <!-- summernote js -->
-<script src="{{asset('js/theme.js')}}"></script> <!-- custom js -->
+<script src="{{asset('coupon/js/bootstrap.bundle.min.js')}}"></script> <!-- bootstrap js -->
+<script src="{{asset('coupon/vendor/owl/js/owl.carousel.min.js')}}"></script> <!-- owl carousel js -->
+<script src="{{asset('coupon/vendor/mailchimp/jquery.ajaxchimp.min.js')}}"></script> <!-- mailchimp js -->
+<script src="{{asset('coupon/vendor/datatables/js/jquery.datatables.min.js')}}"></script> <!-- datatables bootstrap js -->		
+<script src="{{asset('coupon/vendor/datatables/js/datatables.responsive.min.js')}}"></script> <!-- datatables bootstrap js -->		
+<script src="{{asset('coupon/vendor/datatables/js/datatables.min.js')}}"></script> <!-- datatables bootstrap js -->		
+<script src="{{asset('coupon/vendor/summernote/js/summernote-bs4.min.js')}}"></script> <!-- summernote js -->
+<script src="{{asset('coupon/js/theme.js')}}"></script> <!-- custom js -->
 @yield('custom-scripts')
 <script>
 @if(!empty(Session::get('error_code')) && Session::get('error_code') == 5)

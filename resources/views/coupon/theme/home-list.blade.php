@@ -113,7 +113,7 @@
 												<div class="row">
 													<div class="col-lg-3">
 														<div class="deal-img">
-															<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{$item->image != null ? asset('images/coupon/'.$item->image) : asset('images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
+															<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}"><img src="{{$item->image != null ? asset('coupon/images/coupon/'.$item->image) : asset('coupon/images/store/'.$item->store->image)}}" class="img-fluid" alt="Deal"></a>
 														</div>
 													</div>
 													<div class="col-lg-6 border-l">
@@ -203,7 +203,7 @@
 												@if($item->icon)
 													<i class="fa {{$item->icon}}"></i>
 												@else
-													<img src="{{asset('images/category/'.$item->image)}}" class="img-fluid" alt="category">
+													<img src="{{asset('coupon/images/category/'.$item->image)}}" class="img-fluid" alt="category">
 												@endif
 											</div>
 											<h5 class="cat-title">{{strtok($item->title,' ')}}</h5>
@@ -233,7 +233,7 @@
 							<div class="col-lg-4 col-md-6">
 								<div class="blog-post-main">
 									<div class="blog-img">
-										<a href="{{url('blog-dtl/'.$blog->uni_id.'/'.$blog->slug)}}" title="Blog Post"><img src="{{asset('images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post"></a>
+										<a href="{{url('blog-dtl/'.$blog->uni_id.'/'.$blog->slug)}}" title="Blog Post"><img src="{{asset('coupon/images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post"></a>
 									</div>
 									<div class="blog-post-dtl">
 										<h6 class="blog-post-heading"><a href="blog-post.html" title="Blog Post">{{$blog->title}}</a></h6>

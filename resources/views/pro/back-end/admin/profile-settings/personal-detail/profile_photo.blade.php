@@ -10,7 +10,7 @@
                     <upload-image 
                         :id="'avater_id'" 
                         :img_ref="'avater_ref'" 
-                        :url="'{{url('admin/upload-temp-image')}}'" 
+                        :url="'{{url('Pro/admin/upload-temp-image')}}'" 
                         :name="'hidden_avater_image'"
                     >
                     </upload-image>
@@ -29,7 +29,7 @@
                 <upload-image 
                     :id="'avater_id'" 
                     :img_ref="'avater_ref'" 
-                    :url="'{{url('admin/upload-temp-image')}}'" 
+                    :url="'{{url('Pro/admin/upload-temp-image')}}'" 
                     :name="'hidden_avater_image'"
                 >
                 </upload-image>

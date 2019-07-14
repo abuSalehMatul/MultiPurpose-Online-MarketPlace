@@ -32,7 +32,7 @@
 														<a href="{{url('store-dtl/'.$item->slug)}}" title="{{$item->title}}">
 															<div class="cat">
 																<div class="cat-icon">
-																	<img src="{{asset('images/store/'.$item->image)}}" class="img-fluid" alt="{{$item->title}}">
+																	<img src="{{asset('coupon/images/store/'.$item->image)}}" class="img-fluid" alt="{{$item->title}}">
 																</div>
 																<h5 class="cat-title">{{$item->title}}</h5>
 															</div>

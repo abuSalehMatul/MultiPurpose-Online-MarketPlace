@@ -239,14 +239,14 @@
 </div>
 <!-- ./wrapper -->
 <!-- Admin Js -->
-<script src="{{asset('js/jquery-3.3.1.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/admin.js')}}" type="text/javascript"></script>
-<script src="{{asset('vendor/summernote/js/summernote-bs4.min.js')}}"></script>
+<script src="{{asset('coupon/js/jquery-3.3.1.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('coupon/js/admin.js')}}" type="text/javascript"></script>
+<script src="{{asset('coupon/vendor/summernote/js/summernote-bs4.min.js')}}"></script>
 <!-- summernote js -->
-<script src="{{asset('js/datatables.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('coupon/js/datatables.min.js')}}" type="text/javascript"></script>
     <!-- Datepicker Library -->
-<script src="{{asset('js/datepicker.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/utils.js')}}" type="text/javascript"></script>
+<script src="{{asset('coupon/js/datepicker.js')}}" type="text/javascript"></script>
+<script src="{{asset('coupon/js/utils.js')}}" type="text/javascript"></script>
 <script>
   $(function () {
     $('#flash-overlay-modal').modal();

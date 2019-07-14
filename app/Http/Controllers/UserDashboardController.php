@@ -85,7 +85,7 @@ class UserDashboardController extends Controller
 
 		if ($file = $request->file('image')) {			
 			$optimizeImage = Image::make($file);
-      $optimizePath = public_path().'coupon/images/coupon/';
+      $optimizePath = public_path().'/coupon/images/coupon/';
       $name = time().$file->getClientOriginalName();
       $optimizeImage->save($optimizePath.$name, 72);
 			$input['image'] = $name;
@@ -124,7 +124,7 @@ class UserDashboardController extends Controller
 		
 		if ($file = $request->file('image')) {            
 	    $optimizeImage = Image::make($file);
-      $optimizePath = public_path().'coupon/images/discussion/';
+      $optimizePath = public_path().'/coupon/images/discussion/';
       $name = time().$file->getClientOriginalName();
       $optimizeImage->save($optimizePath.$name, 72);
 	    $input['image'] = $name;
@@ -194,15 +194,15 @@ class UserDashboardController extends Controller
 
 		  if ($user->image != null && $user->image != 'user.png') {
 		
-				$image_file = @file_get_contents(public_path().'coupon/images/user/'.$user->image);
+				$image_file = @file_get_contents(public_path().'/coupon/images/user/'.$user->image);
 
 				if($image_file){				  
-				  unlink(public_path().'coupon/images/user/'.$user->image);
+				  unlink(public_path().'/coupon/images/user/'.$user->image);
 				}
 		  }
 
 		  $optimizeImage = Image::make($file);
-      $optimizePath = public_path().'coupon/images/user/';
+      $optimizePath = public_path().'/coupon/images/user/';
       $name = time().$file->getClientOriginalName();
       $optimizeImage->save($optimizePath.$name, 72);
 

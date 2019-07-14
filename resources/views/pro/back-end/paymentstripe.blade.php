@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace">
         <div class="row">
@@ -28,7 +28,7 @@
                                         @endif
                                         <div class="panel-heading">Paywith Stripe</div>
                                         <div class="panel-body">
-                                            <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{url('addmoney/stripe')}}" >
+                                            <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{url('Pro/addmoney/stripe')}}" >
                                                 {{ csrf_field() }}
                                                 <div class="form-group{{ $errors->has('card_no') ? ' has-error' : '' }}">
                                                     <label for="card_no" class="col-md-4 control-label">Card No</label>

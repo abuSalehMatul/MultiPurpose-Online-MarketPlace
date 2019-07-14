@@ -35,7 +35,7 @@
 																	@if($item->icon)
 																		<i class="fa {{$item->icon}}"></i>
 																	@else
-																		<img src="{{asset('images/category/'.$item->image)}}" class="img-fluid" alt="category">
+																		<img src="{{asset('coupon/images/category/'.$item->image)}}" class="img-fluid" alt="category">
 																	@endif
 																</div>
 																<h5 class="cat-title">{{strtok($item->title, ' ')}}</h5>

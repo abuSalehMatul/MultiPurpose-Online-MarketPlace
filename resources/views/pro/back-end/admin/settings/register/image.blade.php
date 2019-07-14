@@ -7,7 +7,7 @@
                     <upload-image
                         :id="'register_image'"
                         :img_ref="'register_image_ref'"
-                        :url="'{{url('admin/upload-temp-image/register_image')}}'"
+                        :url="'{{url('Pro/admin/upload-temp-image/register_image')}}'"
                         :name="'register_image'"
                         >
                     </upload-image>
@@ -26,7 +26,7 @@
                 <upload-image
                     :id="'register_image'"
                     :img_ref="'register_image_ref'"
-                    :url="'{{url('admin/upload-temp-image/register_image')}}'"
+                    :url="'{{url('Pro/admin/upload-temp-image/register_image')}}'"
                     :name="'register_image'"
                     >
                 </upload-image>

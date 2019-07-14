@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     @php $user_id = !empty(Auth::user()) ? Auth::user()->id : '';  @endphp
     <div class="wt-haslayout wt-dbsectionspace">
@@ -11,14 +11,14 @@
                         </div>
                     @endif
                     <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
-                        @include('back-end.settings.tabs')
+                        @include('pro.back-end.settings.tabs')
                         <div class="wt-tabscontent tab-content">
                             <div class="wt-passwordholder" id="wt-password">
                                 <div class="wt-changepassword">
                                     <div class="wt-tabscontenttitle">
                                         <h2>{{{ trans('lang.change_pass') }}}</h2>
                                     </div>
-                                    {!! Form::open(['url' => url('profile/settings/request-password'), 'class' =>'wt-formtheme wt-userform'])!!}
+                                    {!! Form::open(['url' => url('Pro/profile/settings/request-password'), 'class' =>'wt-formtheme wt-userform'])!!}
                                         <fieldset>
                                             <div class="form-group form-group-half">
                                                 {!! Form::password('old_password', ['class' => 'form-control'.($errors->has('old_password') ? ' is-invalid' : ''),

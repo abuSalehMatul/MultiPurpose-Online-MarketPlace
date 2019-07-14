@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace wt-insightuser" id="dashboard">
         <div class="row">
@@ -22,9 +22,9 @@
                             <div class="wt-insightsitem wt-dashboardbox">
                                 <countdown
                                 date="{{$expiry_date}}"
-                                :image_url="'{{{ Helper::getDashExpiryImages('images/thumbnail/',$latest_package_expiry_icon, 'img-21.png') }}}'"
+                                :image_url="'{{{ Helper::getDashExpiryImages('Pro/images/thumbnail/',$latest_package_expiry_icon, 'img-21.png') }}}'"
                                 :title="'{{ trans('lang.check_pkg_expiry') }}'"
-                                :package_url="'{{url('dashboard/packages/freelancer')}}'"
+                                :package_url="'{{url('Pro/dashboard/packages/freelancer')}}'"
                                 :trail="'{{$trail}}'"
                                 >
                                 </countdown>
@@ -51,7 +51,7 @@
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
                                         <h3>{{ trans('lang.view_saved_items') }}</h3>
-                                        <a href="{{url('freelancer/saved-items')}}">{{ trans('lang.click_view') }}</a>
+                                        <a href="{{url('Pro/freelancer/saved-items')}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                     <div class="wt-title">
                                         <h3>{{{ $cancelled_projects->count() }}}</h3>
                                         <h3>{{ trans('lang.total_cancelled_projects') }}</h3>
-                                        <a href="{{{ url('freelancer/jobs/cancelled') }}}">{{ trans('lang.click_view') }}</a>
+                                        <a href="{{{ url('Pro/freelancer/jobs/cancelled') }}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                     <div class="wt-title">
                                         <h3>{{{ $ongoing_projects->count() }}}</h3>
                                         <h3>{{ trans('lang.total_ongoing_projects') }}</h3>
-                                        <a href="{{{ url('freelancer/jobs/hired') }}}">{{ trans('lang.click_view') }}</a>
+                                        <a href="{{{ url('Pro/freelancer/jobs/hired') }}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -134,15 +134,15 @@
                                 <tbody>
                                     @foreach ($ongoing_projects as $projects)
                                         @php
-                                            $project = \App\Proposal::find($projects->id);
+                                            $project = \App\ProModel\ProProposal::find($projects->id);
                                             $user = \App\User::find($project->job->user_id);
                                             $user_name = Helper::getUsername($project->job->user_id);
                                         @endphp
                                         <tr>
-                                            <td data-th="Project title"><span class="bt-content"><a target="_blank" href="{{{ url('freelancer/job/'.$project->job->slug) }}}">{{{ $project->job->title }}}</a></span></td>
+                                            <td data-th="Project title"><span class="bt-content"><a target="_blank" href="{{{ url('Pro/freelancer/job/'.$project->job->slug) }}}">{{{ $project->job->title }}}</a></span></td>
                                             <td data-th="Hired freelancer">
                                                 <span class="bt-content">
-                                                    <a href="{{{url('profile/'.$user->slug)}}}">
+                                                    <a href="{{{url('Pro/profile/'.$user->slug)}}}">
                                                         @if ($user->user_verified)
                                                             <i class="fa fa-check-circle"></i>&nbsp;
                                                         @endif
@@ -154,7 +154,7 @@
                                             <td data-th="Actions">
                                                 <span class="bt-content">
                                                     <div class="wt-btnarea">
-                                                        <a href="{{{ url('freelancer/job/'.$project->job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                        <a href="{{{ url('Pro/freelancer/job/'.$project->job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
                                                     </div>
                                                 </span>
                                             </td>
@@ -175,7 +175,7 @@
                     </div>
                     @if (!empty($completed_projects) && $completed_projects->count() > 0)
                         @php
-                            $commision = \App\SiteManagement::getMetaValue('commision');
+                            $commision = \App\ProModel\ProSiteManagement::getMetaValue('commision');
                             $admin_commission = !empty($commision[0]['commision']) ? $commision[0]['commision'] : 0;
                         @endphp
                         <div class="wt-dashboardboxcontent wt-hiredfreelance">
@@ -190,7 +190,7 @@
                                 <tbody>
                                     @foreach ($completed_projects as $projects)
                                         @php
-                                            $project = \App\Proposal::find($projects->id);
+                                            $project = \App\ProModel\ProProposal::find($projects->id);
                                             $user_name = Helper::getUsername($project->job->user_id);
                                             $amount = !empty($project->amount) ? $project->amount - ($project->amount / 100) * $admin_commission : 0;
                                         @endphp

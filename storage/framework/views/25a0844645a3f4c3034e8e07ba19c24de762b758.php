@@ -39,7 +39,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3">
-                <a href="<?php echo e(route('homepage')); ?>" class="logo">
+                <a href="<?php echo e(route('learn.homepage')); ?>" class="logo">
                     <img src="<?php echo e(asset('learn/assets/images/logo/logo.png')); ?>" alt="logo">
                 </a>
             </div>

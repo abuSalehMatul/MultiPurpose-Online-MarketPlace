@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 
 @section('body')
     <div class="page-content-wrapper">

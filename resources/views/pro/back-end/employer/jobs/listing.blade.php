@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
     @php $breadcrumbs = Breadcrumbs::generate('employerJobs', $slug); @endphp
     <div class="wt-haslayout wt-innerbannerholder">
@@ -46,7 +46,7 @@
                                         <div class="wt-userlistingcontent">
                                             <div class="wt-contenthead">
                                                 <div class="wt-title">
-                                                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif {{{$job->employer->first_name.' '.$job->employer->last_name}}}</a>
+                                                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif {{{$job->employer->first_name.' '.$job->employer->last_name}}}</a>
                                                     <h2>{{{$job->title}}}</h2>
                                                 </div>
                                                 <div class="wt-description">
@@ -62,17 +62,17 @@
                                                 <ul>
                                                     <li><span><i class="fa fa-dollar-sign wt-viewjobdollar"></i>{{{$job->price}}}</span></li>
                                                     @if (!empty($job->location->title))
-                                                        <li><span><img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.location') }}}"> {{{ $job->location->title }}}</span></li>
+                                                        <li><span><img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.location') }}}"> {{{ $job->location->title }}}</span></li>
                                                     @endif
                                                     <li><span><i class="far fa-folder wt-viewjobfolder"></i>{{{ trans('lang.type') }}} {{{$job->project_type}}}</span></li>
-                                                    <li><span><i class="far fa-clock wt-viewjobclock"></i>{{{ trans('lang.duration') }}} {{{ \App\Helper::getJobDurationList($job->duration)}}}</span></li>
+                                                    <li><span><i class="far fa-clock wt-viewjobclock"></i>{{{ trans('lang.duration') }}} {{{ \App\ProModel\ProHelper::getJobDurationList($job->duration)}}}</span></li>
                                                     <li><span><i class="fa fa-tag wt-viewjobtag"></i>{{{ trans('lang.job_id') }}} {{{$job->code}}}</span></li>
                                                     <li>
                                                         <a href="javascrip:void(0);" class="wt-clicklike" v-bind:class="disable_btn" @click.prevent="add_wishlist({{$job->id}}, 'saved_jobs')" v-cloak>
                                                             <i v-bind:class="saved_class"></i><span v-cloak>@{{ text }}</span>
                                                         </a>
                                                     </li>
-                                                    <li class="wt-btnarea"><a href="{{url('job/'.$job->slug)}}" class="wt-btn">{{{ trans('lang.view_job') }}}</a></li>
+                                                    <li class="wt-btnarea"><a href="{{url('Pro/job/'.$job->slug)}}" class="wt-btn">{{{ trans('lang.view_job') }}}</a></li>
                                                 </ul>
                                             </div>
                                         </div>

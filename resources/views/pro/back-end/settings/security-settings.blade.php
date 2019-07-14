@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
 <div class="wt-haslayout wt-manage-account wt-dbsectionspace" id="profile_settings">
     <div class="row">
@@ -13,10 +13,10 @@
                 </div>
             @endif
             <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
-                @include('back-end.settings.tabs')
+                @include('pro.back-end.settings.tabs')
                 <div class="wt-tabscontent tab-content">
                     <div class="wt-securityhold" id="wt-security">
-                        {!! Form::open(['url' => url('profile/settings/save-account-settings'), 'class' =>'wt-formtheme wt-userform'])!!}
+                        {!! Form::open(['url' => url('Pro/profile/settings/save-account-settings'), 'class' =>'wt-formtheme wt-userform'])!!}
                             <div class="wt-securitysettings wt-tabsinfo wt-haslayout">
                                 <div class="wt-tabscontenttitle">
                                     <h2>{{{ trans('lang.manage_account') }}}</h2>

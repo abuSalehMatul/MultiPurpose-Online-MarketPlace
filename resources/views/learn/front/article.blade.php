@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('learn.layout')
 
 @section('content')
     <style>
@@ -22,7 +22,7 @@
 
 
     <!--Main container-->
-    @include('partials.menubar')
+    @include('learn.partials.menubar')
     <div class="container pad-80-20">
         <div class="row">
             @if(count($topics) > 0)
@@ -69,7 +69,7 @@
 
 
 
-    @include('partials.subscribe')
+    @include('learn.partials.subscribe')
 @stop
 
 

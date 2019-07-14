@@ -18,8 +18,9 @@ class AdminController extends Controller
 	public function dashboard()
     {
         $data['page_title'] = 'DashBoard';
-        $data['Gset'] = GeneralSettings::first();
-        return view('admin.dashboard', $data);
+		$data['Gset'] = GeneralSettings::first();
+		//return 'hi';
+        return view('learn.admin.dashboard', $data);
     }
 
 

@@ -1,10 +1,10 @@
 
-@extends('layout')
+@extends('learn.layout')
 @section('css')
 @stop
 @section('content')
 
-@include('partials.menubar')
+@include('learn.partials.menubar')
 
 <!-- end header-area -->
 <section class="listing-details-area">
@@ -13,7 +13,7 @@
             <div class="col-md-8 col-sm-12">
                 <div class="listing-details-wrapper">
                     <div class="thumb">
-                        <img src="{{asset('assets/images/post/'.$post->image)}}" alt="listing details image">
+                        <img src="{{asset('learn/assets/images/post/'.$post->image)}}" alt="listing details image">
                     </div>
                     <div class="listing-title">
                         <span class="category">{{$post->category->name}}</span><br><br>
@@ -77,5 +77,5 @@
 <!-- footer area start -->
 
 
-    @include('partials.subscribe')
+    @include('learn.partials.subscribe')
 @stop

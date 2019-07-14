@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\GeneralSettings;
-use App\Faq;
-use App\Menu;
-use App\Slider;
-use App\Social;
-use App\Service;
+use App\Model\GeneralSettings;
+use App\Model\LearnFaq;
+use App\Model\Menu;
+use App\Model\LearnSlider;
+use App\Model\LearnSocial;
+use App\Model\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +20,7 @@ class WebSettingController extends Controller
     public function manageLogo()
     {
         $data['page_title'] = "Manage Logo & Favicon";
-        return view('webControl.logo', $data);
+        return view('learn.webControl.logo', $data);
     }
     public function updateLogo(Request $request)
     {
@@ -32,13 +32,13 @@ class WebSettingController extends Controller
         if ($request->hasFile('logo')) {
             $image = $request->file('logo');
             $filename = 'logo.png';
-            $location = 'assets/images/logo/' . $filename;
+            $location = 'learn/assets/images/logo/' . $filename;
             Image::make($image)->save($location);
         }
         if ($request->hasFile('favicon')) {
             $image = $request->file('favicon');
             $filename = 'favicon.png';
-            $location = 'assets/images/logo/' . $filename;
+            $location = 'learn/assets/images/logo/' . $filename;
             Image::make($image)->save($location);
         }
         $notification = array('message' => 'Update Successfully', 'alert-type' => 'success');
@@ -49,7 +49,7 @@ class WebSettingController extends Controller
     {
         $data['basic'] = GeneralSettings::first();
         $data['page_title'] = "Contact Settings";
-        return view('webControl.contact-setting',$data);
+        return view('learn.webControl.contact-setting',$data);
     }
 
     public function putContactSetting(Request $request)
@@ -70,7 +70,7 @@ class WebSettingController extends Controller
     public function manageFooter()
     {
         $data['page_title'] = "Manage Footer";
-        return view('webControl.footer', $data);
+        return view('learn.webControl.footer', $data);
     }
     public function updateFooter(Request $request)
     {
@@ -87,8 +87,8 @@ class WebSettingController extends Controller
     public function manageSocial()
     {
         $data['page_title'] = "Manage Social";
-        $data['social'] = Social::all();
-        return view('webControl.social', $data);
+        $data['social'] = LearnSocial::all();
+        return view('learn.webControl.social', $data);
     }
     public function storeSocial(Request $request)
     {
@@ -97,17 +97,17 @@ class WebSettingController extends Controller
             'code' => 'required',
             'link' => 'required',
         ]);
-        $product = Social::create($request->input());
+        $product = LearnSocial::create($request->input());
         return response()->json($product);
     }
     public function editSocial($product_id)
     {
-        $product = Social::find($product_id);
+        $product = LearnSocial::find($product_id);
         return response()->json($product);
     }
     public function updateSocial(Request $request,$product_id)
     {
-        $product = Social::find($product_id);
+        $product = LearnSocial::find($product_id);
         $product->name = $request->name;
         $product->code = $request->code;
         $product->link = $request->link;
@@ -116,7 +116,7 @@ class WebSettingController extends Controller
     }
     public function destroySocial(Request $request)
     {
-        $product = Social::destroy($request->delete_id);
+        $product = LearnSocial::destroy($request->delete_id);
         $notification = array('message' => 'Deleted Successfully.', 'alert-type' => 'success');
         return back()->with($notification);
     }
@@ -125,12 +125,12 @@ class WebSettingController extends Controller
     {
         $data['page_title'] = "Control Menu";
         $data['menus'] = Menu::paginate(2);
-        return view('webControl.menu-show',$data);
+        return view('learn.webControl.menu-show',$data);
     }
     public function createMenu()
     {
         $data['page_title'] = "Create Menu";
-        return view('webControl.menu-create',$data);
+        return view('learn.webControl.menu-create',$data);
     }
     public function storeMenu(Request $request)
     {
@@ -148,7 +148,7 @@ class WebSettingController extends Controller
     {
         $data['page_title'] = "Edit Menu";
         $data['menu'] = Menu::findOrFail($id);
-        return view('webControl.menu-edit',$data);
+        return view('learn.webControl.menu-edit',$data);
     }
     public function updateMenu(Request $request,$id)
     {
@@ -178,7 +178,7 @@ class WebSettingController extends Controller
     public function mangeBreadcrumb()
     {
         $data['page_title'] = "Manage Breadcrumb";
-        return view('webControl.breadcrumb',$data);
+        return view('learn.webControl.breadcrumb',$data);
     }
     public function updateBreadcrumb(Request $request)
     {
@@ -188,7 +188,7 @@ class WebSettingController extends Controller
         if($request->hasFile('testimonial')){
             $image = $request->file('testimonial');
             $filename = 'testimonial.jpg';
-            $location = 'assets/images/logo/' . $filename;
+            $location = 'learn/assets/images/logo/' . $filename;
             Image::make($image)->save($location);
         }
 
@@ -200,7 +200,7 @@ class WebSettingController extends Controller
     public function manageScript()
     {
         $data['page_title'] = " Comment Script";
-        return view('webControl.fb-comment',$data);
+        return view('learn.webControl.fb-comment',$data);
     }
     public function updateScript(Request $request)
     {
@@ -216,7 +216,7 @@ class WebSettingController extends Controller
     public function manageAbout()
     {
         $data['page_title'] = "Manage About";
-        return view('webControl.about',$data);
+        return view('learn.webControl.about',$data);
     }
     public function updateAbout(Request $request)
     {
@@ -233,7 +233,7 @@ class WebSettingController extends Controller
     public function managePrivacy()
     {
         $data['page_title'] = "Manage Privacy & Policy";
-        return view('webControl.privacy',$data);
+        return view('learn.webControl.privacy',$data);
     }
     public function updatePrivacy(Request $request)
     {
@@ -250,7 +250,7 @@ class WebSettingController extends Controller
     public function manageTerms()
     {
         $data['page_title'] = "Manage Terms & Conditions";
-        return view('webControl.terms',$data);
+        return view('learn.webControl.terms',$data);
     }
     public function updateTerms(Request $request)
     {
@@ -269,7 +269,7 @@ class WebSettingController extends Controller
     public function createFaqs()
     {
         $data['page_title'] = "Create New Faq";
-        return view('webControl.faqs-create',$data);
+        return view('learn.webControl.faqs-create',$data);
     }
 
     public function storeFaqs(Request $request)
@@ -279,7 +279,7 @@ class WebSettingController extends Controller
             'description' => 'required'
         ]);
         $in = Input::except('_method','_token');
-        Faq::create($in);
+        LearnFaq::create($in);
         $notification = array('message' => 'FAQS Created Successfully.', 'alert-type' => 'success');
         return back()->with($notification);
     }
@@ -287,20 +287,20 @@ class WebSettingController extends Controller
     public function allFaqs()
     {
         $data['page_title'] = "All Question";
-        $data['faqs'] = Faq::orderBy('id','desc')->paginate(10);
-        return view('webControl.faqs-all',$data);
+        $data['faqs'] = LearnFaq::orderBy('id','desc')->paginate(10);
+        return view('learn.webControl.faqs-all',$data);
     }
 
     public function editFaqs($id)
     {
         $data['page_title'] = "Edit Faqs";
-        $data['faqs'] = Faq::findOrFail($id);
-        return view('webControl.faqs-edit',$data);
+        $data['faqs'] = LearnFaq::findOrFail($id);
+        return view('learn.webControl.faqs-edit',$data);
     }
 
     public function updateFaqs(Request $request, $id)
     {
-        $faqs = Faq::findOrFail($id);
+        $faqs = LearnFaq::findOrFail($id);
         $request->validate([
             'title' => 'required',
             'description' => 'required'
@@ -318,7 +318,7 @@ class WebSettingController extends Controller
         $request->validate([
             'id' => 'required'
         ]);
-        Faq::destroy($request->id);
+        LearnFaq::destroy($request->id);
         $notification = array('message' => 'FAQS Deleted Successfully.', 'alert-type' => 'success');
         return back()->with($notification);
     }
@@ -327,8 +327,8 @@ class WebSettingController extends Controller
     public function manageSlider()
     {
         $data['page_title'] = "Manage Slider";
-        $data['slider'] = Slider::all();
-        return view('webControl.slider', $data);
+        $data['slider'] = LearnSlider::all();
+        return view('learn.webControl.slider', $data);
     }
     public function storeSlider(Request $request)
     {
@@ -339,11 +339,11 @@ class WebSettingController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = 'slider_'.time().'.jpg';
-            $location = 'assets/images/slider/' . $filename;
+            $location = 'learn/assets/images/slider/' . $filename;
             Image::make($image)->resize(2100,1410)->save($location);
             $in['image'] = $filename;
         }
-        Slider::create($in);
+        LearnSlider::create($in);
         $notification = array('message' => 'Slider Created Successfully.', 'alert-type' => 'success');
         return back()->with($notification);
     }
@@ -352,8 +352,8 @@ class WebSettingController extends Controller
         $this->validate($request,[
             'id' => 'required'
         ]);
-        $slider = Slider::findOrFail($request->id);
-        File::delete('assets/images/slider/'.$slider->image);
+        $slider = LearnSlider::findOrFail($request->id);
+        File::delete('learn/assets/images/slider/'.$slider->image);
         $slider->delete();
 
         $notification = array('message' => 'Slider Deleted Successfully.', 'alert-type' => 'success');
@@ -365,13 +365,13 @@ class WebSettingController extends Controller
     {
         $data['page_title'] = "Our Goals";
         $data['service'] = Service::all();
-        return view('webControl.service-show',$data);
+        return view('learn.webControl.service-show',$data);
     }
     public function editService($id)
     {
         $data['page_title'] = " Edit Our Goals";
         $data['service'] = Service::findOrFail($id);
-        return view('webControl.service-edit',$data);
+        return view('learn.webControl.service-edit',$data);
     }
     public function updateService(Request $request,$id)
     {
@@ -385,11 +385,11 @@ class WebSettingController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = 'how_it_works_'.time().'.'.$image->getClientOriginalExtension();
-            $location = 'assets/images/' . $filename;
+            $location = 'learn/assets/images/' . $filename;
             Image::make($image)->resize(100,100)->save($location);
             $in['image'] = $filename;
 
-            $path = 'assets/images/'.$menu->image;
+            $path = 'learn/assets/images/'.$menu->image;
             @unlink($path);
 
 

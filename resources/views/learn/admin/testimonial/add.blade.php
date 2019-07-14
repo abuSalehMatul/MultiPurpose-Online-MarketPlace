@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('import-css')
-    <link href="{{ asset('assets/admin/css/bootstrap-fileinput.css') }}" rel="stylesheet">
+    <link href="{{ asset('learn/assets/admin/css/bootstrap-fileinput.css') }}" rel="stylesheet">
 @stop
 @section('body')
     <div class="row">
@@ -103,7 +103,7 @@
 @endsection
 
 @section('import-script')
-    <script src="{{ asset('assets/admin/js/bootstrap-fileinput.js') }}"></script>
+    <script src="{{ asset('learn/assets/admin/js/bootstrap-fileinput.js') }}"></script>
 @stop
 @section('script')
 @stop

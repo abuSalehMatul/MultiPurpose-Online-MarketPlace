@@ -1,9 +1,9 @@
 
-@extends('layout')
+@extends('learn.layout')
 @section('css')
 @stop
 @section('content')
-@include('partials.menubar')
+@include('learn.partials.menubar')
     <section class="blog-page-area">
         <div class="container">
             <div class="row">
@@ -15,7 +15,7 @@
                             $slug = str_slug($data->title)
                             @endphp
                             <a href="{{route('details.blog',[$data->id, $slug])}}">
-                            <img src="{{asset('assets/images/post/'.$data->image)}}" alt="blog images">
+                            <img src="{{asset('learn/assets/images/post/'.$data->image)}}" alt="blog images">
                             </a>
                         </div>
                         <div class="content">
@@ -67,5 +67,5 @@
         </div>
     </section>
 
-    @include('partials.subscribe')
+    @include('learn.partials.subscribe')
 @stop

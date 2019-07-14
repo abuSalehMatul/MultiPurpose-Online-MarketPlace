@@ -1,5 +1,5 @@
-@include('back-end.admin.home-page-settings.banner-settings.background-image')
-@include('back-end.admin.home-page-settings.banner-settings.banner-image')
+@include('pro.back-end.admin.home-page-settings.banner-settings.background-image')
+@include('pro.back-end.admin.home-page-settings.banner-settings.banner-image')
 <div class="wt-location wt-tabsinfo">
     <h5>{{{ trans('lang.banner_title') }}}</h5>
     <div class="wt-settingscontent">

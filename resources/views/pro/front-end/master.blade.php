@@ -1,10 +1,10 @@
-@extends('master')
+@extends('pro.master')
 @push('stylesheets')
 
 @endpush
 
 @section('header')
-	@include('includes.header')
+	@include('pro.includes.header')
 @endsection
 
 @section('main')
@@ -16,7 +16,7 @@
 @endsection
 
 @section('footer')
-	@include('front-end.includes.footer')
+	@include('pro.front-end.includes.footer')
 @endsection
 
 @push('scripts')

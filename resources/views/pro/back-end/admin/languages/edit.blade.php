@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="langs-listing" id="lang-list">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.edit_lang') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open([ 'url' => url('admin/languages/update-langs/'.$langs->id.''), 'class' =>'wt-formtheme wt-formprojectinfo
+                            {!! Form::open([ 'url' => url('Pro/admin/languages/update-langs/'.$langs->id.''), 'class' =>'wt-formtheme wt-formprojectinfo
                             wt-formcategory', 'id' => 'langs' ]) !!}
                                 <fieldset>
                                     <div class="form-group">

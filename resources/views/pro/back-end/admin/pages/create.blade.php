@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="pages-listing" id="pages-list">
         <section class="wt-haslayout wt-dbsectionspace">
@@ -9,7 +9,7 @@
                             <h2>{{{ trans('lang.add_page') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            <form method="POST" action="{{url('admin/store-page')}}" accept-charset="UTF-8" id="pages" class="wt-formtheme wt-formprojectinfo wt-formcategory" @submit.prevent="submitPage('{{$page_created}}')">
+                            <form method="POST" action="{{url('Pro/admin/store-page')}}" accept-charset="UTF-8" id="pages" class="wt-formtheme wt-formprojectinfo wt-formcategory" @submit.prevent="submitPage('{{$page_created}}')">
                                 @csrf
                                 <fieldset>
                                     <div class="form-group">

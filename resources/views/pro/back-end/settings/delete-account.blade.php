@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-haslayout wt-delete-account wt-dbsectionspace" id="profile_settings">
         <div class="row">
@@ -13,14 +13,14 @@
                     </div>
                 @endif
                 <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
-                    @include('back-end.settings.tabs')
+                    @include('pro.back-end.settings.tabs')
                     <div class="wt-tabscontent tab-content">
                         <div class="wt-yourdetails wt-tabsinfo">
                             <div class="wt-tabscontenttitle">
                                 <h2>{{{ trans('lang.delete_account') }}}</h2>
                             </div>
                             <div class="wt-formtheme wt-userform">
-                                {!! Form::open(['url' => url('profile/settings/delete-user'), 'class' =>'wt-formtheme wt-userform delete-user-form', '@submit.prevent' => 'deleteAccount($event)', 'id' => 'delete_acc_form' ])!!}
+                                {!! Form::open(['url' => url('Pro/profile/settings/delete-user'), 'class' =>'wt-formtheme wt-userform delete-user-form', '@submit.prevent' => 'deleteAccount($event)', 'id' => 'delete_acc_form' ])!!}
                                     <fieldset>
                                         <div class="form-group form-group-half">
                                             {!! Form::password('old_password', ['class' => 'form-control','placeholder' => trans('lang.ph_oldpass')]) !!}

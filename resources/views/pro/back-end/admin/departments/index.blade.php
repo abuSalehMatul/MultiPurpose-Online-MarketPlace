@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="dpts-listing" id="dpt-list">
         @if (Session::has('message'))
@@ -19,7 +19,7 @@
                         </div>
                         <div class="wt-dashboardboxcontent">
                             {!! Form::open([
-                                'url' => url('admin/store-department'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory',
+                                'url' => url('Pro/admin/store-department'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory',
                                 'id' => 'dpts'])
                             !!}
                                 <fieldset>
@@ -48,7 +48,7 @@
                     <div class="wt-dashboardbox">
                         <div class="wt-dashboardboxtitle wt-titlewithsearch">
                             <h2>{{{ trans('lang.dpts') }}}</h2>
-                            {!! Form::open(['url' => url('admin/departments/search'),
+                            {!! Form::open(['url' => url('Pro/admin/departments/search'),
                                 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch'])
                             !!}
                                 <fieldset>
@@ -94,10 +94,10 @@
                                                 <td>{{{ $dpt->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/departments/edit-dpts') }}}/{{{ $dpt->id }}}" class="wt-addinfo wt-dpts">
+                                                        <a href="{{{ url('Pro/admin/departments/edit-dpts') }}}/{{{ $dpt->id }}}" class="wt-addinfo wt-dpts">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
-                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$dpt->id}}'" :message="'{{trans("lang.ph_dpt_delete_message")}}'" :url="'{{url('admin/departments/delete-dpts')}}'"></delete>
+                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$dpt->id}}'" :message="'{{trans("lang.ph_dpt_delete_message")}}'" :url="'{{url('Pro/admin/departments/delete-dpts')}}'"></delete>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -110,7 +110,7 @@
                                 @endif
                             </div>
                         @else
-                            @include('errors.no-record')
+                            @include('pro.errors.no-record')
                         @endif
                     </div>
                 </div>

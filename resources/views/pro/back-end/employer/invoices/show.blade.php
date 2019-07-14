@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @push('stylesheets')
     <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print" type="text/css">
 @endpush

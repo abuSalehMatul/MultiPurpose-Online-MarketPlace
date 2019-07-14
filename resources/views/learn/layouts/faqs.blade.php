@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('learn.layout')
 
 
 
@@ -14,7 +14,7 @@
 @stop
 @section('content')
 
-@include('partials.menubar')
+@include('learn.partials.menubar')
     <section class="faq-section pad-t-b-40" >
         <div class="container">
             <div class="row">
@@ -52,5 +52,5 @@
     </section>
 
 
-@include('partials.subscribe')
+@include('learn.partials.subscribe')
 @stop

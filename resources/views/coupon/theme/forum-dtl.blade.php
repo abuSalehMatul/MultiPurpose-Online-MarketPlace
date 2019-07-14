@@ -52,7 +52,7 @@
 						      	<div class="row">
 											<div class="col-lg-1 col-md-2 d-none d-lg-block d-md-block">
 						      			<div class="forum-user-img">
-						      				<a href="{{url('profile/'.$item->user_id)}}" title="{{$item->user->name}}"><img src="{{asset('images/user/'.$item->user->image)}}" alt="User"></a>
+						      				<a href="{{url('profile/'.$item->user_id)}}" title="{{$item->user->name}}"><img src="{{asset('coupon/images/user/'.$item->user->image)}}" alt="User"></a>
 						      			</div>
 						      		</div>
 						      		<div class="col-lg-9 col-md-10">

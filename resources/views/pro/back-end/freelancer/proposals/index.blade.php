@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="wt-haslayout wt-dbsectionspace">
         <div class="row">
@@ -13,10 +13,10 @@
                                 <div class="wt-managejobcontent">
                                     @foreach ($proposals as $proposal)
                                         @php
-                                            $freelancer_proposal = \App\Proposal::find($proposal->id);
+                                            $freelancer_proposal = \App\ProModel\ProProposal::find($proposal->id);
                                             $duration = Helper::getJobDurationList($proposal->job->duration);
                                             $status_btn = $proposal->status == 'cancelled' ? trans('lang.view_reason') : trans('lang.view_detail');
-                                            $detail_link = $proposal->status == 'hired' ? url('freelancer/job/'.$proposal->job->slug) : 'javascript:void(0);';
+                                            $detail_link = $proposal->status == 'hired' ? url('Pro/freelancer/job/'.$proposal->job->slug) : 'javascript:void(0);';
                                             $user_name = Helper::getUserName($proposal->job->employer->id);
                                         @endphp
                                         <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
@@ -28,7 +28,7 @@
                                                     @if (!empty($user_name) || !empty($proposal->job->title) )
                                                         <div class="wt-title">
                                                             @if (!empty($user_name))
-                                                            <a href="{{{ url('profile/'.$proposal->job->employer->slug) }}}">
+                                                            <a href="{{{ url('Pro/profile/'.$proposal->job->employer->slug) }}}">
                                                                 @if ($proposal->job->employer->user_verified === 1)
                                                                     <i class="fa fa-check-circle"></i>
                                                                 @endif
@@ -64,7 +64,7 @@
                                                     <div class="wt-hireduserstatus">
                                                         <h4>{{{ $proposal->status }}}</h4>
                                                         @if ( $proposal->status != 'pending' )
-                                                            <a href="{{{ url('freelancer/job/'.$proposal->job->slug) }}}" class="wt-btn">
+                                                            <a href="{{{ url('Pro/freelancer/job/'.$proposal->job->slug) }}}" class="wt-btn">
                                                                 {{$status_btn}}
                                                             </a>
                                                         @endif

@@ -1,4 +1,4 @@
-@include('back-end.admin.settings.email.sender-avatar')
+@include('pro.back-end.admin.settings.email.sender-avatar')
 <div class="wt-location wt-tabsinfo">
     <div class="wt-tabscontenttitle">
         <h2>{{{ trans('lang.email_sender_name') }}}</h2>

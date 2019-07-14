@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace">
         <div class="row">
@@ -23,7 +23,7 @@
                                     <div class="wt-dashboradsaveitem">
                                         @foreach ($saved_jobs as $job_id)
                                             @php
-                                                $job = \App\Job::where('id', $job_id)->first();
+                                                $job = \App\ProModel\ProJob::where('id', $job_id)->first();
                                                 $duration  =  Helper::getJobDurationList($job->duration);
                                                 $user_name = $job->employer->first_name.' '.$job->employer->last_name;
                                             @endphp
@@ -36,12 +36,12 @@
                                                         @if (!empty($user_name) || !empty($job->title))
                                                             <div class="wt-title">
                                                                 @if (!empty($user_name))
-                                                                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">
+                                                                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">
                                                                         @if($job->employer->user_verified === 1)<i class="fa fa-check-circle"></i>&nbsp;{{{ $user_name }}} @endif
                                                                     </a>
                                                                 @endif
                                                                 @if (!empty($job->title))
-                                                                    <h2><a href="{{ url('job/'.$job->slug) }}">{{{ $job->title }}}</a></h2>
+                                                                    <h2><a href="{{ url('Pro/job/'.$job->slug) }}">{{{ $job->title }}}</a></h2>
                                                                 @endif
                                                             </div>
                                                         @endif
@@ -95,15 +95,15 @@
                                                     <div class="wt-userlistingcontent">
                                                         <div class="wt-contenthead wt-followcomhead">
                                                             <div class="wt-title">
-                                                                    <a href="{{{ url('profile/'.$user->slug) }}}">
+                                                                    <a href="{{{ url('Pro/profile/'.$user->slug) }}}">
                                                                         @if($user->user_verified === 1)
                                                                             <i class="fa fa-check-circle"></i> {{ trans('lang.verified_company') }}</a>
                                                                         @endif
-                                                                <h3><a href="{{{ url('profile/'.$user->slug) }}}">{{{ $user_name }}}</a></h3>
+                                                                <h3><a href="{{{ url('Pro/profile/'.$user->slug) }}}">{{{ $user_name }}}</a></h3>
                                                             </div>
                                                             <ul class="wt-followcompomy-breadcrumb wt-userlisting-breadcrumb">
-                                                                <li><a href="{{{ url('profile/'.$user->slug) }}}"> {{ trans('lang.open_jobs') }}  </a></li>
-                                                                <li><a href="{{ url('profile/'.$user->slug) }}"> {{ trans('lang.full_profile') }}</a></li>
+                                                                <li><a href="{{{ url('Pro/profile/'.$user->slug) }}}"> {{ trans('lang.open_jobs') }}  </a></li>
+                                                                <li><a href="{{ url('Pro/profile/'.$user->slug) }}"> {{ trans('lang.full_profile') }}</a></li>
                                                                 <li><a href="javascript:void(0);" class="wt-savefollow"> {{ trans('lang.following') }}</a></li>
                                                             </ul>
                                                         </div>
@@ -148,13 +148,13 @@
                                                 <div class="wt-userlistingcontent">
                                                     <div class="wt-contenthead">
                                                         <div class="wt-title">
-                                                            <a href="{{{ url('profile/'.$user->slug) }}}">
+                                                            <a href="{{{ url('Pro/profile/'.$user->slug) }}}">
                                                                 @if ($user->user_verified === 1)
                                                                     <i class="fa fa-check-circle"></i>
                                                                 @endif
                                                                 {{{ $user_name }}}
                                                             </a>
-                                                            <h2><a href="{{ url('profile/'.$user->slug) }}">{{{ $profile->tagline }}}</a></h2>
+                                                            <h2><a href="{{ url('Pro/profile/'.$user->slug) }}">{{{ $profile->tagline }}}</a></h2>
                                                         </div>
                                                         <ul class="wt-userlisting-breadcrumb">
                                                             @if (!empty($profile->hourly_rate))

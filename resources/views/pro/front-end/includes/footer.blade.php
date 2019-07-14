@@ -1,8 +1,8 @@
-@if( Schema::hasTable('site_managements'))
+@if( Schema::hasTable('pro_site_managements'))
     @php
-        $footer = \App\SiteManagement::getMetaValue('footer_settings');
-        $search_menu = \App\SiteManagement::getMetaValue('search_menu');
-        $menu_title = DB::table('site_managements')->select('meta_value')->where('meta_key', 'menu_title')->get()->first();
+        $footer = \App\ProModel\ProSiteManagement::getMetaValue('footer_settings');
+        $search_menu = \App\ProModel\ProSiteManagement::getMetaValue('search_menu');
+        $menu_title = DB::table('pro_site_managements')->select('meta_value')->where('meta_key', 'menu_title')->get()->first();
     @endphp
     <footer id="wt-footer" class="wt-footer wt-haslayout">
         @if (!empty($footer))
@@ -12,7 +12,7 @@
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="wt-footerlogohold">
                                 @if (!empty($footer['footer_logo']))
-                                    <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset(\App\Helper::getFooterLogo($footer['footer_logo'])) }}}" alt="company logo here"></a></strong>
+                                    <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset(\App\ProModel\ProHelper::getFooterLogo($footer['footer_logo'])) }}}" alt="company logo here"></a></strong>
                                 @endif
                                 @if (!empty($footer['description']))
                                     <div class="wt-description">
@@ -35,7 +35,7 @@
                                             @foreach($footer['menu_pages_1'] as $menu_1_page)
                                                 @php  $page = \App\Page::where('id', $menu_1_page)->first(); @endphp
                                                 @if (!empty($page))
-                                                    <li><a href="{{{ url('page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
+                                                    <li><a href="{{{ url('Pro/page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -74,7 +74,7 @@
                                     @foreach($footer['pages'] as $menu_page)
                                         @php $page = \App\Page::where('id', $menu_page)->first(); @endphp
                                         @if (!empty($page))
-                                            <li><a href="{{{ url('page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
+                                            <li><a href="{{{ url('Pro/page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>

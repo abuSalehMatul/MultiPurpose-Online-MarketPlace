@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor']) 
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor']) 
 @section('content')
     <div class="wt-haslayout wt-innerbannerholder">
         <div class="container">
@@ -36,7 +36,7 @@
                                                     <img src="{{{ asset('/images/banner.jpg') }}}" alt="{{ trans('lang.img') }}">
                                                 </figure>
                                                 <div class="wt-companysinfo">
-                                                    <figure><img src="{{{ asset(\App\Helper::getCategoryImage($category->image)) }}}" alt="{{{ $category->title }}}"></figure>
+                                                    <figure><img src="{{{ asset(\App\ProModel\ProHelper::getCategoryImage($category->image)) }}}" alt="{{{ $category->title }}}"></figure>
                                                     <div class="wt-title">
                                                         <h2>{{{ $category->title }}}</h2>
                                                     </div>

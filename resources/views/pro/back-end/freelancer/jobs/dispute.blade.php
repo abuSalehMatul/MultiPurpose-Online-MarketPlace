@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('content')
     <div class="wt-haslayout wt-innerbannerholder">
         <div class="container">
@@ -22,7 +22,7 @@
                     <div class="wt-proposalholder wt-haslayout">
                         <div class="proposalhead">
                             <h3>{{ trans('lang.raise_dispute_text') }}</h3>
-                            <a href="{{{ url('job/'.$job->slug) }}}">{{{ $job->title }}}</a>
+                            <a href="{{{ url('Pro/job/'.$job->slug) }}}">{{{ $job->title }}}</a>
                         </div>
                         <div class="wt-proposalamount-holder">
                             {!! Form::open([

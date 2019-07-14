@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @push('stylesheets')
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
 @endpush
@@ -46,7 +46,7 @@
                                                 {{{ trans('lang.member_since') }}}&nbsp;{{{ $joining_date }}}
                                             @endif
                                             <br>
-                                            <a href="{{url('profile/'.$user->slug)}}">{{ '@' }}{{{ $user->slug }}}</a>
+                                            <a href="{{url('Pro/profile/'.$user->slug)}}">{{ '@' }}{{{ $user->slug }}}</a>
                                         </span>
                                     </div>
                                 </div>
@@ -131,7 +131,7 @@
                                 @if (!empty($reviews) && $reviews->count() > 0)
                                     @foreach ($reviews as $key => $review)
                                         @php
-                                            $job = \App\Job::where('id', $review->job_id)->first();
+                                            $job = \App\ProModel\ProJob::where('id', $review->job_id)->first();
                                             $verified_user = \App\User::select('user_verified')->where('id', $review->user_id)->pluck('user_verified')->first();
                                         @endphp
                                         <div class="wt-userlistinghold wt-userlistingsingle">
@@ -141,14 +141,14 @@
                                             <div class="wt-userlistingcontent">
                                                 <div class="wt-contenthead">
                                                     <div class="wt-title">
-                                                        <a href="{{{ url('profile/'.$job->employer->slug) }}}">@if ($verified_user === 1)<i class="fa fa-check-circle"></i>@endif {{{ Helper::getUserName($review->user_id) }}}</a>
+                                                        <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">@if ($verified_user === 1)<i class="fa fa-check-circle"></i>@endif {{{ Helper::getUserName($review->user_id) }}}</a>
                                                         <h3>{{{ $job->title }}}</h3>
                                                     </div>
                                                     <ul class="wt-userlisting-breadcrumb">
-                                                        <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{{ \App\Helper::getProjectLevel($job->project_level) }}}</span></li>
+                                                        <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{{ \App\ProModel\ProHelper::getProjectLevel($job->project_level) }}}</span></li>
                                                         <li>
                                                             <span>
-                                                                <img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.flag_img') }}}"> {{{ $job->location->title }}}
+                                                                <img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.flag_img') }}}"> {{{ $job->location->title }}}
                                                             </span>
                                                         </li>
                                                         <li><span><i class="far fa-calendar"></i> {{ Carbon\Carbon::parse($job->created_at)->format('M Y') }} - {{ Carbon\Carbon::parse($job->updated_at)->format('M Y') }}</span></li>
@@ -178,7 +178,7 @@
                                     @endforeach
                                 @else
                                     <div class="wt-userprofile">
-                                        @include('errors.no-record')
+                                        @include('pro.errors.no-record')
                                     </div>
                                 @endif
                             </div>
@@ -190,7 +190,7 @@
                                     <crafted_project :no_of_post="3" :project="'{{  json_encode($projects) }}'" :freelancer_id="'{{$profile->user_id}}'" :img="'{{ trans('lang.img') }}'"></crafted_project>
                                 @else
                                     <div class="wt-userprofile">
-                                        @include('errors.no-record')
+                                        @include('pro.errors.no-record')
                                     </div>
                                 @endif
                             </div>
@@ -204,7 +204,7 @@
                                     </div>
                                 @else
                                     <div class="wt-userprofile">
-                                        @include('errors.no-record')
+                                        @include('pro.errors.no-record')
                                     </div>
                                 @endif
                             </div>
@@ -216,7 +216,7 @@
                                     <education :freelancer_id="'{{$profile->user_id}}'" :no_of_post="1"></education>
                                 @else
                                     <div class="wt-userprofile">
-                                        @include('errors.no-record')
+                                        @include('pro.errors.no-record')
                                     </div>
                                 @endif
                             </div>
@@ -268,7 +268,7 @@
                             <div class="wt-proposalsr">
                                 <div class="tg-authorcodescan tg-authorcodescanvtwo">
                                     <figure class="tg-qrcodeimg">
-                                        {!! QrCode::size(100)->generate(Request::url('profile/'.$user->slug)); !!}
+                                        {!! QrCode::size(100)->generate(Request::url('Pro/profile/'.$user->slug)); !!}
                                     </figure>
                                     <div class="tg-qrcodedetail">
                                         <span class="lnr lnr-laptop-phone"></span>

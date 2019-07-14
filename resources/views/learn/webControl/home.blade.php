@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('css')
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <style>
         rect{
             fill: #8e44ad;
@@ -27,7 +27,7 @@
                     @php
                         $totalusers = \App\User::where('status',1)->count();
                         $banusers = \App\User::where('status',0)->count();
-                        $sell = \App\Sell::where('status',0)->sum('id');
+                        $sell = \App\Model\Sell::where('status',0)->sum('id');
                     @endphp
 
                     <div class="row">
@@ -87,7 +87,7 @@
 
                     @php
                         $main_chart_data = "[";
-                        $trans = \App\Product::latest()->take(50)->get();
+                        $trans = \App\Model\Product::latest()->take(50)->get();
                             foreach ($trans as $data){
                              $main_chart_data .= "{ year: '".date('Y-m-d', strtotime($data->created_at))."' , value:  ".$data->sells()->count()."  }".",";
                             }
@@ -114,14 +114,14 @@
 @section('import-script')
 
     <!-- START PAGE LEVEL PLUGINS -->
-    <script src="{{asset('assets/admin/')}}/js/jquery.waypoints.min.js" type="text/javascript"></script>
-    <script src="{{asset('assets/admin/')}}/js/jquery.counterup.min.js" type="text/javascript"></script>
+    <script src="{{asset('learn/assets/admin/')}}/js/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="{{asset('learn/assets/admin/')}}/js/jquery.counterup.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
 
 @stop
 @section('script')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
     <script>
         $(document).ready(function () {

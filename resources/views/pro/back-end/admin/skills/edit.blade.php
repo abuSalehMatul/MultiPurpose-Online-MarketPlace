@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="skills-listing" id="skill-list">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.edit_skill') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open(['url' => url('admin/skills/update-skills/'.$skills->id.''),
+                            {!! Form::open(['url' => url('Pro/admin/skills/update-skills/'.$skills->id.''),
                                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'skills'] ) !!}
                             <fieldset>
                                 <div class="form-group">

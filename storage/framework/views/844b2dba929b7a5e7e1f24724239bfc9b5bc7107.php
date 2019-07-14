@@ -7,6 +7,18 @@
         $inner_header = !empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' ? 'wt-headervtwo' : '';
     ?>
 <?php endif; ?>
+<?php
+    if(Auth::user()){
+        Auth::user()->syncRoles('freelancer');
+    }
+    // if(Auth::user()->hasRole('pro')){
+    //     echo 'pro';
+    // }
+    // if(Auth::user()->hasRole('candidate')){
+    //     echo 'candidate';
+    // }
+    
+?>
 <header id="wt-header" class="wt-header wt-haslayout <?php echo e($inner_header); ?>">
     <div class="wt-navigationarea">
         <div class="container-fluid">
@@ -69,6 +81,7 @@
 
                                         </a>
                                     </li>
+                                    
                                     <li>
                                         <a href="<?php echo e(url('search-results?type=employer')); ?>">
                                             <?php echo e(trans('lang.view_employers')); ?>
@@ -77,7 +90,7 @@
                                     </li>
                                     <li>
                                         <a href="<?php echo e(url('search-results?type=job')); ?>">
-                                            <?php echo e(trans('lang.browse_jobs')); ?>
+                                            <?php echo e(trans('lang.browse_project')); ?>
 
                                         </a>
                                     </li>
@@ -95,6 +108,7 @@
                                         </div>
                                         <form method="POST" action="<?php echo e(route('login')); ?>" class="wt-formtheme wt-loginform do-login-form">
                                             <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="user_role" value="freelancers">
                                             <fieldset>
                                                 <div class="form-group">
                                                     <input id="email" type="email" name="email" class="form-control<?php echo e($errors->has('email') ? ' is-invalid' : ''); ?>"

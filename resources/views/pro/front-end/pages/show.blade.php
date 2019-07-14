@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @push('stylesheets')
     <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
 @endpush
@@ -47,7 +47,7 @@
             </div>
         </div>
     @else
-        @include('errors.404')
+        @include('pro.errors.404')
     @endif
 @endsection
 @push('scripts')

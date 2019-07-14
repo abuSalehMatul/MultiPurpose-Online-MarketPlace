@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('import-css')
-    <link href="{{ asset('assets/admin/css/bootstrap-fileinput.css') }}" rel="stylesheet">
+    <link href="{{ asset('learn/assets/admin/css/bootstrap-fileinput.css') }}" rel="stylesheet">
 @stop
 @section('body')
     <div class="row">
@@ -59,7 +59,7 @@
                                         @if($post->image == null)
                                             <img style="width: 200px" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=Fetured Image" alt="...">
                                         @else
-                                            <img style="width: 200px" src="{{ asset('assets/images/post') }}/{{ $post->image }}" alt="...">
+                                            <img style="width: 200px" src="{{ asset('learn/assets/images/post') }}/{{ $post->image }}" alt="...">
                                         @endif
                                     </div>
                                     <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
@@ -119,11 +119,11 @@
 @endsection
 
 @section('import-script')
-    <script src="{{ asset('assets/admin/js/bootstrap-fileinput.js') }}"></script>
+    <script src="{{ asset('learn/assets/admin/js/bootstrap-fileinput.js') }}"></script>
 @stop
 @section('script')
 
-    <script src="{{ asset('assets/admin/js/nicEdit-latest.js') }}"></script>
+    <script src="{{ asset('learn/assets/admin/js/nicEdit-latest.js') }}"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function() { new nicEditor({fullPanel : true}).panelInstance('area1'); });
     </script>

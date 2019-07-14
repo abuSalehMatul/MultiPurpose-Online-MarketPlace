@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
 <div class="wt-haslayout wt-dbsectionspace">
     <div class="row">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="wt-haslayout wt-post-job-wrap">
-                {!! Form::open(['url' => url('job/post-job'), 'class' =>'post-job-form wt-haslayout', 'id' => 'post_job_form',  '@submit.prevent'=>'submitJob']) !!}
+                {!! Form::open(['url' => url('Pro/job/post-job'),'method' => 'POST','files' =>true,'enctype'=>'multipart/form-data', 'class' =>'post-job-form wt-haslayout', 'id' => 'post_job_form',]) !!}
                     <div class="wt-dashboardbox">
                         <div class="wt-dashboardboxtitle">
                             <h2>{{ trans('lang.post_job') }}</h2>
@@ -149,7 +149,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <job_attachments :temp_url="'{{url('job/upload-temp-image')}}'"></job_attachments>
+                                    <job_attachments :temp_url="'{{url('Pro/job/upload-temp-image')}}'"></job_attachments>
                                     <div class="form-group input-preview">
                                         <ul class="wt-attachfile dropzone-previews">
 

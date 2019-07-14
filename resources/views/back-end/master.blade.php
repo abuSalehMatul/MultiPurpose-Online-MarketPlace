@@ -7,7 +7,7 @@
     <link href="{{ asset('css/basictable.css') }}" rel="stylesheet">
 @endpush
 @section('header')
-	@include('includes.header')
+	@include('back-end.header')
 @endsection
 @section('main')
 

@@ -85,7 +85,7 @@
             <div class="clear-both"></div> 
           </div>
           <div class="col-md-offset-1 col-md-5">
-            <img src="{{asset('images/'.$slider->image)}}" width="300">
+            <img src="{{asset('coupon/images/'.$slider->image)}}" width="300">
             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }} input-file-block">
               {!! Form::label('image', 'Slider Image') !!} - <p class="inline info">Help block text</p>
               {!! Form::file('image', ['class' => 'input-file', 'id'=>'image']) !!}

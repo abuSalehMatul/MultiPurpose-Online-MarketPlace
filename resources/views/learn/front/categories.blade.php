@@ -1,9 +1,9 @@
-@extends('layout')
+@extends('learn.layout')
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/front/css/homepage.css')}}">
+    <link rel="stylesheet" href="{{asset('learn/assets/front/css/homepage.css')}}">
 @stop
 @section('content')
-@include('partials.menubar')
+@include('learn.partials.menubar')
 
     <div class="container pad-t-b-80">
         @if(count($subjects)  > 0)
@@ -28,5 +28,5 @@
         @endif
     </div>
 
-    @include('partials.subscribe')
+    @include('learn.partials.subscribe')
 @stop

@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('import-css')
-    <link href="{{ asset('assets/admin/css/jquery.fileupload.css') }}" rel="stylesheet">
+    <link href="{{ asset('learn/assets/admin/css/jquery.fileupload.css') }}" rel="stylesheet">
 @stop
 @section('body')
     <div class="row">
@@ -15,7 +15,7 @@
                                 <div class="panel panel-primary minh-185">
                                     <div class="panel-heading"><strong>Present Logo</strong></div>
                                     <div class="panel-body">
-                                        <img src="{{ asset('assets/images/logo/logo.png') }}" class="img-responsive"
+                                        <img src="{{ asset('learn/assets/images/logo/logo.png') }}" class="img-responsive"
                                              width="" height="80px" >
                                     </div>
                                     <br>
@@ -37,7 +37,7 @@
                                 <div class="panel panel-primary minh-185">
                                     <div class="panel-heading"><strong>Present Icon</strong></div>
                                     <div class="panel-body">
-                                        <img src="{{ asset('assets/images/logo/favicon.png') }}" class="img-responsive"
+                                        <img src="{{ asset('learn/assets/images/logo/favicon.png') }}" class="img-responsive"
                                              width="" height="60px">
                                     </div>
                                     <br><br>
@@ -72,5 +72,5 @@
 @stop
 
 @section('import-script')
-    <script src="{{ asset('assets/admin/js/bootstrap-fileinput.js') }}"></script>
+    <script src="{{ asset('learn/assets/admin/js/bootstrap-fileinput.js') }}"></script>
 @stop

@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="freelancer-profile wt-dbsectionspace la-admin-details" id="user_profile">
         <div class="row">
@@ -47,10 +47,10 @@
                                     </div>
                                 </div>
                                 <div class="wt-profilephoto wt-tabsinfo">
-                                    @include('back-end.admin.profile-settings.personal-detail.profile_photo')
+                                    @include('pro.back-end.admin.profile-settings.personal-detail.profile_photo')
                                 </div>
                                 <div class="wt-bannerphoto wt-tabsinfo">
-                                    @include('back-end.admin.profile-settings.personal-detail.profile_banner')
+                                    @include('pro.back-end.admin.profile-settings.personal-detail.profile_banner')
                                 </div>
                                 <div class="wt-updatall la-updateall-holder">
                                     <i class="ti-announcement"></i>

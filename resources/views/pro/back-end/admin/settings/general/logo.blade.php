@@ -10,7 +10,7 @@
                     <upload-image 
                         :id="'logo'" 
                         :img_ref="'logo_ref'" 
-                        :url="'{{url('admin/upload-temp-image/logo')}}'" 
+                        :url="'{{url('Pro/admin/upload-temp-image/logo')}}'" 
                         :name="'logo'">
                     </upload-image>
                 </div>
@@ -28,7 +28,7 @@
                 <upload-image 
                     :id="'logo'" 
                     :img_ref="'logo_ref'" 
-                    :url="'{{url('admin/upload-temp-image/logo')}}'" 
+                    :url="'{{url('Pro/admin/upload-temp-image/logo')}}'" 
                     :name="'logo'">
                 </upload-image>
                 <input type="hidden" name="settings[0][logo]" id="hidden_site_logo">

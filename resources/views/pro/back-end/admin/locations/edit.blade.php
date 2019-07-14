@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="edit-location" id="location">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.edit_location') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open(['url' => url('admin/locations/update-location/'.$locations->id.''), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory']) !!}
+                            {!! Form::open(['url' => url('Pro/admin/locations/update-location/'.$locations->id.''), 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory']) !!}
                                 <fieldset>
                                     {!! Form::hidden( 'location', e($locations->id), ['id'=>'uploaded_id'] ) !!}
                                     <div class="form-group">
@@ -62,7 +62,7 @@
                                                     <upload-image
                                                         :id="'location_image'"
                                                         :img_ref="'location_ref'"
-                                                        :url="'{{url('admin/locations/upload-temp-image')}}'"
+                                                        :url="'{{url('Pro/admin/locations/upload-temp-image')}}'"
                                                         :name="'uploaded_image'"
                                                         >
                                                     </upload-image>
@@ -87,7 +87,7 @@
                                                 <upload-image
                                                 :id="'location_image'"
                                                 :img_ref="'location_ref'"
-                                                :url="'{{url('admin/locations/upload-temp-image')}}'"
+                                                :url="'{{url('Pro/admin/locations/upload-temp-image')}}'"
                                                 :name="'uploaded_image'"
                                                 >
                                                 </upload-image>

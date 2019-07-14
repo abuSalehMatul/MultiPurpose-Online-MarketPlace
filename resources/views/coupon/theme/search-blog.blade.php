@@ -29,7 +29,7 @@
 											<div class="col-lg-4 col-md-6">
 												<div class="blog-post-main">
 													<div class="blog-img">
-														<a href="{{url('blog-dtl/'.$item->uni_id.'/'.$item->slug)}}" title="Blog Post"><img src="{{asset('images/blog/'.$item->image)}}" class="img-fluid" alt="Blog Post"></a>
+														<a href="{{url('blog-dtl/'.$item->uni_id.'/'.$item->slug)}}" title="Blog Post"><img src="{{asset('coupon/images/blog/'.$item->image)}}" class="img-fluid" alt="Blog Post"></a>
 													</div>
 													<div class="blog-post-dtl">
 														<h6 class="blog-post-heading"><a href="{{url('blog-dtl/'.$item->uni_id.'/'.$item->slug)}}" title="Blog Post">{{$item->title}}</a></h6>

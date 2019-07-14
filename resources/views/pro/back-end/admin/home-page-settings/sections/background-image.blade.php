@@ -8,7 +8,7 @@
                     <upload-image
                         :id="'section_bg'"
                         :img_ref="'section_ref'"
-                        :url="'{{url('admin/upload-temp-image/section_bg')}}'"
+                        :url="'{{url('Pro/admin/upload-temp-image/section_bg')}}'"
                         :name="'section_bg'"
                         >
                     </upload-image>
@@ -27,7 +27,7 @@
                 <upload-image
                     :id="'section_bg'"
                     :img_ref="'section_ref'"
-                    :url="'{{url('admin/upload-temp-image/section_bg')}}'"
+                    :url="'{{url('Pro/admin/upload-temp-image/section_bg')}}'"
                     :name="'section_bg'"
                     >
                 </upload-image>

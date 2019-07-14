@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\LiveClass;
-use App\Model\Subscriber;
+use App\Model\LearnSubscriber;
 use Illuminate\Http\Request;
 use Auth;
 use App\Model\GeneralSettings;
@@ -25,7 +25,7 @@ class DashboardController extends Controller
     {
         $data['page_title'] = 'Manage Live';
         $data['events'] = LiveClass::latest()->paginate(15);
-        return view('admin.pages.live', $data);
+        return view('learn.admin.pages.live', $data);
     }
     public function UpdateLive(Request $request)
     {
@@ -60,7 +60,7 @@ class DashboardController extends Controller
     {
         $data['page_title'] = 'All Category';
         $data['events'] = Mining::latest()->paginate(15);
-        return view('admin.pages.mining', $data);
+        return view('learn.admin.pages.mining', $data);
     }
 
     public function searchCategory(Request $request)
@@ -78,7 +78,7 @@ class DashboardController extends Controller
 
         $data['events'] = $query->latest()->get();
         $data['page_title'] = "Search Category";
-        return view('admin.pages.search-mining', $data);
+        return view('learn.admin.pages.search-mining', $data);
     }
 
 
@@ -119,7 +119,7 @@ class DashboardController extends Controller
         $data['page_title'] = 'Manage Subcategory';
         $data['category'] = Mining::whereStatus(1)->get();
         $data['events'] = Unit::paginate(15);
-        return view('admin.pages.unit', $data);
+        return view('learn.admin.pages.unit', $data);
     }
     public function searchSubCategory(Request $request)
     {
@@ -137,7 +137,7 @@ class DashboardController extends Controller
         $data['events'] = $query->latest()->get();
         $data['page_title'] = "Search Sub-Category";
         $data['category'] = Mining::whereStatus(1)->get();
-        return view('admin.pages.search-unit', $data);
+        return view('learn.admin.pages.search-unit', $data);
     }
 
 
@@ -176,7 +176,7 @@ class DashboardController extends Controller
     {
         $data['page_title'] = 'Add New Post';
         $data['category'] = Mining::whereStatus(1)->get();
-        return view('admin.pages.create-plan', $data);
+        return view('learn.admin.pages.create-plan', $data);
     }
 
     public function storePlan(Request $request)
@@ -208,7 +208,7 @@ class DashboardController extends Controller
     {
         $data['page_title'] = 'All Post';
         $data['plans'] = PricingPlan::latest()->paginate(10);
-        return view('admin.pages.plans', $data);
+        return view('learn.admin.pages.plans', $data);
     }
 
     public function searchPost(Request $request)
@@ -232,7 +232,7 @@ class DashboardController extends Controller
 
         $data['plans'] = $query->latest()->get();
         $data['page_title'] = "Search Post";
-        return view('admin.pages.search-plans', $data);
+        return view('learn.admin.pages.search-plans', $data);
     }
 
     public function editPlan($id)
@@ -240,7 +240,7 @@ class DashboardController extends Controller
         $data['page_title'] = 'Edit Post';
         $data['post'] = PricingPlan::find($id);
         $data['category'] = Mining::whereStatus(1)->get();
-        return view('admin.pages.edit-plan', $data);
+        return view('learn.admin.pages.edit-plan', $data);
     }
 
     public function updatePlan(Request $request)
@@ -278,13 +278,13 @@ class DashboardController extends Controller
     public function manageSubscribers()
     {
         $data['page_title'] = 'Subscribers';
-        $data['events'] = Subscriber::latest()->paginate(30);
-        return view('admin.pages.subscriber', $data);
+        $data['events'] = LearnSubscriber::latest()->paginate(30);
+        return view('learn.admin.pages.subscriber', $data);
     }
 
     public function updateSubscriber(Request $request)
     {
-        $mac = Subscriber::findOrFail($request->id);
+        $mac = LearnSubscriber::findOrFail($request->id);
         $mac['status'] = $request->status;
         $res = $mac->save();
 
@@ -298,7 +298,7 @@ class DashboardController extends Controller
     public function sendMail()
     {
         $data['page_title'] = 'Mail to Subscribers';
-        return view('admin.pages.subscriber-email', $data);
+        return view('learn.admin.pages.subscriber-email', $data);
     }
 
     public function sendMailsubscriber(Request $request)
@@ -308,7 +308,7 @@ class DashboardController extends Controller
                 'subject' => 'required',
                 'emailMessage' => 'required'
             ]);
-        $subscriber = Subscriber::whereStatus(1)->get();
+        $subscriber = LearnSubscriber::whereStatus(1)->get();
         foreach ($subscriber as $data) {
             $to = $data->email;
             $name = substr($data->email, 0, strpos($data->email, "@"));

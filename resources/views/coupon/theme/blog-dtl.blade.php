@@ -26,7 +26,7 @@
 							<div class="blog-page-main-block">
 								<div class="blog-post-main">
 									<div class="blog-img">
-										<img src="{{asset('images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post">
+										<img src="{{asset('coupon/images/blog/'.$blog->image)}}" class="img-fluid" alt="Blog Post">
 									</div>
 									<div class="blog-post-dtl">
 										<div class="blog-post-tags">
@@ -77,7 +77,7 @@
 								<div class="row">
 									<div class="col-lg-2">
 										<div class="blog-post-author-img">
-											<img src="{{asset('images/user/'.$blog->users->image)}}" class="img-fluid" alt="Author">
+											<img src="{{asset('coupon/images/user/'.$blog->users->image)}}" class="img-fluid" alt="Author">
 										</div>
 									</div>
 									<div class="col-lg-10">
@@ -111,7 +111,7 @@
 									@foreach($comments as $comment)
 										<div class="media">
 											<div class="media-left mr-3">
-												<a href="{{url('profile/'.$comment->user_id)}}" title="{{$comment->users->is_admin ? 'Admin' : 'User'}}"><img src="{{asset('images/user/'.$comment->users->image)}}" class="img-fluid media-object" alt="Admin"></a>
+												<a href="{{url('profile/'.$comment->user_id)}}" title="{{$comment->users->is_admin ? 'Admin' : 'User'}}"><img src="{{asset('coupon/images/user/'.$comment->users->image)}}" class="img-fluid media-object" alt="Admin"></a>
 											</div>
 											<div class="media-body">
 												<h6 class="media-heading"><a href="{{url('profile/'.$comment->user_id)}}" title="{{$comment->users->name}}">{{$comment->users->name}}</a> - <span>{{$comment->created_at->diffForHumans()}}</span></h6>
@@ -122,7 +122,7 @@
 													<div class="media-reply"><a class="reply-btn1" data-toggle="modal" data-target="#login" href="#" title="Reply"><i class="fa fa-reply"></i> Reply</a></div>
 												@endauth
 												@if($comment->replies()->count()>0)
-													@include('theme.childcomment', ['comments' => $comment->replies])
+													@include('coupon.theme.childcomment', ['comments' => $comment->replies])
 												@endif
 											</div>
 										</div>
@@ -135,9 +135,9 @@
 									<div class="col-lg-2">
 										<div class="post-author-img">
 											@auth
-												<img src="{{asset('images/user/'.$auth->image)}}" class="img-fluid" alt="{{$auth->title}}">
+												<img src="{{asset('coupon/images/user/'.$auth->image)}}" class="img-fluid" alt="{{$auth->title}}">
 											@else
-												<img src="{{asset('images/user/user.png')}}" class="img-fluid" alt="user-img">
+												<img src="{{asset('coupon/images/user/user.png')}}" class="img-fluid" alt="user-img">
 											@endauth
 										</div>
 									</div>

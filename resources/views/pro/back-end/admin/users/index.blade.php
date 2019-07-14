@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace" id="profile_settings">
         <div class="row">
@@ -36,12 +36,12 @@
                                         @php $user = \App\User::find($user_data['id']); @endphp
                                         @if ($user->getRoleNames()->first() != 'admin')
                                             <tr class="del-user-{{ $user->id }}">
-                                                <td>{{{ ucwords(\App\Helper::getUserName($user->id)) }}}</td>
+                                                <td>{{{ ucwords(\App\ProModel\ProHelper::getUserName($user->id)) }}}</td>
                                                 <td>{{ $user->getRoleNames()->first() }}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
                                                         <a href="javascript:void()" v-on:click.prevent="deleteUser({{$user->id}})" class="wt-deleteinfo wt-skillsaddinfo"><i class="fa fa-trash"></i></a>
-                                                        <a href="{{ url('profile/'.$user->slug) }}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-eye"></i></a>
+                                                        <a href="{{ url('Pro/profile/'.$user->slug) }}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-eye"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

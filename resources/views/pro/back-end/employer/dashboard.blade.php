@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace wt-insightuser" id="dashboard">
         <div class="row">
@@ -13,7 +13,7 @@
                             <div class="wt-insightdetails">
                                 <div class="wt-title">
                                     <h3>{{ trans('lang.new_msgs') }}</h3>
-                                    <a href="{{ url('message-center') }}">{{ trans('lang.click_view') }}</a>
+                                    <a href="{{ url('Pro/message-center') }}">{{ trans('lang.click_view') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
                                         <h3>{{ trans('lang.latest_proposals') }}</h3>
-                                        <a href="{{{ url('employer/dashboard/manage-jobs') }}}">{{ trans('lang.click_view') }}</a>
+                                        <a href="{{{ url('Pro/employer/dashboard/manage-jobs') }}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -35,9 +35,9 @@
                             <div class="wt-insightsitem wt-dashboardbox">
                                 <countdown
                                 date="{{$expiry_date}}"
-                                :image_url="'{{{ Helper::getDashExpiryImages('images/thumbnail/',$latest_package_expiry_icon, 'img-21.png') }}}'"
+                                :image_url="'{{{ Helper::getDashExpiryImages('Pro/images/thumbnail/',$latest_package_expiry_icon, 'img-21.png') }}}'"
                                 :title="'{{ trans('lang.check_pkg_expiry') }}'"
-                                :package_url="'{{url('dashboard/packages/employer')}}'"
+                                :package_url="'{{url('Pro/dashboard/packages/employer')}}'"
                                 >
                                 </countdown>
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
                                         <h3>{{ trans('lang.view_saved_items') }}</h3>
-                                        <a href="{{ url('employer/saved-items') }}">{{ trans('lang.click_view') }}</a>
+                                        <a href="{{ url('Pro/employer/saved-items') }}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                     <div class="wt-title">
                                         <h3>{{Helper::getTotalJobs('hired')}}</h3>
                                         <span>{{ trans('lang.total_ongoing_jobs') }}</span>
-                                        <a href="{{{ url('employer/jobs/hired') }}}">{{ trans('lang.click_view') }}</a>
+                                        <a href="{{{ url('Pro/employer/jobs/hired') }}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                     <div class="wt-title">
                                         <h3>{{Helper::getTotalJobs('completed')}}</h3>
                                         <span>{{ trans('lang.total_completed_jobs') }}</span>
-                                        <a href="{{{ url('employer/jobs/completed') }}}">{{ trans('lang.click_view') }}</a>
+                                        <a href="{{{ url('Pro/employer/jobs/completed') }}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -139,10 +139,10 @@
                                             $user_name = Helper::getUsername($proposal_freelancer);
                                         @endphp
                                         <tr>
-                                            <td data-th="Project title"><span class="bt-content"><a target="_blank" href="{{{ url('job/'.$project->slug) }}}">{{{ $project->title }}}</a></span></td>
+                                            <td data-th="Project title"><span class="bt-content"><a target="_blank" href="{{{ url('Pro/job/'.$project->slug) }}}">{{{ $project->title }}}</a></span></td>
                                             <td data-th="Hired freelancer">
                                                 <span class="bt-content">
-                                                    <a href="{{{url('profile/'.$freelancer->slug)}}}">
+                                                    <a href="{{{url('Pro/profile/'.$freelancer->slug)}}}">
                                                         @if ($freelancer->user_verified)
                                                             <i class="fa fa-check-circle"></i>&nbsp;
                                                         @endif
@@ -154,7 +154,7 @@
                                             <td data-th="Actions">
                                                 <span class="bt-content">
                                                     <div class="wt-btnarea">
-                                                        <a href="{{{ url('employer/dashboard/job/'.$project->slug.'/proposals') }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                        <a href="{{{ url('Pro/employer/dashboard/job/'.$project->slug.'/proposals') }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
                                                     </div>
                                                 </span>
                                             </td>

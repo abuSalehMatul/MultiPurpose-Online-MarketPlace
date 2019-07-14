@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('learn/assets/admin/css/main.css')}}">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('learn/assets/admin/css/font-awesome.min.css')}}">
     <title>{{$page_title}} | {{$basic->sitename}}</title>
     <style>
         #error{
@@ -66,14 +66,14 @@
     </div>
 </section>
 <!-- Essential javascripts for application to work-->
-<script src="{{asset('assets/admin/js/jquery-3.2.1.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/popper.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/jquery.validate.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('learn/assets/admin/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/popper.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/jquery.validate.min.js')}}" type="text/javascript"></script>
 
-<script src="{{asset('assets/admin/js/main.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/main.js')}}"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="{{asset('assets/admin/js/pace.min.js')}}"></script>
+<script src="{{asset('learn/assets/admin/js/pace.min.js')}}"></script>
 
 
 <script>

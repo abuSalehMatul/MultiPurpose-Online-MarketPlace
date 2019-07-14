@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="cats-listing" id="cat-list">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.edit_cat') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open(['url' => url('admin/categories/update-cats/'.$cats->id.''),
+                            {!! Form::open(['url' => url('Pro/admin/categories/update-cats/'.$cats->id.''),
                                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'categories'] )
                             !!}
                                 <fieldset>
@@ -39,7 +39,7 @@
                                                     <upload-image
                                                         :id="'cat_image'"
                                                         :img_ref="'cat_img'"
-                                                        :url="'{{url('admin/categories/upload-temp-image')}}'"
+                                                        :url="'{{url('Pro/admin/categories/upload-temp-image')}}'"
                                                         :name="'uploaded_image'"
                                                         >
                                                     </upload-image>
@@ -64,7 +64,7 @@
                                                 <upload-image
                                                     :id="'cat_image'"
                                                     :img_ref="'cat_ref'"
-                                                    :url="'{{url('admin/categories/upload-temp-image')}}'"
+                                                    :url="'{{url('Pro/admin/categories/upload-temp-image')}}'"
                                                     :name="'uploaded_image'"
                                                     >
                                                 </upload-image>

@@ -33,7 +33,7 @@
 															<div class="coupon-dtl">
 																<div class="coupon-img">
 																	<a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}">
-																		<img src="{{$item->image != null ? asset('images/coupon/'.$item->image) : asset('images/store/'.$item->store->image)}}" class="img-fluid" alt="{{$item->title}}">
+																		<img src="{{$item->image != null ? asset('coupon/images/coupon/'.$item->image) : asset('coupon/images/store/'.$item->store->image)}}" class="img-fluid" alt="{{$item->title}}">
 																	</a>
 																</div>
 																<h6 class="coupon-title"><a href="{{url('post/'.$item->uni_id.'/'.$item->slug)}}" title="{{$item->title}}">{{str_limit($item->title, 60)}}</a></h6>

@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
 <div class="wt-haslayout wt-dbsectionspace">
     <div class="manage-proposals float-left">
@@ -32,7 +32,7 @@
                                         @if (!empty($user_name) || !empty($job->title) )
                                             <div class="wt-title">
                                                 @if (!empty($user_name))
-                                                    <a href="{{{ url('profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $user_name }}}</a>
+                                                    <a href="{{{ url('Pro/profile/'.$job->employer->slug) }}}">@if($verified_user === 1)<i class="fa fa-check-circle"></i>@endif&nbsp;{{{ $user_name }}}</a>
                                                 @endif
                                                 @if (!empty($job->title))
                                                     <h2>{{{ $job->title }}}</h2>
@@ -49,7 +49,7 @@
                                                     <li><span class="wt-dashboraddoller"><i>{{ !empty($symbol) ? $symbol['symbol'] : '$' }}</i> {{{ $job->price }}}</span></li>
                                                 @endif
                                                 @if (!empty($job->location->title))
-                                                    <li><span><img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $job->location->title }}}</span></li>
+                                                    <li><span><img src="{{{asset(App\ProModel\ProHelper::getLocationFlag($job->location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $job->location->title }}}</span></li>
                                                 @endif
                                                 @if (!empty($job->project_type))
                                                     <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> {{ trans('lang.type') }} {{{ $job->project_type }}}</a></li>
@@ -96,7 +96,7 @@
                                         $reviews = \App\Review::where('receiver_id', $proposal->freelancer_id)->get();
                                         $stars  = $reviews->sum('avg_rating') != 0 ? $reviews->sum('avg_rating')/20*100 : 0;
                                         $feedbacks = \App\Review::select('feedback')->where('receiver_id', $proposal->freelancer_id)->count();
-                                        $completion_time = !empty($accepted_proposal->completion_time) ? \App\Helper::getJobDurationList($accepted_proposal->completion_time) : '';
+                                        $completion_time = !empty($accepted_proposal->completion_time) ? \App\ProModel\ProHelper::getJobDurationList($accepted_proposal->completion_time) : '';
                                         $p_attachments = !empty($accepted_proposal->attachments) ? unserialize($accepted_proposal->attachments) : '';
                                         $feedbacks = \App\Review::select('feedback')->where('receiver_id', $user->id)->count();
                                         $badge = Helper::getUserBadge($user->id);
@@ -117,7 +117,7 @@
                                                 @if (!empty($user_name))
                                                     <div class="wt-contenthead">
                                                         <div class="wt-title">
-                                                            <a href="{{ url('profile/'.$user->slug) }}">{{{ $user_name }}}</a>
+                                                            <a href="{{ url('Pro/profile/'.$user->slug) }}">{{{ $user_name }}}</a>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -129,7 +129,7 @@
                                             <div class="wt-rightarea">
                                                 <div class="wt-btnarea">
                                                     <a href="javascript:void(0);" class="wt-btn" style="pointer-events:none;">{{ trans('lang.hired') }}</a>
-                                                    <a href="{{{ url('proposal/'.$job->slug.'/'.$job->status) }}}"  class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                    <a href="{{{ url('Pro/proposal/'.$job->slug.'/'.$job->status) }}}"  class="wt-btn">{{ trans('lang.view_detail') }}</a>
                                                 </div>
                                                 <div class="wt-hireduserstatus">
                                                     <h5>{{ !empty($symbol) ? $symbol['symbol'] : '$' }}{{{ $accepted_proposal->amount }}}</h5>
@@ -144,7 +144,7 @@
                                                 <div class="wt-hireduserstatus">
                                                     <i class="fa fa-paperclip"></i>
                                                     @if (!empty($p_attachments))
-                                                        {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'accepted-download-attachments-form-'.$accepted_proposal->id]) !!}
+                                                        {!! Form::open(['url' => url('Pro/proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'accepted-download-attachments-form-'.$accepted_proposal->id]) !!}
                                                             @foreach ($p_attachments as $attachments)
                                                                 @if (Storage::disk('local')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachments))
                                                                     {!! Form::hidden('attachments['.$count.']', $attachments, []) !!}
@@ -186,7 +186,7 @@
                                                     $reviews = \App\Review::where('receiver_id', $proposal->freelancer_id)->get();
                                                     $stars  = $reviews->sum('avg_rating') != 0 ? $reviews->sum('avg_rating')/20*100 : 0;
                                                     $feedbacks = \App\Review::select('feedback')->where('receiver_id', $proposal->freelancer_id)->count();
-                                                    $completion_time = !empty($proposal->completion_time) ? \App\Helper::getJobDurationList($proposal->completion_time) : '';
+                                                    $completion_time = !empty($proposal->completion_time) ? \App\ProModel\ProHelper::getJobDurationList($proposal->completion_time) : '';
                                                     $attachments = !empty($proposal->attachments) ? unserialize($proposal->attachments) : '';
                                                     $attachments_count = 0;
                                                     if (!empty($attachments)){
@@ -211,7 +211,7 @@
                                                         @if (!empty($user_name))
                                                             <div class="wt-contenthead">
                                                                 <div class="wt-title">
-                                                                    <a href="{{ url('profile/'.$user->slug) }}">{{{ $user_name }}}</a>
+                                                                    <a href="{{ url('Pro/profile/'.$user->slug) }}">{{{ $user_name }}}</a>
                                                                 </div>
                                                             </div>
                                                         @endif
@@ -239,7 +239,7 @@
                                                         <div class="wt-hireduserstatus">
                                                             <i class="fa fa-paperclip"></i>
                                                             @if (!empty($attachments))
-                                                                {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$proposal->id]) !!}
+                                                                {!! Form::open(['url' => url('Pro/proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$proposal->id]) !!}
                                                                     @foreach ($attachments as $attachment)
                                                                         @if (Storage::disk('local')->exists('uploads/proposals/'.$proposal->freelancer_id.'/'.$attachment))
                                                                             {!! Form::hidden('attachments['.$received_proposal_count.']', $attachment, []) !!}

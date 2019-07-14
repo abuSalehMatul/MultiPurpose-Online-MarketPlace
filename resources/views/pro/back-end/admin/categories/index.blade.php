@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="cats-listing" id="cat-list">
         @if (Session::has('message'))
@@ -19,7 +19,7 @@
                         </div>
                         <div class="wt-dashboardboxcontent">
                             {!! Form::open([
-                                'url' => url('admin/store-category'),
+                                'url' => url('Pro/admin/store-category'),
                                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id'=> 'categories'
                                 ])
                             !!}
@@ -42,7 +42,7 @@
                                             <upload-image
                                                 :id="'cat_image'"
                                                 :img_ref="'cat_ref'"
-                                                :url="'{{url('admin/categories/upload-temp-image')}}'"
+                                                :url="'{{url('Pro/admin/categories/upload-temp-image')}}'"
                                                 :name="'uploaded_image'"
                                                 >
                                             </upload-image>
@@ -61,7 +61,7 @@
                     <div class="wt-dashboardbox">
                         <div class="wt-dashboardboxtitle wt-titlewithsearch">
                             <h2>{{{ trans('lang.cats') }}}</h2>
-                            {!! Form::open(['url' => url('admin/categories/search'),
+                            {!! Form::open(['url' => url('Pro/admin/categories/search'),
                                 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch'])
                             !!}
                             <fieldset>
@@ -104,15 +104,15 @@
                                                         <label for="wt-check-{{{ $counter }}}"></label>
                                                     </span>
                                                 </td>
-                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{ asset(\App\Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure></span></td>
+                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{ asset(\App\ProModel\ProHelper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure></span></td>
                                                 <td>{{{ $cat->title }}}</td>
                                                 <td>{{{ $cat->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/categories/edit-cats') }}}/{{{ $cat->id }}}" class="wt-addinfo wt-skillsaddinfo">
+                                                        <a href="{{{ url('Pro/admin/categories/edit-cats') }}}/{{{ $cat->id }}}" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
-                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$cat->id}}'" :message="'{{trans("lang.ph_cat_delete_message")}}'" :url="'{{url('admin/categories/delete-cats')}}'"></delete>
+                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{$cat->id}}'" :message="'{{trans("lang.ph_cat_delete_message")}}'" :url="'{{url('Pro/admin/categories/delete-cats')}}'"></delete>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -125,7 +125,7 @@
                                 @endif
                             </div>
                         @else
-                            @include('errors.no-record')
+                            @include('pro.errors.no-record')
                         @endif
                     </div>
                 </div>

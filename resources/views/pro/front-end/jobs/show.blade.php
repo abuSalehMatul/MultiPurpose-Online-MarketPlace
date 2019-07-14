@@ -1,4 +1,4 @@
-@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+@extends('pro.front-end.master', ['body_class' => 'wt-innerbgcolor'])
 @section('title'){{ $job->title }} @stop
 @section('description', "$job->description")
 @section('content')
@@ -82,7 +82,7 @@
                                             @endif
                                         </div>
                                     @endif
-                                    <div class="wt-btnarea"><a href="javascript:void(0);" @click.prevent="check_auth('{{{ url('job/proposal/'.$job->slug) }}}')" class="wt-btn">{{{ trans('lang.send_propsal') }}}</a></div>
+                                    <div class="wt-btnarea"><a href="javascript:void(0);" @click.prevent="check_auth('{{{ url('Pro/job/proposal/'.$job->slug) }}}')" class="wt-btn">{{{ trans('lang.send_propsal') }}}</a></div>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
@@ -104,7 +104,7 @@
                                             </div>
                                             <div class="wt-tag wt-widgettag">
                                                 @foreach ($job->skills as $skill)
-                                                    <a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a>
+                                                    <a href="{{{url('Pro/search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -133,7 +133,7 @@
                             </div>
                         @endif
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-                            @include('front-end.jobs.sidebar.index')
+                            @include('pro.front-end.jobs.sidebar.index')
                         </div>
                     </div>
                 </div>

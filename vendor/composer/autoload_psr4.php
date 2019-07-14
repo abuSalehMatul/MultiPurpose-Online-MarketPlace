@@ -96,5 +96,6 @@ return array(
     'Ben182\\AutoTranslate\\' => array($vendorDir . '/ben182/laravel-auto-translate/src'),
     'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),
     'App\\' => array($baseDir . '/app'),
+    'Anhskohbo\\NoCaptcha\\' => array($vendorDir . '/anhskohbo/no-captcha/src'),
     '' => array($vendorDir . '/nesbot/carbon/src'),
 );

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Testimonial;
+use App\Model\Testimonial;
 
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Input;
@@ -16,13 +16,13 @@ class TestimonialController extends Controller
     {
         $data['page_title'] = "Testimonials";
         $data['posts'] = Testimonial::latest()->paginate(20);
-        return view('admin.testimonial.index', $data);
+        return view('learn.admin.testimonial.index', $data);
     }
 
     public function create()
     {
         $data['page_title'] = 'Add Testimonial';
-        return view('admin.testimonial.add', $data);
+        return view('learn.admin.testimonial.add', $data);
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class TestimonialController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = 'testimonial_'.time().'.jpg';
-            $location = 'assets/images/testimonial/' . $filename;
+            $location = 'learn/assets/images/testimonial/' . $filename;
             Image::make($image)->resize(100,100)->save($location);
             $in['image'] = $filename;
         }
@@ -59,7 +59,7 @@ class TestimonialController extends Controller
     {
         $data['page_title'] = 'Edit Testimonial';
         $data['post'] = Testimonial::find($id);
-        return view('admin.testimonial.edit', $data);
+        return view('learn.admin.testimonial.edit', $data);
     }
     public function updatePost(Request $request)
     {
@@ -81,9 +81,9 @@ class TestimonialController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = 'testimonial_'.time().'.jpg';
-            $location = 'assets/images/testimonial/' . $filename;
+            $location = 'learn/assets/images/testimonial/' . $filename;
             Image::make($image)->resize(100,100)->save($location);
-            $path = './assets/images/testimonial/';
+            $path = '.learn/assets/images/testimonial/';
             File::delete($path.$data->image);
             $in['image'] = $filename;
         }
@@ -103,7 +103,7 @@ class TestimonialController extends Controller
             'id' => 'required'
         ]);
         $data = Testimonial::findOrFail($request->id);
-        $path = './assets/images/testimonial/';
+        $path = '.learn/assets/images/testimonial/';
         File::delete($path.$data->image);
         $res =  $data->delete();
 

@@ -27,12 +27,12 @@ class GeneralSettingController extends Controller
 	}
 	public function index(){
 		$data['page_title'] = "Basic Settings";
-		return view('admin.loginform', $data);
+		return view('learn.admin.loginform', $data);
 	}
 	public function GenSetting(){
 		$data['page_title'] = 'General Settings';
 			$data['general'] = GeneralSettings::first();
-		return view('admin.webcontrol.general', $data);
+		return view('learn.admin.webcontrol.general', $data);
 	}
 
 	public function UpdateGenSetting(Request $request)
@@ -62,7 +62,7 @@ class GeneralSettingController extends Controller
     public function changePassword()
     {
         $data['page_title'] = "Change Password";
-        return view('admin.webcontrol.change_password',$data);
+        return view('learn.admin.webcontrol.change_password',$data);
     }
 
     public function updatePassword(Request $request)
@@ -96,7 +96,7 @@ class GeneralSettingController extends Controller
     {
         $data['admin'] = Auth::user();
         $data['page_title'] = "Profile Settings";
-        return view('admin.webcontrol.profile',$data);
+        return view('learn.admin.webcontrol.profile',$data);
     }
 
     public function updateProfile(Request $request)
@@ -112,9 +112,9 @@ class GeneralSettingController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = 'admin_'.time().'.jpg';
-            $location = 'assets/admin/img/' . $filename;
+            $location = 'learn/assets/admin/img/' . $filename;
             Image::make($image)->resize(300,300)->save($location);
-            $path = './assets/admin/img/';
+            $path = '.learn/assets/admin/img/';
             File::delete($path.$data->image);
             $in['image'] = $filename;
         }

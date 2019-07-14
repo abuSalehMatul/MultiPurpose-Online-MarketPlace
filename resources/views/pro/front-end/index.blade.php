@@ -1,4 +1,4 @@
-@extends('front-end.master')
+@extends('pro.front-end.master')
 @push('stylesheets')
     <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
 @endpush
@@ -6,9 +6,9 @@
 @section('description', 'This is description tag')
 @section('content')
     @php
-        $categories = App\Category::latest()->get()->take(8);
-        $skills = App\Skill::latest()->get()->take(8);
-        $locations = App\Location::latest()->get()->take(8);
+        $categories = App\ProModel\ProCategory::latest()->get()->take(8);
+        $skills = App\ProModel\ProSkill::latest()->get()->take(8);
+        $locations = App\ProModel\ProLocation::latest()->get()->take(8);
         $languages = App\Language::latest()->get()->take(8);
     @endphp
     <div id="home" class="la-home-page">
@@ -83,13 +83,13 @@
                                     <div class="wt-categorycontent">
                                         <figure><img src="{{{ asset(Helper::getCategoryImage($category->image)) }}}" alt="{{{ $category->title }}}"></figure>
                                         <div class="wt-cattitle">
-                                            <h3><a href="{{{url('search-results?type=job&category%5B%5D='.$category->slug)}}}">{{{ $category->title }}}</a></h3>
+                                            <h3><a href="{{{url('Pro/search-results?type=job&category%5B%5D='.$category->slug)}}}">{{{ $category->title }}}</a></h3>
                                         </div>
                                         <div class="wt-categoryslidup">
                                             @if (!empty($category->abstract))
                                                 <p>{{{ $category->abstract }}}</p>
                                             @endif
-                                            <a href="{{{url('search-results?type=job&category%5B%5D='.$category->slug)}}}">{{ trans('lang.explore') }} <i class="fa fa-arrow-right"></i></a>
+                                            <a href="{{{url('Pro/search-results?type=job&category%5B%5D='.$category->slug)}}}">{{ trans('lang.explore') }} <i class="fa fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                                     @if (!empty($skills))
                                         <ul class="wt-fwidgetcontent">
                                             @foreach ($skills as $skill)
-                                                <li><a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a></li>
+                                                <li><a href="{{{url('Pro/search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -210,7 +210,7 @@
                                     @if (!empty($categories))
                                         <ul class="wt-fwidgetcontent">
                                             @foreach ($categories as $category)
-                                                <li><a href="{{{url('search-results?type=job&category%5B%5D='.$category->slug)}}}">{{{ $category->title }}}</a></li>
+                                                <li><a href="{{{url('Pro/search-results?type=job&category%5B%5D='.$category->slug)}}}">{{{ $category->title }}}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -226,7 +226,7 @@
                                     @if (!empty($locations))
                                         <ul class="wt-fwidgetcontent">
                                             @foreach ($locations as $location)
-                                                <li><a href="{{{url('search-results?type=job&locations%5B%5D='.$location->slug)}}}">{{{ $location->title }}}</a></li>
+                                                <li><a href="{{{url('Pro/search-results?type=job&locations%5B%5D='.$location->slug)}}}">{{{ $location->title }}}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -242,7 +242,7 @@
                                     @if (!empty($languages))
                                         <ul class="wt-fwidgetcontent">
                                             @foreach ($languages as $language)
-                                                <li><a href="{{{url('search-results?type=job&languages%5B%5D='.$language->slug)}}}">{{{ $language->title }}}</a></li>
+                                                <li><a href="{{{url('Pro/search-results?type=job&languages%5B%5D='.$language->slug)}}}">{{{ $language->title }}}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif

@@ -103,7 +103,7 @@
 
 
     <div class="parallax section overlay" data-stellar-background-ratio="0.5"
-         style="background-image:url('assets/images/logo/testimonial.jpg'); background-position: 0px 66.4844px">
+         style="background-image:url('learn/assets/images/logo/testimonial.jpg'); background-position: 0px 66.4844px">
 
         <div class="container">
 

@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 @section('import-css')
 @stop
 @section('body')
@@ -109,7 +109,7 @@
 @stop
 @section('script')
 
-    <script src="{{ asset('assets/admin/js/nicEdit-latest.js') }}"></script>
+    <script src="{{ asset('learn/assets/admin/js/nicEdit-latest.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('#category_id').on('change',function (e) {

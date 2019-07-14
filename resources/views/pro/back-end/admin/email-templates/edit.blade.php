@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('pro.back-end.master')
 @section('content')
     <div class="cats-listing" id="emails">
         @if (Session::has('message'))
@@ -18,7 +18,7 @@
                             <h2>{{{ trans('lang.edit_email_template') }}}</h2>
                         </div>
                         <div class="wt-dashboardboxcontent">
-                            {!! Form::open(['url' => url('admin/email-templates/update-templates/'.$template->id.''),
+                            {!! Form::open(['url' => url('Pro/admin/email-templates/update-templates/'.$template->id.''),
                                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'update_email_templates'] )
                             !!}
                             <fieldset>

@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('learn.admin.layout.master')
 
 @section('body')
 	<div class="row">
@@ -69,7 +69,7 @@
 @endsection
 
 @section('script')
-	<script src="{{asset('assets/admin/js/nicEdit-latest.js')}}" type="text/javascript"></script>
+	<script src="{{asset('learn/assets/admin/js/nicEdit-latest.js')}}" type="text/javascript"></script>
 	<script type="text/javascript">
         new nicEditor().panelInstance('emessage');
 	</script>
