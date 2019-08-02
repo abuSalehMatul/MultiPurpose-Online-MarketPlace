@@ -12,8 +12,8 @@
                                 </figure>
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
-                                        <h3>{{ trans('lang.latest_proposals') }}</h3>
-                                        <a href="{{route('showFreelancerProposals')}}">{{ trans('lang.click_view') }}</a>
+                                        <h3>{{ trans('lang.latest_drop') }}</h3>
+                                        <a href="{{route('job_showFreelancerProposals')}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -50,12 +50,14 @@
                                 </figure>
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
-                                        <h3>{{ trans('lang.view_saved_items') }}</h3>
+                                        <h3>{{ trans('lang.view_saved_circular') }}</h3>
                                         <a href="{{url('Job/freelancer/saved-items')}}">{{ trans('lang.click_view') }}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                       
+                        @if(Auth::user()->hasRole('candidate') != true)
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox">
                                 <figure class="wt-userlistingimg">
@@ -110,6 +112,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -118,14 +121,14 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 float-left">
                 <div class="wt-dashboardbox wt-ongoingproject la-ongoing-projects">
                     <div class="wt-dashboardboxtitle wt-titlewithsearch">
-                        <h2>{{ trans('lang.ongoing_project') }}</h2>
+                        <h2>{{ trans('lang.ongoing_circular') }}</h2>
                     </div>
                     @if (!empty($ongoing_projects) && $ongoing_projects->count() > 0)
                         <div class="wt-dashboardboxcontent wt-hiredfreelance">
                             <table class="wt-tablecategories wt-freelancer-table">
                                 <thead>
                                     <tr>
-                                        <th>{{trans('lang.project_title')}}</th>
+                                        <th>{{trans('lang.circular_title')}}</th>
                                         <th>{{trans('lang.employer_name')}}</th>
                                         <th>{{trans('lang.project_cost')}}</th>
                                         <th>{{trans('lang.actions')}}</th>
@@ -182,7 +185,7 @@
                             <table class="wt-tablecategories">
                                 <thead>
                                     <tr>
-                                        <th>{{trans('lang.project_title')}}</th>
+                                        <th>{{trans('lang.circular_title')}}</th>
                                         <th>{{trans('lang.date')}}</th>
                                         <th>{{trans('lang.earnings')}}</th>
                                     </tr>

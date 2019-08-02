@@ -130,7 +130,7 @@
          	       
             
                  @php
-                     $all_chore=App\chore::where('category_id',$chore->category_id)->where('type',2)->get();
+                     $all_chore=App\Chore::where('category_id',$chore->category_id)->where('type',2)->get();
                      $j=0;
                  @endphp
                  @if($all_chore)

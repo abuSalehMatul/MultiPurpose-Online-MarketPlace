@@ -109,6 +109,12 @@
                 } else if(type == 'job') {
                     this.selected_type = this.job_placeholder;
                 }
+                 else if(type == 'candidte') {
+                    this.selected_type = this.candidate_placeholder;
+                }
+                else if(type == 'pro') {
+                    this.selected_type = this.pro_placeholder;
+                }
             },
             getFilters(){
                 let self = this;

@@ -1,5 +1,8 @@
 @if (Schema::hasTable('pages') || Schema::hasTable('site_managements'))
     @php
+        $get_switching=' ';
+         $get_switching=Session::get('get_swithcing');
+       // echo $get_switching.'<br>'.'hi';
         $settings = array();
         $pages = App\Page::all();
         $setting = \App\ProModel\ProSiteManagement::getMetaValue('settings');
@@ -10,7 +13,13 @@
 @php
     if(Auth::user()->hasRole('admin')){
         Auth::user()->syncRoles('admin');
-    }else{
+    }
+   elseif($get_switching=='selling'){
+         Auth::user()->syncRoles('pro');
+    }elseif($get_switching=='buying'){
+        Auth::user()->syncRoles('employer');
+    }
+    else{
         Auth::user()->syncRoles('pro');
     }
     
@@ -21,6 +30,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    {{$get_switching}}
                     @auth
                         {{ Helper::displayEmailWarning() }}
                     @endauth
@@ -86,6 +96,14 @@
                                             {{{ trans('lang.browse_project') }}}
                                         </a>
                                     </li>
+                                    @if(!Auth::user()->hasRole('admin'))
+                                     <li>
+                                        <a href="{{url('switch_to/'.'buying/'.'pro')}}">{{{ trans('lang.switch to buying')}}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('switch_to/'.'selling/'.'pro')}}">{{{ trans('lang.switch to selling')}}}</a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
                         </nav>
@@ -107,7 +125,7 @@
                                         <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
                                         <span>{{{ !empty(Auth::user()->job_profile->tagline) ? str_limit(Auth::user()->job_profile->tagline, 26, '') : Auth::user()->getRoleNames()->first() }}}</span>
                                     </div>
-                                    @include('back-end.includes.profile-menu')
+                                    @include('pro.back-end.includes.profile-menu')
                                 </div>
                         @endauth
                         @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home')

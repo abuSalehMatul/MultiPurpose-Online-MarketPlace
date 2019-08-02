@@ -15,7 +15,9 @@
     @endphp
 @endif
 @php
-    if(Auth::user()){
+    if(Auth::user()->hasRole('admin')){
+        Auth::user()->syncRoles('admin');
+    }else {
         Auth::user()->syncRoles('pro');
     }
     

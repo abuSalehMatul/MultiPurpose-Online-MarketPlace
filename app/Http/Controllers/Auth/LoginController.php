@@ -56,20 +56,7 @@ class LoginController extends Controller
                 if(isset($request->user_role)){
                    
                     if (!empty($user_id) && is_numeric($user_id)) {
-                        // $user_role_id = DB::table('roles')->select('id')->where('name', $request->user_role)->first();
-                       
-                        // if ($user_role_id) {
-                        //     $role_id = DB::table('model_has_roles')->where('model_id', $user_id)
-                        //                                             ->where('role_id',$user_role_id)    
-                        //                                             ->first();
-                        // } 
-                        // $roles=array();
-                        // print_r($role_id);
-                        // print_r($user_role_name);
-                        // exit();
-                        // foreach($role_id as $role){
-                        //     array_push($roles,$role->role_id);
-                        // }
+                        
                        
                         if( $user->hasRole($request->user_role)){
                             $user->syncRoles([$request->user_role]);
@@ -96,7 +83,7 @@ class LoginController extends Controller
                     }                
                 }else{
                     $user->syncRoles(['freelancer']);
-                    return Redirect::to('freelancer/dashboard');       
+                    return Redirect::to('/');       
                 }
                
                
@@ -106,11 +93,17 @@ class LoginController extends Controller
     }
 
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    public function logout(Request $request)
+    {
+        if(Auth::guard('admin')->check() || Auth::check()){
+            $request->session()->invalidate();
+            return $this->loggedOut($request) ?: redirect('/');
+        }
+    }
+    protected function loggedOut(Request $request)
+    {
+        $request->session()->flush();
+    }
     public function __construct()
     {
         if (Schema::hasTable('users')) {

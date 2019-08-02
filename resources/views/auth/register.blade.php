@@ -136,22 +136,33 @@
                                         @if(!empty($roles))
                                             <ul class="wt-accordionhold wt-formaccordionhold accordion">
                                                 @foreach ($roles as $key => $role)
-                                                @php
-                                                    if($role['role_type']!='employer' && $role['role_type']!='freelancer'){
-                                                        continue;
-                                                    }
-                                                @endphp
+                                                
                                                     @if (!in_array($role['id'] == 1, $roles))
                                                         <li>
                                                             <div class="wt-accordiontitle" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
                                                                 <span class="wt-radio">
-                                                                <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="" v-model="user_role" v-on:change="selectedRole(user_role)">
-                                                                <label for="wt-company-{{$key}}">{{{ $role['name'] }}}<span> ({{ $role['name'] === 'freelancer' ? trans('lang.signup_as_freelancer') : trans('lang.signup_as_country')
-                                                                }})</span></label>
+                                                                <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="" onclick="show_location({{{ $role['role_type'] }}})" del="user_role" v-on:change="selectedRole(user_role)">
+                                                                <label for="wt-company-{{$key}}" onclick="show_location('<?php echo $role['name']?>')">{{{ $role['name'] }}}
+                                                                <span> (
+                                                                    {{  $role['name'] === 'freelancer' ? trans('lang.signup_as_freelancer') :
+                                                                        $role['name']==='employer' ?trans('lang.signup_as_employer'):
+                                                                        $role['name']==='pro_employer' ? trans('lang.signup_as_pro_employer'): 
+                                                                        $role['name']==='job_employer'? trans('lang.signup_as_job_employer'):' '
+                                                                      
+                                                                    }}
+                                                                    {{ $role['name'] === 'pro' ? trans('lang.signup_as_pro') : ' '}}
+                                                                    {{ $role['name'] === 'candidate' ? trans('lang.signup_as_candidate') : ' '}}
+                                                                    {{ $role['name'] === 'user' ? trans('lang.signup_as_user') : ' '}}
+                                                                    )
+                                                                </span>
+                                                                </label>
                                                                 </span>
                                                             </div>
                                                             @if ($role['role_type'] === 'employer')
                                                                 <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne" v-if="is_show">
+                                                                    {{-- <label for="wt-company-{{$key}}">
+                                                                        <span>{{$role['name'] =='employer' ?trans('lang.</span>
+                                                                    </label> --}}
                                                                     <div class="wt-radioboxholder">
                                                                         <div class="wt-title">
                                                                             <h4>{{{ trans('lang.no_of_employees') }}}</h4>
@@ -181,9 +192,184 @@
                                                                     @endif
                                                                 </div>
                                                             @endif
+                                                            {{-- job_employer --}}
+                                                            @if ($role['role_type'] === 'job_employer')
+                                                                <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne" v-if="is_show">
+                                                                    <div class="wt-radioboxholder">
+                                                                        <div class="wt-title">
+                                                                            <h4>{{{ trans('lang.no_of_employees') }}}</h4>
+                                                                        </div>
+                                                                        @foreach ($employees as $key => $employee)
+                                                                            <span class="wt-radio">
+                                                                                <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" checked="">
+                                                                                <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
+                                                                            </span>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    @php
+                                                                         $departments    = App\JobModel\JobDepartment::all();
+                                                                    @endphp
+                                                                    @if ($departments->count() > 0)
+                                                                        <div class="wt-radioboxholder">
+                                                                            <div class="wt-title">
+                                                                                <h4>{{{ trans('lang.your_department') }}}</h4>
+                                                                            </div>
+                                                                            @foreach ($departments as $key => $department)
+                                                                                <span class="wt-radio">
+                                                                                        <input id="wt-department-{{{$department->id}}}" type="radio" name="department" value="{{{$department->id}}}" checked="">
+                                                                                        <label for="wt-department-{{{$department->id}}}">{{{$department->title}}}</label>
+                                                                                </span>
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <div class="form-group wt-othersearch d-none">
+                                                                            <input type="text" name="department_name" class="form-control" placeholder="{{{ trans('lang.enter_department') }}}">
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            @endif
+                                                            {{-- job_employer ends --}}
+                                                            {{-- pro_employer --}}
+                                                            @if ($role['role_type'] === 'pro_employer')
+                                                                <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne" v-if="is_show">
+                                                                    <div class="wt-radioboxholder">
+                                                                        <div class="wt-title">
+                                                                            <h4>{{{ trans('lang.no_of_employees') }}}</h4>
+                                                                        </div>
+                                                                        @foreach ($employees as $key => $employee)
+                                                                            <span class="wt-radio">
+                                                                                <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" checked="">
+                                                                                <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
+                                                                            </span>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    @php
+                                                                          $departments    = App\ProModel\ProDepartment::all();
+                                                                    @endphp
+                                                                    @if ($departments->count() > 0)
+                                                                        <div class="wt-radioboxholder">
+                                                                            <div class="wt-title">
+                                                                                <h4>{{{ trans('lang.your_department') }}}</h4>
+                                                                            </div>
+                                                                            @foreach ($departments as $key => $department)
+                                                                                <span class="wt-radio">
+                                                                                        <input id="wt-department-{{{$department->id}}}" type="radio" name="department" value="{{{$department->id}}}" checked="">
+                                                                                        <label for="wt-department-{{{$department->id}}}">{{{$department->title}}}</label>
+                                                                                </span>
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <div class="form-group wt-othersearch d-none">
+                                                                            <input type="text" name="department_name" class="form-control" placeholder="{{{ trans('lang.enter_department') }}}">
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            @endif
+                                                            {{-- pro_employer ends --}}
                                                         </li>
                                                     @endif
                                                 @endforeach
+                                                <li>
+                                                    {{-- <div v-if=" user_role === freelancer"> 
+                                                        <div class="wt-accordiontitle">
+                                                            @if (!empty($locations))
+                                                                <div class="form-group">
+                                                                    <span class="wt-select">
+                                                                        {!! Form::select('locations', $locations, null, array('placeholder' => trans('lang.select_locations'), 'v-bind:class' => '{ "is-invalid": form_step2.is_locations_error }')) !!}
+                                                                        <span class="help-block" v-if="form_step2.locations_error">
+                                                                            <strong v-cloak>@{{form_step2.locations_error}}</strong>
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div> 
+                                                    {{-- normal user --}}
+                                                    {{-- <div v-if=" user_role == user"> 
+                                                        <div class="wt-accordiontitle">
+                                                            @if (!empty($locations))
+                                                                <div class="form-group">
+                                                                    <span class="wt-select">
+                                                                        {!! Form::select('locations', $locations, null, array('placeholder' => trans('lang.select_locations'), 'v-bind:class' => '{ "is-invalid": form_step2.is_locations_error }')) !!}
+                                                                        <span class="help-block" v-if="form_step2.locations_error">
+                                                                            <strong v-cloak>@{{form_step2.locations_error}}</strong>
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>  --}}
+                                                    {{-- pro            --}}
+                                                    {{-- <div v-if=" user_role == pro"> 
+                                                        <div class="wt-accordiontitle">
+                                                            @php
+                                                                    $locations= App\ProModel\ProLocation::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+                                                            @endphp
+                                                            @if (!empty($locations))
+                                                                <div class="form-group">
+                                                                    <span class="wt-select">
+                                                                        {!! Form::select('locations', $locations, null, array('placeholder' => trans('lang.select_locations'), 'v-bind:class' => '{ "is-invalid": form_step2.is_locations_error }')) !!}
+                                                                        <span class="help-block" v-if="form_step2.locations_error">
+                                                                            <strong v-cloak>@{{form_step2.locations_error}}</strong>
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>  
+                                                    <div v-if=" user_role == pro_employer"> 
+                                                        <div class="wt-accordiontitle">
+                                                            @php
+                                                                    $locations= App\ProModel\ProLocation::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+                                                            @endphp
+                                                            @if (!empty($locations))
+                                                                <div class="form-group">
+                                                                    <span class="wt-select">
+                                                                        {!! Form::select('locations', $locations, null, array('placeholder' => trans('lang.select_locations'), 'v-bind:class' => '{ "is-invalid": form_step2.is_locations_error }')) !!}
+                                                                        <span class="help-block" v-if="form_step2.locations_error">
+                                                                            <strong v-cloak>@{{form_step2.locations_error}}</strong>
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>   --}}
+                                                    {{-- candidate                                                  --}}
+                                                    {{-- <div v-if=" user_role == candidate"> 
+                                                        <div class="wt-accordiontitle">
+                                                            @php
+                                                                    $locations= App\JobModel\JobLocation::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+                                                            @endphp
+                                                            @if (!empty($locations))
+                                                                <div class="form-group">
+                                                                    <span class="wt-select">
+                                                                        {!! Form::select('locations', $locations, null, array('placeholder' => trans('lang.select_locations'), 'v-bind:class' => '{ "is-invalid": form_step2.is_locations_error }')) !!}
+                                                                        <span class="help-block" v-if="form_step2.locations_error">
+                                                                            <strong v-cloak>@{{form_step2.locations_error}}</strong>
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>   
+                                                    {{-- job employer     --}}
+                                                    {{-- <div v-if=" user_role == job_employer"> 
+                                                        <div class="wt-accordiontitle">
+                                                            @php
+                                                                    $locations= App\JobModel\JobLocation::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+                                                            @endphp
+                                                            @if (!empty($locations))
+                                                                <div class="form-group">
+                                                                    <span class="wt-select">
+                                                                        {!! Form::select('locations', $locations, null, array('placeholder' => trans('lang.select_locations'), 'v-bind:class' => '{ "is-invalid": form_step2.is_locations_error }')) !!}
+                                                                        <span class="help-block" v-if="form_step2.locations_error">
+                                                                            <strong v-cloak>@{{form_step2.locations_error}}</strong>
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>                                                    --}} --}} --}}
+
+                                                </li>
                                             </ul>
                                         @endif
                                     </fieldset>
@@ -269,4 +455,18 @@
             </div>
         </div>
     </div>
+<script>
+   function show_location(clicked_role){
+       console.log(clicked_role);
+    $.ajax({
+        type : 'get',
+        url : '{{URL::to('get_login_location')}}',
+        data:{'value':clicked_role},
+        success:function(data){
+        $('tbody').html(data);
+        }
+    });
+   }
+</script>
+
 @endsection

@@ -11,7 +11,7 @@
 @php
 $id = Auth::user()->id;
 
-$chore = App\chore::where('creator', $id)->where('type',2)->get();
+$chore = App\Chore::where('creator', $id)->where('type',2)->get();
 @endphp
 <div id="content" class="content-for-account  col-xs-10 col-sm-8 col-lg-8 ">
      <div class="my_box3" style="height:100%">      
@@ -89,7 +89,7 @@ $proposal =App\Chore_proposal::where('user_id', $id)->where('status',1)->get();
           @if($proposal)
             @foreach($proposal as $proposal)
                 @php
-                    $chore=App\chore::where('id',$proposal->chore_id)->first();
+                    $chore=App\Chore::where('id',$proposal->chore_id)->first();
                     // print_r($chore->id);
                     // exit();
                     // if($proposal){

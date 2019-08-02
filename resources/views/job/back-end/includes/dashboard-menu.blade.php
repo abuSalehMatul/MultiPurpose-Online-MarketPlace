@@ -10,6 +10,7 @@
         @php
             $user = !empty(Auth::user()) ? Auth::user() : '';
             $role = !empty($user) ? $user->getRoleNames()->first() : array();
+            echo $role;
             $profile = \App\User::find($user->id)->profile;
             $setting = \App\JobModel\JobSiteManagement::getMetaValue('footer_settings');
             $copyright = !empty($setting) ? $setting['copyright'] : 'Worketic All Rights Reserved';
@@ -29,9 +30,9 @@
                         </h2>
                         <span>{{{ !empty(Auth::user()->job_profile->tagline) ? str_limit(Auth::user()->job_profile->tagline, 26, '') : Auth::user()->getRoleNames()->first() }}}</span>
                     </div>
-                    @if ($role === 'employer')
+                    @if ($role === 'job_employer')
                         <div class="wt-btnarea"><a href="{{{ url(route('job_employerPostJob')) }}}" class="wt-btn">{{{ trans('lang.post_job') }}}</a></div>
-                    @elseif ($role === 'freelancer')
+                    @elseif ($role === 'candidate')
                         <div class="wt-btnarea"><a href="{{{ url(route('job_showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @endif
                 </div>
@@ -45,7 +46,7 @@
                                 <span>{{ trans('lang.all_jobs') }}</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{{ route('job_reviewOptions') }}}">
                                 <i class="ti-check-box"></i>
                                 <span>{{ trans('lang.review_options') }}</span>
@@ -62,7 +63,7 @@
                                 <i class="ti-email"></i>
                                 <span>{{ trans('lang.email_templates') }}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
@@ -81,19 +82,19 @@
                                 <span>{{ trans('lang.packages') }}</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{{ route('job_adminPayouts') }}}">
                                 <i class="ti-money"></i>
                                 <span>{{ trans('lang.payouts') }}</span>
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="{{{ route('job_homePageSettings') }}}">
                                 <i class="ti-home"></i>
                                 <span>{{ trans('lang.home_page_settings') }}</span>
                             </a>
-                        </li>
-                        <li class="menu-item-has-children">
+                        </li> --}}
+                        {{-- <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
                                 <i class="ti-settings"></i>
@@ -104,7 +105,7 @@
                                 <li><hr><a href="{{{ url('Job/admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
                                 <li><hr><a href="{{{ route('resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
@@ -115,13 +116,13 @@
                                 <li><hr><a href="{{{ route('job_skills') }}}">{{ trans('lang.skills') }}</a></li>
                                 <li><hr><a href="{{{ route('job_categories') }}}">{{ trans('lang.job_cats') }}</a></li>
                                 <li><hr><a href="{{{ route('job_departments') }}}">{{ trans('lang.dpts') }}</a></li>
-                                <li><hr><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
+                                <li><hr><a href="{{{ route('job_languages') }}}">{{ trans('lang.langs') }}</a></li>
                                 <li><hr><a href="{{{ route('job_locations') }}}">{{ trans('lang.locations') }}</a></li>
-                                <li><hr><a href="{{{ route('badges') }}}">{{ trans('lang.badges') }}</a></li>
+                                <li><hr><a href="{{{ route('job_badges') }}}">{{ trans('lang.badges') }}</a></li>
                             </ul>
                         </li>
                     @endif
-                    @if ($role === 'employer' || $role === 'freelancer' )
+                    @if ($role === 'job_employer' || $role === 'candidate' )
                         <li>
                             <a href="{{{ url('Job/'.$role.'/dashboard') }}}">
                                 <i class="ti-desktop"></i>
@@ -142,10 +143,10 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ url('Job/'.$role.'/profile') }}}">{{ trans('lang.profile_settings') }}</a></li>
-                                <li><hr><a href="{{{ route('manageAccount') }}}">{{ trans('lang.acc_settings') }}</a></li>
+                                <li><hr><a href="{{{ route('job_manageAccount') }}}">{{ trans('lang.acc_settings') }}</a></li>
                             </ul>
                         </li>
-                        @if ($role === 'employer')
+                        @if ($role === 'job_employer')
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">
@@ -169,7 +170,7 @@
                                     <li><hr><a href="{{{ url('Job/employer/project/invoice') }}}">{{ trans('lang.project_inv') }}</a></li>
                                 </ul>
                             </li>
-                        @elseif ($role === 'freelancer')
+                        @elseif ($role === 'candidate')
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">
@@ -183,13 +184,13 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="{{{ route('showFreelancerProposals') }}}">
+                                <a href="{{{ route('job_showFreelancerProposals') }}}">
                                     <i class="ti-bookmark-alt"></i>
                                     <span> {{ trans('lang.proposals') }}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{{ route('getFreelancerPayouts') }}}">
+                                <a href="{{{ route('job_getFreelancerPayouts') }}}">
                                     <i class="ti-money"></i>
                                     <span> {{ trans('lang.payouts') }}</span>
                                 </a>

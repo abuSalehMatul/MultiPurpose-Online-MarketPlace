@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('back-end.master-without-options')
 @section('content')
     <div class="cats-listing" id="emails">
         @if (Session::has('message'))

@@ -1,5 +1,6 @@
 @if (Schema::hasTable('pages') || Schema::hasTable('site_managements'))
     @php
+        $get_switching=Session::get('get_swithcing');
         $settings = array();
         $pages = App\Page::all();
         $setting = \App\JobModel\JobSiteManagement::getMetaValue('settings');
@@ -10,7 +11,13 @@
 @php
      if(Auth::user()->hasRole('admin')){
         Auth::user()->syncRoles('admin');
-    }else{
+    }
+   elseif($get_switching=='selling'){
+         Auth::user()->syncRoles('candidate');
+    }elseif($get_switching=='buying'){
+        Auth::user()->syncRoles('job_employer');
+    }
+    else{
         Auth::user()->syncRoles('candidate');
     }
     
@@ -30,9 +37,9 @@
                     @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home')
                         <search-form
                         :placeholder="'{{ trans('lang.looking_for') }}'"
-                        :freelancer_placeholder="'{{ trans('lang.search_filter_list.freelancer') }}'"
-                        :employer_placeholder="'{{ trans('lang.search_filter_list.employers') }}'"
-                        :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
+                        :freelancer_placeholder="'{{ trans('lang.search_filter_list.candidate') }}'"
+                        :employer_placeholder="'{{ trans('lang.search_filter_list.company') }}'"
+                        :job_placeholder="'{{ trans('lang.search_filter_list.circular') }}'"
                         :no_record_message="'{{ trans('lang.no_record') }}'"
                         >
                         </search-form>
@@ -72,20 +79,28 @@
                                     @endif
                                     <li>
                                         <a href="{{url('search-results?type=freelancer')}}">
-                                            {{{ trans('lang.view_freelancers') }}}
+                                            {{{ trans('lang.view_candidate') }}}
                                         </a>
                                     </li>
                                     
                                     <li>
-                                        <a href="{{url('search-results?type=employer')}}">
-                                            {{{ trans('lang.view_employers') }}}
+                                        <a href="{{url('search-results?type=job_employer')}}">
+                                            {{{ trans('lang.view_company') }}}
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{url('search-results?type=job')}}">
-                                            {{{ trans('lang.browse_project') }}}
+                                            {{{ trans('lang.browse_circular') }}}
                                         </a>
                                     </li>
+                                    @if(!Auth::user()->hasRole('admin'))
+                                     <li>
+                                        <a href="{{url('switch_to/'.'buying/'.'job')}}">{{{ trans('lang.switch to company')}}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('switch_to/'.'selling/'.'job')}}">{{{ trans('lang.switch to candidate')}}}</a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
                         </nav>
@@ -107,7 +122,7 @@
                                         <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
                                         <span>{{{ !empty(Auth::user()->job_profile->tagline) ? str_limit(Auth::user()->job_profile->tagline, 26, '') : Auth::user()->getRoleNames()->first() }}}</span>
                                     </div>
-                                    @include('back-end.includes.profile-menu')
+                                    @include('job.back-end.includes.profile-menu')
                                 </div>
                         @endauth
                         @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home')

@@ -10,7 +10,7 @@
 @php
 $id = Auth::user()->id;
 //$proposal=App\Chore_proposal::where('user_id',$id)->get();
- $chore = App\chore::where('creator', $id)->get();
+ $chore = App\Chore::where('creator', $id)->get();
 @endphp
 <div id="content" class="content-for-account  col-xs-10 col-sm-8 col-lg-8 ">
      <div class="my_box3" style="height:100%">      
@@ -63,11 +63,7 @@ $id = Auth::user()->id;
                             @endforeach
                         
                         @endif
-                    </div>
-                   
-                   
-                    
-                    
+                    </div>                   
 
                 </div>
             @endforeach

@@ -1,17 +1,17 @@
-@php
+{{-- @php
     if(!isset($request['g-recaptcha-response'])){
         exit();
     }
    // print_r($request);
-@endphp
+@endphp --}}
 @extends('master_backend.master')
 @section('content')
 
 <head>
 	<title>Laravel 5.7 - Google Recaptcha Code with Validation - ItSolutionStuff.com</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	 {!! NoCaptcha::renderJs() !!}
+	{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
+	 {{-- {!! NoCaptcha::renderJs() !!} --}}
 </head>
 
   
@@ -53,7 +53,7 @@
    
                                 
    
-                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                        {{-- <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Captcha</label>
                             <div class="col-md-6">
                                 {!! app('captcha')->display() !!}
@@ -63,7 +63,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
    
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

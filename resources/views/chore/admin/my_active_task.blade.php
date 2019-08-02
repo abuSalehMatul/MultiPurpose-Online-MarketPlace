@@ -10,7 +10,7 @@
 @php
 $id = Auth::user()->id;
 
-$chore = App\chore::where('creator', $id)->where('type',1)->get();
+$chore = App\Chore::where('creator', $id)->where('type',1)->get();
 @endphp
 <div id="content" class="content-for-account  col-xs-10 col-sm-8 col-lg-8 ">
      <div class="my_box3" style="height:100%">      
@@ -76,7 +76,7 @@ $chore = App\chore::where('creator', $id)->where('type',1)->get();
 @php
 $id = Auth::user()->id;
 
-$chore = App\chore::where('gifted', $id)->get();
+$chore = App\Chore::where('gifted', $id)->get();
 @endphp
 
      <div class="my_box3" style="height:100%">      

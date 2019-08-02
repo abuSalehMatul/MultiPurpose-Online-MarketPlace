@@ -1,14 +1,15 @@
 <nav id="wt-profiledashboard" class="wt-usernav">
+   
         <ul>
             @if ($role === 'admin')
                 <li>
-                    <a href="{{{ route('allJobs') }}}">
+                    <a href="{{{ route('job_allJobs') }}}">
                         <i class="ti-briefcase"></i>
                         <span>{{ trans('lang.all_jobs') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{{ route('reviewOptions') }}}">
+                {{-- <li>
+                    <a href="{{{ route('job_reviewOptions') }}}">
                         <i class="ti-check-box"></i>
                         <span>{{ trans('lang.review_options') }}</span>
                     </a>
@@ -24,7 +25,7 @@
                         <i class="ti-email"></i>
                         <span>{{ trans('lang.email_templates') }}</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                     <a href="{{{  url('Job/admin/pages') }}}">
@@ -42,7 +43,7 @@
                         <span>{{ trans('lang.packages') }}</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{{ route('adminPayouts') }}}">
                         <i class="ti-money"></i>
                         <span>{{ trans('lang.payouts') }}</span>
@@ -65,10 +66,10 @@
                         <li><a href="{{{ url('Job/admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
                         <li><a href="{{{ route('job_resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="ti-layers"></i></span>
-                    <a href="{{{ route('categories') }}}">
+                    <a href="{{{ route('job_categories') }}}">
                         <i class="ti-layers"></i>
                         <span>{{ trans('lang.cats') }}</span>
                     </a>
@@ -82,9 +83,11 @@
                     </ul>
                 </li>
             @endif
-            @if ($role === 'employer' || $role === 'candidate' )
+           
+            @if ($role === 'job_employer' || $role == 'candidate' )
+            
                 <li>
-                    <a href="{{{ url('Job/'.$role.'/dashboard') }}}">
+                    <a href="{{{ url('Job/candidate/dashboard') }}}">
                         <i class="ti-desktop"></i>
                         <span>{{ trans('lang.dashboard') }}</span>
                     </a>
@@ -106,7 +109,7 @@
                         <li><a href="{{{ route('manageAccount') }}}">{{ trans('lang.acc_settings') }}</a></li>
                     </ul>
                 </li>
-                @if ($role === 'employer')
+                @if ($role === 'job_employer')
                     <li>
                         <a href="{{{ route('employerPostJob') }}}">
                             <i class="ti-pencil-alt"></i>
@@ -152,7 +155,7 @@
                             <span>{{ trans('lang.proposals') }}</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{{ route('getFreelancerPayouts') }}}">
                             <i class="ti-money"></i>
                             <span>{{ trans('lang.payouts') }}</span>
@@ -166,7 +169,7 @@
                         <ul class="sub-menu">
                             <li><a href="{{{ url('Job/freelancer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 @endif
                 <li>
                     <a href="{{{ url('Job/dashboard/packages/'.$role) }}}">
@@ -182,6 +185,7 @@
                 </li>
             @endif
             <li>
+                 
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('profile-logout-form').submit();">
                     <i class="lnr lnr-exit"></i>
                     {{{trans('lang.logout')}}}

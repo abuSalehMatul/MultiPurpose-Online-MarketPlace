@@ -282,8 +282,8 @@
 .featured{
    
     position: relative;
-    top: -164px;
-    left: 127px;
+    top: -28px;
+    left: 73px;
     font-size: 13px;
 
 }

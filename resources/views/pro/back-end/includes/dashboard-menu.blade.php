@@ -31,7 +31,7 @@
                     </div>
                     @if ($role === 'employer'  || $role=='admin')
                         <div class="wt-btnarea"><a href="{{{ url(route('pro_employerPostJob')) }}}" class="wt-btn">{{{ trans('lang.post_job') }}}</a></div>
-                    @elseif ($role === 'freelancer' || $role=='admin')
+                    @elseif ($role === 'pro' || $role=='admin')
                         <div class="wt-btnarea"><a href="{{{ url(route('pro_showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @endif
                 </div>
@@ -45,7 +45,7 @@
                                 <span>{{ trans('lang.all_jobs') }}</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{{ route('pro_reviewOptions') }}}">
                                 <i class="ti-check-box"></i>
                                 <span>{{ trans('lang.review_options') }}</span>
@@ -56,13 +56,13 @@
                                 <i class="ti-user"></i>
                                 <span>{{ trans('lang.manage_users') }}</span>
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="{{{ route('pro_emailTemplates') }}}">
                                 <i class="ti-email"></i>
                                 <span>{{ trans('lang.email_templates') }}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
@@ -81,19 +81,19 @@
                                 <span>{{ trans('lang.packages') }}</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{{ route('pro_adminPayouts') }}}">
                                 <i class="ti-money"></i>
                                 <span>{{ trans('lang.payouts') }}</span>
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="{{{ route('pro_homePageSettings') }}}">
                                 <i class="ti-home"></i>
                                 <span>{{ trans('lang.home_page_settings') }}</span>
                             </a>
-                        </li>
-                        <li class="menu-item-has-children">
+                        </li> --}}
+                        {{-- <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
                                 <i class="ti-settings"></i>
@@ -104,7 +104,7 @@
                                 <li><hr><a href="{{{ url('Pro/admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
                                 <li><hr><a href="{{{ route('resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
@@ -121,7 +121,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if ($role === 'employer' || $role === 'freelancer'  )
+                    @if ($role === 'employer' || $role === 'pro'  )
                         <li>
                             <a href="{{{ url('Pro/'.$role.'/dashboard') }}}">
                                 <i class="ti-desktop"></i>
@@ -169,7 +169,7 @@
                                     <li><hr><a href="{{{ url('Pro/employer/project/invoice') }}}">{{ trans('lang.project_inv') }}</a></li>
                                 </ul>
                             </li>
-                        @elseif ($role === 'freelancer')
+                        @elseif ($role === 'pro')
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">

@@ -16,12 +16,12 @@
         {{$m}}
     </div>
     @php
-        $cat=App\ChoreCategory::where('id',$chore->category_id)->first();
+        // $cat=App\ChoreCategory::where('id',$chore->category_id)->first();
         $image=App\Image::where('id',$chore->image_id)->first();
     @endphp  	
     <div class="get_div">  <!-- Breadcrumb NavXT 5.2.2 -->
         <span typeof="v:Breadcrumb">
-            <a  class="main-home">healthbute</a>
+            <a  class="main-home">{{ env('APP_NAME') }}</a>
         </span> &gt; <span typeof="v:Breadcrumb">
             <a  class="home">{{$cat->name}}</a>
         </span> &gt; <span typeof="v:Breadcrumb">
@@ -43,7 +43,7 @@
                 Posted in:                 </p> 
             </div>
 			@php
-                $creator=App\All_user::find($chore->creator);
+               // $creator=App\All_user::find($chore->creator);
             @endphp
             <div class="user_avatar col-xs-12 col-sm-4 col-lg-4">
             	<div class="user_av_1"><img class="avatar_ma" src="" width="80" height="80" alt="avatar_user" /></div>
@@ -91,7 +91,7 @@
                 <tbody>
                     @foreach($proposal as $proposal)
                     @php
-                        $user=App\All_user::find($proposal->user_id);
+                        $user=App\User::find($proposal->user_id);
                     @endphp
                     <tr>
                         <th>
@@ -128,7 +128,7 @@
          	       
             
                  @php
-                     $all_chore=App\chore::where('category_id',$chore->category_id)->get();
+                     $all_chore=App\Chore::where('category_id',$cat->id)->get();
                      $j=0;
                  @endphp
                  @if($all_chore)
@@ -249,7 +249,7 @@
         
         
         <div class="detail_div">
-        	<p class="p_nzl2">Views for this task: {{$chore->view}}</p>
+        	<p class="p_nzl2">Views for this task: {{$view}}</p>
         </div>
 
         <div class="detail_div">

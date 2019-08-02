@@ -1,5 +1,6 @@
 @if (Schema::hasTable('pages') || Schema::hasTable('site_managements'))
     @php
+        $get_switching=Session::get('get_swithcing');
         $settings = array();
         $pages = App\Page::all();
         $setting = \App\SiteManagement::getMetaValue('settings');
@@ -8,9 +9,16 @@
     @endphp
 @endif
 @php
+
     if(Auth::user()->hasRole('admin')){
         Auth::user()->syncRoles('admin');
-    }else{
+    }
+    elseif($get_switching=='selling'){
+         Auth::user()->syncRoles('freelancer');
+    }elseif($get_switching=='buying'){
+        Auth::user()->syncRoles('employer');
+    }
+    else{
         Auth::user()->syncRoles('freelancer');
     }
    
@@ -86,6 +94,14 @@
                                             {{{ trans('lang.browse_project') }}}
                                         </a>
                                     </li>
+                                    @if(!Auth::user()->hasRole('admin'))
+                                    <li>
+                                        <a href="{{url('switch_to/'.'buying/'.'freelancer')}}">{{{ trans('lang.switch to buying')}}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('switch_to/'.'selling/'.'freelancer')}}">{{{ trans('lang.switch to selling')}}}</a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
                         </nav>

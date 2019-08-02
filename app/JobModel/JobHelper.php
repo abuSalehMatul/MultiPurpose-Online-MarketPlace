@@ -418,9 +418,9 @@ class JobHelper extends Model
     public static function getProjectLevel($key = "")
     {
         $list = array(
-            'basic'     => trans('lang.project_level.basic'),
-            'medium'    => trans('lang.project_level.medium'),
-            'expensive' => trans('lang.project_level.expensive'),
+            'basic'     => trans('lang.job_level.basic'),
+            'medium'    => trans('lang.job_level.medium'),
+            'expensive' => trans('lang.job_level.expensive'),
         );
         if (!empty($key) && array_key_exists($key, $list)) {
             return $list[$key];
@@ -441,9 +441,9 @@ class JobHelper extends Model
     public static function getProjectType($key = "")
     {
         $list = array(
-            'projects' => trans('lang.projecttype.projects'),
-            'hourly'  => trans('lang.projecttype.hourly'),
-            'fixed' => trans('lang.projecttype.fixed'),
+            'projects' => trans('lang.jobttype.projects'),
+            'hourly'  => trans('lang.jobttype.hourly'),
+            'fixed' => trans('lang.jobttype.fixed'),
         );
         if (!empty($key) && array_key_exists($key, $list)) {
             return $list[$key];
@@ -487,8 +487,7 @@ class JobHelper extends Model
     public static function getJobDurationList($key = "")
     {
         $list = array(
-            'weekly' => trans('lang.job_duration.weekly'),
-            'monthly' => trans('lang.job_duration.monthly'),
+            
             'three_month' => trans('lang.job_duration.three_month'),
             'six_month' => trans('lang.job_duration.six_month'),
             'more_than_six' => trans('lang.job_duration.more_than_six'),
@@ -590,9 +589,9 @@ class JobHelper extends Model
     public static function getFreelancerLevelList($key = "")
     {
         $list = array(
-            'independent'       => trans('lang.freelancer_level.independent'),
-            'agency'            => trans('lang.freelancer_level.agency'),
-            'rising_talent'     => trans('lang.freelancer_level.rising_talent'),
+            'full_time'       => trans('lang.candidate_level.full_time'),
+            'part_time'       => trans('lang.candidate_level.part_time'),
+           
         );
         if (!empty($key) && array_key_exists($key, $list)) {
             return $list[$key];

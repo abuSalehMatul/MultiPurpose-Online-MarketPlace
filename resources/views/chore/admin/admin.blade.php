@@ -17,10 +17,8 @@
         
         <div class="main_avatar">
             <a href="">
-                @php
-                   
-                @endphp
-                <img class="avatar_ma" src="{{asset('chores/1.jpg')}}" width="140" height="140" alt="avatar_user" />
+               
+                <img class="avatar_ma" src="{{asset('uploads/image/'.Auth::user()->image)}}" width="140" height="140" alt="avatar_user" />
             </a>
             <br>
             <br>
@@ -37,8 +35,7 @@
                                 <span> 
                                     Menu
                                 </span>
-                            {{-- </h6>
-                            <h6 class="widget-title"> --}}
+                            
                                 <span> 
                                     <a href="{{url('chores/view')}}">View Chores</a>
                                    
@@ -49,7 +46,7 @@
                         <li><a href="{{url('chores/admin')}}">MyAccount Home</a></li>
                         <li><a href="{{url('chores/add')}}">Post New Task</a></li>
                         <li><a href="{{url('service/add')}}">Post New Service</a></li>
-                        <li><a href="payments/index.html">Payments</a></li>
+                        <li><a href="{{url('paypal/ec-checkout')}}">Payments</a></li>
                       
                         <li><a href="reviews/index.html">Reviews <span class='notif_a'>1</span></a></li>
                         <li class="final_row_a"><a href="{{url('chores/mywishlist')}}" >Wishlist</a></li>
@@ -72,9 +69,7 @@
      				<li><a href="{{url('chores/proposal_received')}}">Proposals Received </a></li> 
                     <li><a href="{{url('chores/my_proposals')}}">My Task Proposals</a></li> 
                      <li class=""><a href="">Complited service </a></li>  
-                    <li><a href="{{url('chores/task_i_get_pay')}}">Tasks I'm waiting payment for </a></li>
-                                  
-     				<li class="final_row_a"><a href="{{url('chores/task_i_pay')}}">Tasks I have to pay for </a></li>
+                    
                 </ul>        
                 </div>        
             </li>
@@ -94,8 +89,7 @@
                     <li class=""><a href="{{url('service/my_active_service')}}">Active Services </a></li>    
                     <li class=""><a href="{{url('service/my_service')}}">My Services </a></li>    
                     {{-- <li class=""><a href="{{url('service/purchased_service')}}">Purchased Services </a></li>     --}}
-                    <li class=""><a href="">Service I'm waiting payment for </a></li>    
-                    <li class="final_row_a"><a href="">Service I have to pay for </a></li>    
+                    
                 </ul>        
                 </div>        
             </li>

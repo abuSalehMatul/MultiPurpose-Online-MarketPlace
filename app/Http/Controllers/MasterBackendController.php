@@ -21,29 +21,13 @@ class MasterBackendController extends Controller
 {
     public function __construct()
     {
-        // $ip=\Request::ip();
-        // $sess= Session::get('master');
-        // if(isset($sess)){
-        //     $master=AdminValidation::where('primary_email',Session::get('master'))->first();
-        //     Session::forget('master');
-        //     if($master){
-        //         if($master->ip!=$ip){
-        //             Session::flush();
-        //             return redirect('master_backend_26');
-        //         }else{
-        //             Session::put('master',$master->primary_email);
-        //         }
-        //     }else{
-        //         Session::flush();
-        //         return redirect( 'master_backend_26');
-        //     }
-        // }
+        
     }
     public function login(Request $request){
         $this->validate($request, [
             'primary_email' => 'required|email',
             'secondary_email' => 'required|email',   
-            'g-recaptcha-response' => 'required|captcha',
+           // 'g-recaptcha-response' => 'required|captcha',
         ]);
        // $admin_vallidation=AdminValidation::find(2);
         $admin_vallidation= AdminValidation::where('primary_email', $request->primary_email)->where('secondary_email',$request->secondary_email)->first();
@@ -56,7 +40,7 @@ class MasterBackendController extends Controller
             $admin_vallidation->save();
             Mail::to($request->primary_email)->send(new SENDMAIL($num1,'Primary Email'));
             Mail::to($request->secondary_email)->send(new SENDMAIL($num2,'Secondary Email'));
-           
+          // return 'hi';
             return view('master_backend.pinconfirm')->with('request',$request->all());
         }
          else{
@@ -67,21 +51,28 @@ class MasterBackendController extends Controller
     public function confirm(Request $request){
         $ss=Session::get('master');
         if(isset($ss)){
-            return view( 'master_backend.back_front');
+            return view('backend.index');
         }
         $this->validate($request,[
            
-            'g-recaptcha-response' => 'required|captcha',
+           // 'g-recaptcha-response' => 'required|captcha',
         ]);
         if($request->email!=null && $request->pin!=null){
             $user=User::where('email',$request->email)->first();
+            if(!$user){
+                return 'not valid attempt';
+            }
             $admin_vallidation=AdminValidation::where('primary_email',$request->email)->first();
         //  return $admin_vallidation;
+            if(!$admin_vallidation){
+                return 'not a valild attempt';
+            }
             if($admin_vallidation->pin==$request->pin){
                 if($request->password!=null){
                     if (Hash::check($request->password, $user->password)) {
                         
                     Auth::login($user);
+                    $user->syncRoles(['admin']);  
                     if($user->hasRole('admin')){
                             $user->syncRoles(['admin']);  
                     }else{
@@ -92,7 +83,7 @@ class MasterBackendController extends Controller
                        //  Auth::logout();
                     }
                     Session::put('master',$user->email);                
-                    return view( 'master_backend.back_front');
+                    return view('backend.index');
                     }else{
                         return 'not matched';
                     }

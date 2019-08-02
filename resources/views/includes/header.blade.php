@@ -8,15 +8,15 @@
     @endphp
 @endif
 @php
-    if(Auth::user()){
+    if(Auth::check()){
+        if(Auth::user()->hasRole('admin')){
+        Auth::user()->syncRoles('admin');
+        }else {
         Auth::user()->syncRoles('freelancer');
+        }
     }
-    // if(Auth::user()->hasRole('pro')){
-    //     echo 'pro';
-    // }
-    // if(Auth::user()->hasRole('candidate')){
-    //     echo 'candidate';
-    // }
+    
+   
     
 @endphp
 <header id="wt-header" class="wt-header wt-haslayout {{$inner_header}}">

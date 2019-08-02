@@ -18,8 +18,8 @@
                 </h6>
           @php
               $u=Auth::user()->id;
-              $mytask=App\chore::where('creator',$u)->where('type',1)->get();
-              $myservice=App\chore::where('creator',$u)->where('type',2)->get();
+              $mytask=App\Chore::where('creator',$u)->where('type',1)->get();
+              $myservice=App\Chore::where('creator',$u)->where('type',2)->get();
           @endphp
           <div class="box_content" id="tasks_me"> 
               @if($mytask)

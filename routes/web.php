@@ -1,15 +1,8 @@
 <?php
 
-/**
- * Here is where you can register web routes for your application. These
- * routes are loaded by the RouteServiceProvider within a group which
- * contains the "web" middleware group. Now create something great!
- *
-
- */
-
-// Authentication route
+use Illuminate\Http\Request;
 //master backend 
+route::get('test','SuperAdminController@test');
 
 Route::get('master_backend_26',function (){
     if(!Auth::check()){
@@ -20,23 +13,52 @@ Route::get('master_backend_26',function (){
    
 });
 Route::post('master-admin-login','MasterBackendController@login');
-Route::post( 'admin_confirm','MasterBackendController@confirm');
+Route::any( 'admin_confirm','MasterBackendController@confirm');
 Route::get('master_redirect/{id}','MasterBackendController@redirect')->middleware('Master_access');
+
+Route::group(['middleware' => 'Master_access'], function () {
+    Route::get('see_permission', 'SuperAdminController@see_permission');
+    Route::get('all_permission', 'SuperAdminController@all_permission');
+    Route::get('manage_permission', 'SuperAdminController@manage_permission');
+
+});
+
 
 //end of master backend
 
+Route::get('errors',function(){
+ return view('errors.503');
+})->name('errors');
+
+//switching a/c
+Route::get('switch_to/{type}/{slag}', 'UserController@swithcing');
+//pin
+Route::post('verification_user','CustomVerificationController@pin');
+Route::get('verification_user_ajax','CustomVerificationController@pin_check');
+Route::get('reset_pin','CustomVerificationController@reset');
+Route::get('resetpin_conf/{str}','CustomVerificationController@reset_conf');
+Route::get('reset_form',function (){
+    return view('reset_form');
+});
+Route::post('reset_form','CustomVerificationController@reset_form_conf');
+Route::get('get_email','SuperAdminController@get_email');
+Route::post('set_permission','SuperAdminController@set_permission');
+
 Auth::routes();
 // Cache clear route
-Route::get(
-    'cache-clear',
-    function () {
-        $exitCode = \Artisan::call('cache:clear');
-        $exitCode = \Artisan::call('route:clear');
-        $exitCode = \Artisan::call('config:clear');
-        $exitCode = \Artisan::call('view:clear');
-        return redirect()->back();
-    }
-);
+Route::group(['middleware' => 'Permission_check:server_module'], function () {
+    Route::get(
+        'cache-clear',
+        function () {
+            $exitCode = \Artisan::call('cache:clear');
+            $exitCode = \Artisan::call('route:clear');
+            $exitCode = \Artisan::call('config:clear');
+            $exitCode = \Artisan::call('view:clear');
+            return redirect()->back();
+        }
+    );   
+});
+
 // Home
 Route::get(
     '/freelancer-dashboard',
@@ -58,7 +80,23 @@ Route::get(
         return Redirect::to('/');
     }
 );
-Route::get('/','LandingController@index');
+Route::get('/',function(){
+    $open=Session::get('open');
+    if(isset($open) && $open!=null){
+        return redirect('/site_landing');
+    }else{
+        return view('commingsoon');
+    }
+});
+Route::post('/open',function(Request $request){
+    if($request->open == 'MATUL123'){
+        Session::put('open','open');
+        return redirect('site_landing');
+    }else{
+        return redirect()->back();
+    }
+});
+Route::get('/site_landing','LandingController@index');
 Route::get('job/{slug}', 'JobController@show')->name('jobDetail');
 Route::get('profile/{slug}', 'PublicController@showUserProfile')->name('showUserProfile');
 Route::get('categories', 'CategoryController@categoriesList')->name('categoriesList');
@@ -75,17 +113,35 @@ Route::post('register/form-step2-custom-errors', 'PublicController@RegisterStep2
 Route::get('search-results', 'PublicController@getSearchResult')->name('searchResults');
 Route::post('user/add-wishlist', 'UserController@addWishlist');
 // Admin Routes
+Route::group(['middleware' => ['role:admin', 'Permission_check:server_module']], function () {
+    Route::post('admin/clear-cache', 'SiteManagementController@clearCache');
+    Route::get('admin/clear-allcache', 'SiteManagementController@clearAllCache');
+    Route::get('admin/import-demo', 'SiteManagementController@importDemo');
+    Route::get('admin/remove-demo', 'SiteManagementController@removeDemoContent');
+});
+Route::group(['middleware' => ['role:admin', 'Permission_check:settings_module']], function () {
+    Route::get('admin/home-page-settings', 'SiteManagementController@homePageSettings')->name('homePageSettings');
+    Route::get('admin/settings/a', 'SiteManagementController@Settings')->name('settings');
+    Route::get('admin/languages', 'LanguageController@index')->name('languages');
+    Route::get('admin/languages/edit-langs/{id}', 'LanguageController@edit')->name('editLanguages');
+    Route::get('admin/review-options', 'ReviewController@index')->name('reviewOptions');
+    Route::get('admin/review-options/edit-review-options/{id}', 'ReviewController@edit')->name('editReviewOptions');
+    Route::post('admin/store-review-options', 'ReviewController@store');
+    Route::post('admin/review-options/delete-review-options', 'ReviewController@destroy');
+    Route::post('admin/review-options/update-review-options/{id}', 'ReviewController@update');
+    Route::post('admin/delete-checked-rev-options', 'ReviewController@deleteSelected');
+});
+Route::group(['middleware' => ['role:admin', 'Permission_check:payout_module']], function () {
+    Route::get('admin/payouts', 'UserController@getPayouts')->name('adminPayouts');
+    Route::get('admin/payouts/download/{year}', 'UserController@generatePDF');
+});
+Route::group(['middleware' => ['role:admin', 'Permission_check:user_management_module']], function () {
+    Route::get('users', 'UserController@userListing')->name('userListing');
+});
 Route::group(
-    ['middleware' => ['role:admin']],
+    ['middleware' => ['role:admin', 'Permission_check:freelancer_module']],
     function () {
-        Route::post('admin/clear-cache', 'SiteManagementController@clearCache');
-        Route::get('admin/clear-allcache', 'SiteManagementController@clearAllCache');
-        Route::get('admin/import-demo', 'SiteManagementController@importDemo');
-        Route::get('admin/remove-demo', 'SiteManagementController@removeDemoContent');
-        Route::get('admin/payouts', 'UserController@getPayouts')->name('adminPayouts');
-        Route::get('admin/payouts/download/{year}', 'UserController@generatePDF');
-        Route::get('users', 'UserController@userListing')->name('userListing');
-        Route::get('admin/home-page-settings', 'SiteManagementController@homePageSettings')->name('homePageSettings');
+             
         Route::post('admin/get-page-option', 'SiteManagementController@getPageOption');
         // Skill Routes
         Route::get('admin/skills', 'SkillController@index')->name('skills');
@@ -104,8 +160,7 @@ Route::group(
         Route::post('admin/departments/update-dpts/{id}', 'DepartmentController@update');
         Route::post('admin/delete-checked-dpts', 'DepartmentController@deleteSelected');
         // Language Routes
-        Route::get('admin/languages', 'LanguageController@index')->name('languages');
-        Route::get('admin/languages/edit-langs/{id}', 'LanguageController@edit')->name('editLanguages');
+       
         Route::post('admin/store-language', 'LanguageController@store');
         Route::get('admin/languages/search', 'LanguageController@index');
         Route::post('admin/languages/delete-langs', 'LanguageController@destroy');
@@ -139,14 +194,9 @@ Route::group(
         Route::post('admin/locations/upload-temp-image', 'LocationController@uploadTempImage');
         Route::post('admin/delete-checked-locs', 'LocationController@deleteSelected');
         // Review Options Routes
-        Route::get('admin/review-options', 'ReviewController@index')->name('reviewOptions');
-        Route::get('admin/review-options/edit-review-options/{id}', 'ReviewController@edit')->name('editReviewOptions');
-        Route::post('admin/store-review-options', 'ReviewController@store');
-        Route::post('admin/review-options/delete-review-options', 'ReviewController@destroy');
-        Route::post('admin/review-options/update-review-options/{id}', 'ReviewController@update');
-        Route::post('admin/delete-checked-rev-options', 'ReviewController@deleteSelected');
+       
         // Site Management Routes
-        Route::get('admin/settings', 'SiteManagementController@Settings')->name('settings');
+       
         Route::post('admin/store/email-settings', 'SiteManagementController@storeEmailSettings');
         Route::post('admin/store/home-settings', 'SiteManagementController@storeHomeSettings');
         Route::get('admin/get-section-display-setting', 'SiteManagementController@getSectionDisplaySetting');
@@ -189,7 +239,7 @@ Route::group(
         Route::post('admin/packages/delete-package', 'PackageController@destroy');
         Route::post('package/get-package-options', 'PackageController@getPackageOptions');
 
-        Route::get('admin/profile', 'UserController@adminProfileSettings')->name('adminProfile');
+        Route::get('admin/profile/a', 'UserController@adminProfileSettings')->name('adminProfile');
         Route::post('admin/store-profile-settings', 'UserController@storeProfileSettings');
         Route::post('admin/upload-temp-image', 'UserController@uploadTempImage');
     }
@@ -360,27 +410,27 @@ Route::get('categories', 'Pro\ProCategoryController@categoriesList')->name('pro_
 Route::get('page/{slug}', 'Pro\ProPageController@show')->name('pro_showPage');
 Route::post('store/project-offer', 'Pro\ProUserController@storeProjectOffers');
 Route::get('jobs', 'Pro\ProJobController@listjobs')->name('pro_jobs');
-Route::get('user/password/reset/{verify_code}', 'Pro\ProPublicController@resetPasswordView')->name('pro_getResetPassView');
-Route::post('user/update/password', 'Pro\ProPublicController@resetUserPassword')->name('pro_resetUserPassword');
+// Route::get('user/password/reset/{verify_code}', 'Pro\ProPublicController@resetPasswordView')->name('pro_getResetPassView');
+// Route::post('user/update/password', 'Pro\ProPublicController@resetUserPassword')->name('pro_resetUserPassword');
 // Authentication|Guest Routes
-Route::post('register/login-register-user', 'Pro\ProPublicController@loginUser')->name('pro_loginUser');
-Route::post('register/verify-user-code', 'Pro\ProPublicController@verifyUserCode');
-Route::post('register/form-step1-custom-errors', 'Pro\ProPublicController@RegisterStep1Validation');
-Route::post('register/form-step2-custom-errors', 'Pro\ProPublicController@RegisterStep2Validation');
+// Route::post('register/login-register-user', 'Pro\ProPublicController@loginUser')->name('pro_loginUser');
+// Route::post('register/verify-user-code', 'Pro\ProPublicController@verifyUserCode');
+// Route::post('register/form-step1-custom-errors', 'Pro\ProPublicController@RegisterStep1Validation');
+// Route::post('register/form-step2-custom-errors', 'Pro\ProPublicController@RegisterStep2Validation');
 
 Route::get('search-results', 'Pro\ProPublicController@getSearchResult')->name('pro_searchResults');
 Route::post('user/add-wishlist', 'Pro\ProUserController@addWishlist');
 // Admin Routes
 Route::group(
-    ['middleware' => ['role:admin']],
+    ['middleware' => ['role:admin', 'Permission_check:pro_module']],
     function () {
-        Route::post('admin/clear-cache', 'Pro\ProSiteManagementController@clearCache');
-        Route::get('admin/clear-allcache', 'Pro\ProSiteManagementController@clearAllCache');
-        Route::get('admin/import-demo', 'Pro\ProSiteManagementController@importDemo');
-        Route::get('admin/remove-demo', 'Pro\ProSiteManagementController@removeDemoContent');
+        // Route::post('admin/clear-cache', 'Pro\ProSiteManagementController@clearCache');
+        // Route::get('admin/clear-allcache', 'Pro\ProSiteManagementController@clearAllCache');
+        // Route::get('admin/import-demo', 'Pro\ProSiteManagementController@importDemo');
+        // Route::get('admin/remove-demo', 'Pro\ProSiteManagementController@removeDemoContent');
         Route::get('admin/payouts', 'Pro\ProUserController@getPayouts')->name('pro_adminPayouts');
         Route::get('admin/payouts/download/{year}', 'Pro\ProUserController@generatePDF');
-        Route::get('users', 'Pro\ProUserController@userListing')->name('pro_userListing');
+        // Route::get('users', 'Pro\ProUserController@userListing')->name('pro_userListing');
         Route::get('admin/home-page-settings', 'Pro\ProSiteManagementController@homePageSettings')->name('pro_homePageSettings');
         Route::post('admin/get-page-option', 'Pro\ProSiteManagementController@getPageOption');
         // Skill Routes
@@ -485,7 +535,7 @@ Route::group(
         Route::post('admin/packages/delete-package', 'Pro\ProPackageController@destroy');
         Route::post('package/get-package-options', 'Pro\ProPackageController@getPackageOptions');
 
-        Route::get('admin/profile', 'Pro\ProUserController@adminProfileSettings')->name('pro_adminProfile');
+        // Route::get('admin/profile', 'Pro\ProUserController@adminProfileSettings')->name('pro_adminProfile');
         Route::post('admin/store-profile-settings', 'Pro\ProUserController@storeProfileSettings');
         Route::post('admin/upload-temp-image', 'Pro\ProUserController@uploadTempImage');
     }
@@ -587,9 +637,9 @@ Route::group(
 Route::post('job/get-wishlist', 'Pro\ProJobController@getWishlist');
 Route::get('dashboard/packages/{role}', 'Pro\ProPackageController@index');
 Route::get('package/get-purchase-package', 'Pro\ProPackageController@getPurchasePackage');
-Route::get('paypal/redirect-url', 'Pro\ProPaypalController@getIndex');
-Route::get('paypal/ec-checkout', 'Pro\ProPaypalController@getExpressCheckout');
-Route::get('paypal/ec-checkout-success', 'Pro\ProPaypalController@getExpressCheckoutSuccess');
+// Route::get('paypal/redirect-url', 'Pro\ProPaypalController@getIndex');
+// Route::get('paypal/ec-checkout', 'Pro\ProPaypalController@getExpressCheckout');
+// Route::get('paypal/ec-checkout-success', 'Pro\ProPaypalController@getExpressCheckoutSuccess');
 Route::get('user/products/thankyou', 'Pro\ProUserController@thankyou');
 Route::get('payment-process/{id}', 'Pro\ProEmployerController@employerPaymentProcess');
 Route::get('search/get-search-filters', 'Pro\ProPublicController@getFilterlist');
@@ -609,8 +659,8 @@ Route::post('proposal/submit-proposal', 'Pro\ProProposalController@store');
 Route::post('get-freelancer-experiences', 'Pro\ProPublicController@getFreelancerExperience');
 Route::post('get-freelancer-education', 'Pro\ProPublicController@getFreelancerEducation');
 
-Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 'Pro\ProStripeController@payWithStripe',));
-Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'Pro\ProStripeController@postPaymentWithStripe',));
+// Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 'Pro\ProStripeController@payWithStripe',));
+// Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'Pro\ProStripeController@postPaymentWithStripe',));
 });
 
 
@@ -664,24 +714,24 @@ Route::group(['prefix' => 'Job/'], function () {
     Route::get('user/password/reset/{verify_code}', 'Job\JobPublicController@resetPasswordView')->name('job_getResetPassView');
     Route::post('user/update/password', 'Job\JobPublicController@resetUserPassword')->name('job_resetUserPassword');
     // Authentication|Guest Routes
-    Route::post('register/login-register-user', 'Job\JobPublicController@loginUser')->name('job_loginUser');
-    Route::post('register/verify-user-code', 'Job\JobPublicController@verifyUserCode');
-    Route::post('register/form-step1-custom-errors', 'Job\JobPublicController@RegisterStep1Validation');
-    Route::post('register/form-step2-custom-errors', 'Job\JobPublicController@RegisterStep2Validation');
+    // Route::post('register/login-register-user', 'Job\JobPublicController@loginUser')->name('job_loginUser');
+    // Route::post('register/verify-user-code', 'Job\JobPublicController@verifyUserCode');
+    // Route::post('register/form-step1-custom-errors', 'Job\JobPublicController@RegisterStep1Validation');
+    // Route::post('register/form-step2-custom-errors', 'Job\JobPublicController@RegisterStep2Validation');
 
     Route::get('search-results', 'Job\JobPublicController@getSearchResult')->name('job_searchResults');
     Route::post('user/add-wishlist', 'Job\JobUserController@addWishlist');
     // Admin Routes
     Route::group(
-        ['middleware' => ['role:admin']],
+        ['middleware' => ['role:admin', 'Permission_check:job_module']],
         function () {
-            Route::post('admin/clear-cache', 'Job\JobSiteManagementController@clearCache');
-            Route::get('admin/clear-allcache', 'Job\JobSiteManagementController@clearAllCache');
-            Route::get('admin/import-demo', 'Job\JobSiteManagementController@importDemo');
-            Route::get('admin/remove-demo', 'Job\JobSiteManagementController@removeDemoContent');
+            // Route::post('admin/clear-cache', 'Job\JobSiteManagementController@clearCache');
+            // Route::get('admin/clear-allcache', 'Job\JobSiteManagementController@clearAllCache');
+            // Route::get('admin/import-demo', 'Job\JobSiteManagementController@importDemo');
+            // Route::get('admin/remove-demo', 'Job\JobSiteManagementController@removeDemoContent');
             Route::get('admin/payouts', 'Job\JobUserController@getPayouts')->name('job_adminPayouts');
             Route::get('admin/payouts/download/{year}', 'Job\JobUserController@generatePDF');
-            Route::get('users', 'Job\JobUserController@userListing')->name('job_userListing');
+            // Route::get('users', 'Job\JobUserController@userListing')->name('job_userListing');
             Route::get('admin/home-page-settings', 'Job\JobSiteManagementController@homePageSettings')->name('job_homePageSettings');
             Route::post('admin/get-page-option', 'Job\JobSiteManagementController@getPageOption');
             // Skill Routes
@@ -701,7 +751,7 @@ Route::group(['prefix' => 'Job/'], function () {
             Route::post('admin/departments/update-dpts/{id}', 'Job\JobDepartmentController@update');
             Route::post('admin/delete-checked-dpts', 'Job\JobDepartmentController@deleteSelected');
             // Language Routes
-            Route::get('admin/languages', 'Job\JobLanguageController@index')->name('pro_languages');
+            Route::get('admin/languages', 'Job\JobLanguageController@index')->name('job_languages');
             Route::get('admin/languages/edit-langs/{id}', 'Job\JobLanguageController@edit')->name('job_editLanguages');
             Route::post('admin/store-language', 'Job\JobLanguageController@store');
             Route::get('admin/languages/search', 'Job\JobLanguageController@index');
@@ -718,13 +768,13 @@ Route::group(['prefix' => 'Job/'], function () {
             Route::post('admin/categories/upload-temp-image', 'Job\JobCategoryController@uploadTempImage');
             Route::post('admin/delete-checked-cats', 'Job\JobCategoryController@deleteSelected');
             // Badges Routes
-            Route::get('admin/badges', 'Job\JobBadgeController@index')->name('pro_badges');
+            Route::get('admin/badges', 'Job\JobBadgeController@index')->name('job_badges');
             Route::get('admin/badges/edit-badges/{id}', 'Job\JobBadgeController@edit')->name('job_editbadges');
             Route::post('admin/store-badge', 'Job\JobBadgeController@store');
             Route::get('admin/badges/search', 'Job\JobBadgeController@index');
             Route::post('admin/badges/delete-badges', 'Job\JobBadgeController@destroy');
             Route::post('admin/badges/update-badges/{id}', 'Job\JobBadgeController@update');
-            Route::post('admin/badges/upload-temp-image', 'JobJoboBadgeController@uploadTempImage');
+            Route::post('admin/badges/upload-temp-image', 'Job\JobBadgeController@uploadTempImage');
             Route::post('admin/delete-checked-badges', 'Job\JobBadgeController@deleteSelected');
             // Location Routes
             Route::get('admin/locations', 'Job\JobLocationController@index')->name('job_locations');
@@ -758,7 +808,7 @@ Route::group(['prefix' => 'Job/'], function () {
             Route::post('admin/store/upload-icons', 'Job\JobSiteManagementController@storeDashboardIcons');
             Route::post('admin/store/footer-settings', 'Job\JobSiteManagementController@storeFooterSettings');
             Route::post('admin/store/social-settings', 'Job\JobSiteManagementController@storeSocialSettings');
-            Route::post('admin/store/search-menu', 'Job\ProSiteManagementController@storeSearchMenu');
+            Route::post('admin/store/search-menu', 'Job\JobSiteManagementController@storeSearchMenu');
             Route::post('admin/store/commision-settings', 'Job\JobSiteManagementController@storeCommisionSettings');
             Route::post('admin/store/payment-settings', 'Job\JobSiteManagementController@storePaymentSettings');
             Route::post('admin/store/stripe-payment-settings', 'Job\JobSiteManagementController@storeStripeSettings');
@@ -786,14 +836,14 @@ Route::group(['prefix' => 'Job/'], function () {
             Route::post('admin/packages/delete-package', 'Job\JobPackageController@destroy');
             Route::post('package/get-package-options', 'Job\JobPackageController@getPackageOptions');
 
-            Route::get('admin/profile', 'Job\JobUserController@adminProfileSettings')->name('job_adminProfile');
+            // Route::get('admin/profile', 'Job\JobUserController@adminProfileSettings')->name('job_adminProfile');
             Route::post('admin/store-profile-settings', 'Job\JobUserController@storeProfileSettings');
             Route::post('admin/upload-temp-image', 'Job\JobUserController@uploadTempImage');
         }
     );
 
     Route::group(
-        ['middleware' => ['role:employer|admin']],
+        ['middleware' => ['role:job_employer|admin']],
         function () {
             Route::get('job/edit-job/{job_slug}', 'Job\JobJobController@edit')->name('job_editJob');
             Route::post('job/get-stored-job-skills', 'Job\JobJobController@getJobSkills');
@@ -805,7 +855,7 @@ Route::group(['prefix' => 'Job/'], function () {
     );
     //Employer Routes
     Route::group(
-        ['middleware' => ['role:employer']],
+        ['middleware' => ['role:job_employer']],
         function () {
             Route::post('skills/get-job-skills', 'Job\JobSkillController@getJobSkills');
             Route::get('employer/dashboard/post-job', 'Job\JobJobController@postJob')->name('job_employerPostJob');
@@ -825,7 +875,7 @@ Route::group(['prefix' => 'Job/'], function () {
     );
     // Freelancer Routes
     Route::group(
-        ['middleware' => ['role:freelancer']],
+        ['middleware' => ['role:candidate']],
         function () {
             Route::get('/get-freelancer-skills', 'Job\JobSkillController@getFreelancerSkills');
             Route::get('/get-skills', 'Job\JobSkillController@getSkills');
@@ -847,14 +897,14 @@ Route::group(['prefix' => 'Job/'], function () {
             Route::get('freelancer/jobs/{status}', 'Job\JobFreelancerController@showFreelancerJobs');
             Route::get('freelancer/job/{slug}', 'Job\JobFreelancerController@showOnGoingJobDetail')->name('job_showOnGoingJobDetail');
             Route::get('freelancer/proposals', 'Job\JobFreelancerController@showFreelancerProposals')->name('job_showFreelancerProposals');
-            Route::get('freelancer/dashboard', 'Job\JobFreelancerController@freelancerDashboard')->name('job_freelancerDashboard');
-            Route::get('freelancer/profile', 'Job\JobFreelancerController@index')->name('job_personalDetail');
+            Route::get('candidate/dashboard', 'Job\JobFreelancerController@freelancerDashboard')->name('job_freelancerDashboard');
+            Route::get('candidate/profile', 'Job\JobFreelancerController@index')->name('job_personalDetail');
             Route::post('freelancer/upload-temp-image', 'Job\JobFreelancerController@uploadTempImage');
         }
     );
     // Employer|Freelancer Routes
     Route::group(
-        ['middleware' => ['role:employer|freelancer|admin']],
+        ['middleware' => ['role:job_employer|candidate|admin']],
         function () {
             Route::post('proposal/upload-temp-image', 'Job\JobProposalController@uploadTempImage');
             Route::get('job/proposal/{job_slug}', 'Job\JobProposalController@createProposal')->name('job_createProposal');
@@ -888,9 +938,9 @@ Route::group(['prefix' => 'Job/'], function () {
     Route::post('job/get-wishlist', 'Job\JobJobController@getWishlist');
     Route::get('dashboard/packages/{role}', 'Job\JobPackageController@index');
     Route::get('package/get-purchase-package', 'Job\JobPackageController@getPurchasePackage');
-    Route::get('paypal/redirect-url', 'Job\JobPaypalController@getIndex');
-    Route::get('paypal/ec-checkout', 'Job\JobPaypalController@getExpressCheckout');
-    Route::get('paypal/ec-checkout-success', 'Job\JobPaypalController@getExpressCheckoutSuccess');
+    // Route::get('paypal/redirect-url', 'Job\JobPaypalController@getIndex');
+    // Route::get('paypal/ec-checkout', 'Job\JobPaypalController@getExpressCheckout');
+    // Route::get('paypal/ec-checkout-success', 'Job\JobPaypalController@getExpressCheckoutSuccess');
     Route::get('user/products/thankyou', 'Job\JobUserController@thankyou');
     Route::get('payment-process/{id}', 'Job\JobEmployerController@employerPaymentProcess');
     Route::get('search/get-search-filters', 'Job\JobPublicController@getFilterlist');
@@ -910,8 +960,8 @@ Route::group(['prefix' => 'Job/'], function () {
     Route::post('get-freelancer-experiences', 'Job\JobPublicController@getFreelancerExperience');
     Route::post('get-freelancer-education', 'Job\JobPublicController@getFreelancerEducation');
 
-    Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 'Job\JobStripeController@payWithStripe',));
-    Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'Job\JobStripeController@postPaymentWithStripe',));
+    // Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 'Job\JobStripeController@payWithStripe',));
+    // Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'Job\JobStripeController@postPaymentWithStripe',));
 });
 
 
@@ -960,7 +1010,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'Permission_check:learn_module']], function () {
 
     /*demo start*/
     //    Route::middleware(['demo'])->group(function () {
@@ -1072,7 +1122,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     //    });
     /*demo End*/
 
-    Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+    // Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 });
 
 
@@ -1113,7 +1163,7 @@ Route::redirect('/home', '/');
 
 Route::redirect('/admin', '/');
 
-Route::get('register/verify/{confirmationCode}', 'UserDashboardController@confirm');
+// Route::get('register/verify/{confirmationCode}', 'UserDashboardController@confirm');
 
 // Searching Routes
 Route::get('search', 'SearchController@homeSearch');
@@ -1149,12 +1199,12 @@ Route::get('profile/{id}', 'CouponPageController@profile_show');
 
 
 // Admin Dashboard Routes
-Route::group(['middleware' => ['web', 'auth', 'is_admin']], function () {
+Route::group(['middleware' => ['web', 'auth', 'is_admin', 'Permission_check:community_module']], function () {
     Route::get('/admin', 'AdminDashboardController@dashboard_show');
-    Route::get('admin/profile', function () {
-        $auth = Auth::user();
-        return view('admin.profile', compact('auth'));
-    });
+    // Route::get('admin/profile', function () {
+    //     $auth = Auth::user();
+    //     return view('admin.profile', compact('auth'));
+    // });
     Route::post('admin/profile-update', 'AdminDashboardController@update_profile');
     Route::resource('admin/category', 'CouponCategoryController');
     Route::post('admin/category/bulk_delete', 'CouponCategoryController@bulk_delete');
@@ -1219,7 +1269,7 @@ Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallba
 // Mail Subscription
 Route::post('emailsubscribe', 'EmailSubscribeController@subscribe');
 
-Route::get('{page}', 'PageController@page_show');
+// Route::get('{page}', 'PageController@page_show');
 
 
 
@@ -1256,3 +1306,7 @@ Route::group(['prefix' => 'service'], function () {
     Route::get('/proposal_accept/{id}', 'ServicesController@accept');
     Route::get('/proposal_denied/{id}', 'ServicesController@denied');
 });
+// Route::get('{any}', 'UboldController@index');
+
+Route::get('/chore_panel','ChoreController@panel');
+Route::get('chore_panel_ajax', 'ChoreController@panel_ajax');

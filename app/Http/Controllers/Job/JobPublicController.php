@@ -441,7 +441,7 @@ class JobPublicController extends Controller
         if (!empty($_GET['type'])) {
             if ($type != 'job') {
                // return $type;
-                if ($type == 'employer' || $type == 'freelancer' ||$type=='pro' || $type== 'candidate' || $type='company') {
+                if ($type == 'job_employer' || $type== 'candidate' ) {
                    // return $type;
                     $search =  User::getSearchResult(
                         $type,
@@ -463,7 +463,7 @@ class JobPublicController extends Controller
                 } else {
                     abort(404);
                 }
-                if ($type === 'employer') {
+                if ($type === 'job_employer') {
                     return view(
                         'job.front-end.employers.index',
                         compact(

@@ -1,4 +1,4 @@
-@extends('back-end.master')
+@extends('back-end.master-without-options')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace" id="profile_settings">
         <div class="row">

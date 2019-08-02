@@ -441,7 +441,12 @@ class User extends Authenticatable
                 if($type=='pro'){
                     $locations = ProLocation::select('id')->whereIn('slug', $search_locations)
                         ->get()->pluck('id')->toArray();
-                }elseif($type=='candidate'){
+                }
+                elseif($type=='candidate'){
+                    $locations = JobLocation::select('id')->whereIn('slug', $search_locations)
+                        ->get()->pluck('id')->toArray();
+                }
+                elseif($type=='job_employer'){
                     $locations = JobLocation::select('id')->whereIn('slug', $search_locations)
                         ->get()->pluck('id')->toArray();
                 }
@@ -581,6 +586,11 @@ class User extends Authenticatable
         return 'success';
     }
 
+    //chore 
+
+    public function chore(){
+        return $this->hasOne('App\Chore','creator');
+    }
     //coupon.................
     public function followers()
     {

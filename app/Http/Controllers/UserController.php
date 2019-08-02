@@ -689,7 +689,7 @@ class UserController extends Controller
             return $json;
         }
     }
-
+   
     /**
      * Download Attachements.
      *
@@ -1130,6 +1130,7 @@ class UserController extends Controller
      */
     public function adminProfileSettings()
     {
+       // return 'hi';
         $profile = Profile::where('user_id', Auth::user()->id)
             ->get()->first();
         $banner = !empty($profile->banner) ? $profile->banner : '';
@@ -1492,5 +1493,41 @@ class UserController extends Controller
             $json['message'] = trans('lang.verify_code');
             return $json;
         }
+    }
+    public function swithcing($type,$slag){
+        if($type=='selling' && $slag=='pro'){
+            Session::forget('get_swithcing');
+            Session::put('get_swithcing', 'selling');
+            Auth::user()->syncRoles('pro');
+            return redirect('Pro/pro/dashboard');
+        }elseif($type=='buying' && $slag=='pro'){
+            Session::forget('get_swithcing');
+            Session::put('get_swithcing', 'buying');
+            Auth::user()->syncRoles('employer');
+            return redirect('Pro/employer/dashboard');
+        }
+        if($type=='selling' && $slag=='freelancer'){
+            Session::forget('get_swithcing');
+            Session::put('get_swithcing', 'selling');
+            Auth::user()->syncRoles('freelancer');
+            return redirect('freelancer/dashboard');
+        }elseif($type=='buying' && $slag=='freelancer'){
+            Session::forget('get_swithcing');
+            Session::put('get_swithcing', 'buying');
+            Auth::user()->syncRoles('employer');
+            return redirect('employer/dashboard');
+        }
+        if($type=='selling' && $slag=='job'){
+            Session::forget('get_swithcing');
+            Session::put('get_swithcing', 'selling');
+            Auth::user()->syncRoles('candidate');
+            return redirect('Job/candidate/dashboard');
+        }elseif($type=='buying' && $slag=='job'){
+            Session::forget('get_swithcing');
+            Session::put('get_swithcing', 'buying');
+            Auth::user()->syncRoles('job_employer');
+            return redirect('Job/employer/dashboard');
+        }
+
     }
 }

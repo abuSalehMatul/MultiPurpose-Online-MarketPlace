@@ -106,7 +106,7 @@ class JobUserController extends Controller
             }
         }
         return view(
-            'job.job.back-end.settings.security-settings',
+            'job.back-end.settings.security-settings',
             compact('languages', 'saved_options', 'user_languages', 'english_levels', 'user_level')
         );
     }

@@ -295,7 +295,8 @@ if (document.getElementById("registration")) {
             loading: false,
             user_role:'employer',
             is_show:true,
-            error_message:''
+            error_message:'',
+            
         },
         methods:{
             showError(error){

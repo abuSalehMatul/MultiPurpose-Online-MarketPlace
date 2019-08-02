@@ -1,14 +1,5 @@
 <?php
-/**
- * Class Kernel.
- *
- * @category Worketic
- *
- * @package Worketic
- * @author  Amentotech <theamentotech@gmail.com>
- * @license http://www.amentotech.com Amentotech
- * @link    http://www.amentotech.com
- */
+
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -85,6 +76,7 @@ class Kernel extends HttpKernel
         'Master_access' => \App\Http\Middleware\Master_access::class,
 
         'demo' => \App\Http\Middleware\Demo::class,
+        'Permission_check' => \App\Http\Middleware\Permission_check::class,
         ];
 
     /**

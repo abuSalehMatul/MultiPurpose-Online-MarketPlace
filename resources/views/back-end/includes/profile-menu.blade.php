@@ -7,24 +7,24 @@
                         <span>{{ trans('lang.all_jobs') }}</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{{ route('reviewOptions') }}}">
                         <i class="ti-check-box"></i>
                         <span>{{ trans('lang.review_options') }}</span>
                     </a>
-                </li>
-                <li>
+                </li> --}}
+                {{-- <li>
                     <a href="{{{ route('userListing') }}}">
                         <i class="ti-user"></i>
                         <span>{{ trans('lang.manage_users') }}</span>
                     </a>
-                </li>
-                <li>
+                </li> --}}
+                {{-- <li>
                     <a href="{{{ route('emailTemplates') }}}">
                         <i class="ti-email"></i>
                         <span>{{ trans('lang.email_templates') }}</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                     <a href="{{{  url('admin/pages') }}}">
@@ -42,7 +42,7 @@
                         <span>{{ trans('lang.packages') }}</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{{ route('adminPayouts') }}}">
                         <i class="ti-money"></i>
                         <span>{{ trans('lang.payouts') }}</span>
@@ -53,8 +53,8 @@
                         <i class="ti-home"></i>
                         <span>{{ trans('lang.home_page_settings') }}</span>
                     </a>
-                </li>
-                <li class="menu-item-has-children">
+                </li> --}}
+                {{-- <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                     <a href="{{{ url('admin/profile') }}}">
                         <i class="ti-settings"></i>
@@ -65,7 +65,7 @@
                         <li><a href="{{{ url('admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
                         <li><a href="{{{ route('resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="ti-layers"></i></span>
                     <a href="{{{ route('categories') }}}">

@@ -10,15 +10,12 @@
     @endphp
 @endif
 @php
-    if(Auth::user()){
+    if(Auth::user()->hasRole('admin')){
+        Auth::user()->syncRoles('admin');
+    }else {
         Auth::user()->syncRoles('candidate');
     }
-    // if(Auth::user()->hasRole('pro')){
-    //     echo 'pro';
-    // }
-    // if(Auth::user()->hasRole('candidate')){
-    //     echo 'candidate';
-    // }
+    
     
 @endphp
 <header id="wt-header" class="wt-header wt-haslayout {{$inner_header}}">
@@ -82,7 +79,7 @@
                                     </li>
                                    
                                     <li>
-                                        <a href="{{url('Job/search-results?type=employer')}}">
+                                        <a href="{{url('Job/search-results?type=job_employer')}}">
                                             {{{ trans('lang.view_company') }}}
                                         </a>
                                     </li>

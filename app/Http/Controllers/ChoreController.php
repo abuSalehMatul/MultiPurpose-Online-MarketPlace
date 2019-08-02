@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\chore;
+use App\Chore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -13,7 +13,9 @@ use App\Chore_proposal;
 use Session;
 use Auth;
 use App\User;
-use App\All_user;
+use Yajra\Datatables\Datatables;
+
+use CyrildeWit\EloquentViewable\Viewable;
 
 
 class ChoreController extends Controller
@@ -22,7 +24,7 @@ class ChoreController extends Controller
     public function index()
     {
 
-        return view('chore.view')->with('flag','chorepage');
+        return view('chore.mainmaster')->with('flag','chorepage');
     }
 
     public function create()
@@ -93,9 +95,23 @@ class ChoreController extends Controller
     }
     public function show( $chore)
     {
-        $chore=chore::find($chore);
+        $chore=Chore::find($chore);
+       // return $chore;
         $chore->view++;
-        return view('chore.choreDetails')->with('chore',$chore);
+        $minutes=30;
+        views($chore)
+             ->delayInSession($minutes)
+            ->record();
+        $category=Chore::find($chore->id)->category;
+        $view=views($chore)->count();
+        $creator=Chore::find($chore->id)->user;
+        // print_r($creator);
+        // exit();
+        return view('chore.choreDetails')
+                    ->with('chore',$chore)
+                    ->with('view',$view)
+                    ->with('cat',$category)
+                    ->with('creator',$creator);
     }
 
     public function edit(chore $chore)
@@ -147,7 +163,7 @@ class ChoreController extends Controller
     public function admin(){
         if (Auth::guard('admin')->check()) {
             $email = Auth::guard('admin')->email;
-            $user = All_user::where('email', $email)->first();
+            $user = User::where('email', $email)->first();
             Auth::guard('admin')->logout();
             Auth::login($user);
         }
@@ -166,7 +182,7 @@ class ChoreController extends Controller
     public function denied($id)
     {
         $proposal = Chore_proposal::find($id);
-        $chore = chore::find($proposal->chore_id);
+        $chore = Chore::find($proposal->chore_id);
         $proposal->status = 2;
         $proposal->save();
         Session::flash('message', 'Proposal Denied');
@@ -178,5 +194,38 @@ class ChoreController extends Controller
     }
     public function mywishlist(){
         return view('chore.admin.mywishlist');
+    }
+    public function panel(){
+        return view('backend.chore.admin_inbox');
+    }
+    public function panel_ajax(){
+       
+        $query = DB::table('chore_proposals')->orderBy('created_at', 'desc')
+            ->get();
+        return Datatables::queryBuilder($query)->make(true)
+            ->setRowId('id')
+            ->editColumn('user_id', function ($val) {
+                // return 'Hi ' . $user->name . '!';
+                $user=User::find($val->user_id);
+                return $user->first_name;
+            })
+            ->editColumn('chore_id', function ( $v) {
+                // return 'Hi ' . $user->name . '!';
+                $chore=Chore::find($v->chore_id);
+                return $chore->name;
+            })
+            ->editColumn('status', function ($val) {
+                // return 'Hi ' . $user->name . '!';
+                if($val->status==0){
+                    return 'Not Accepted';
+                }elseif ($val->status==1) {
+                   return 'Accepted';
+                }else{
+                    return 'Denied';
+                }
+            })
+            ->make(true);;
+       
+         
     }
 }

@@ -24,7 +24,7 @@ use App\ProModel\Helper;
  * Class Category Controller
  *
  */
-class BadgeController extends Controller
+class ProBadgeController extends Controller
 {
     /**
      * Defining scope of variable

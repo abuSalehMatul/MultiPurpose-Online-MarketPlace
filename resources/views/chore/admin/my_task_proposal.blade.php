@@ -26,7 +26,7 @@ $proposal=App\Chore_proposal::where('user_id',$id)->get();
           @if($proposal)
             @foreach($proposal as $proposal)
                 @php
-                    $chore=App\chore::find($proposal->chore_id);
+                    $chore=App\Chore::find($proposal->chore_id);
                     // print_r($chore->id);
                     // exit();
                    

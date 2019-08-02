@@ -32,7 +32,7 @@
                     @if ($role === 'employer')
                       
                         <div class="wt-btnarea float-left"><a href="{{{ url(route('employerPostJob')) }}}" class=" float-left btn-sm">{{{ trans('lang.post_job') }}}</a></div>
-                        <div class="wt-btnarea float-left"><a href="{{{ url(route('pro_employerPostJob')) }}}" class="float-left btn-sm">{{{ trans('lang.post_service') }}}</a></div>
+                        {{-- <div class="wt-btnarea float-left"><a href="{{{ url(route('pro_employerPostJob')) }}}" class="float-left btn-sm">{{{ trans('lang.post_service') }}}</a></div> --}}
                     @elseif ($role === 'freelancer')
                         <div class="wt-btnarea"><a href="{{{ url(route('showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @elseif($role=='pro')
@@ -49,24 +49,24 @@
                                 <span>{{ trans('lang.all_jobs') }}</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{{ route('reviewOptions') }}}">
                                 <i class="ti-check-box"></i>
                                 <span>{{ trans('lang.review_options') }}</span>
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="{{{ route('userListing') }}}">
                                 <i class="ti-user"></i>
                                 <span>{{ trans('lang.manage_users') }}</span>
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="{{{ route('emailTemplates') }}}">
                                 <i class="ti-email"></i>
                                 <span>{{ trans('lang.email_templates') }}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
@@ -85,19 +85,19 @@
                                 <span>{{ trans('lang.packages') }}</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{{ route('adminPayouts') }}}">
                                 <i class="ti-money"></i>
                                 <span>{{ trans('lang.payouts') }}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{{ route('homePageSettings') }}}">
                                 <i class="ti-home"></i>
                                 <span>{{ trans('lang.home_page_settings') }}</span>
                             </a>
                         </li>
-                        <li class="menu-item-has-children">
+                        {{-- <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
                                 <i class="ti-settings"></i>
@@ -108,7 +108,7 @@
                                 <li><hr><a href="{{{ url('admin/settings') }}}">{{ trans('lang.general_settings') }}</a></li>
                                 <li><hr><a href="{{{ route('resetPassword') }}}">{{ trans('lang.reset_pass') }}</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">

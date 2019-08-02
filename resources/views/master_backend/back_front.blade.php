@@ -42,7 +42,7 @@
         <a href="{{url('master_redirect/'.'candidate')}}">Job</a>
     </div>
     <div class="box" style="float:right">
-        <a href="{{url('master_redirect/'.'employer')}}">Employer</a>
+        <a href="{{url('master_redirect/'.'chores')}}">Chores</a>
     </div>
     <div class="box">
         <a href="{{url('master_redirect/'.'study')}}">Studey and Grow</a>

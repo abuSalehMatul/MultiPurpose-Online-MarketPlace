@@ -1,3 +1,6 @@
+@php
+     Auth::user()->syncRoles('employer');
+@endphp
 @extends('back-end.master')
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace wt-insightuser" id="dashboard">

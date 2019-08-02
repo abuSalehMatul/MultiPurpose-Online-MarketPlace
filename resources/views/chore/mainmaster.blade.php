@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    @include('chore.CSS')
-    @include('chore.choreContent')
+    @include('chore.style.CSS')
+    @include('chore.style.choreContent')
      <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -31,8 +31,8 @@
 
 <div class="">
    @php
-       $chores=App\chore::where('type',1)->get();
-       $chores_service=App\chore::where('type',2)->get();
+       $chores=App\Chore::where('type',1)->get();
+       $chores_service=App\Chore::where('type',2)->get();
     //    print_r($chores[0]->id);
 
    @endphp
@@ -41,13 +41,16 @@
             <h3>Find local help for your chores or trade your services</h3>
             <small>You can start by posting a chore you need done, or a service you can do for others</small>
         </div>
+        @auth
         <div class="post">
             <a href="{{url('service/add')}}" class="btn btn-info ">Post a service</a>
             <a href="{{url('chores/add')}}" class="btn btn-info ">Post a Task</a>
         </div>
-        @php
-            
-        @endphp
+        <div class="post">
+             <a href="{{url('chores/admin')}}" class="btn btn-success">Your Dashboard</a>
+        </div>
+        @endauth
+        
         <div class="sliderm">            
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                 @if($chores)
@@ -55,8 +58,7 @@
                     @if(count($chores)>0)
                         @php
                             $image=App\Image::where('id',$chores[0]->image_id)->first();
-                            // print_r($chores[0]);
-                            // exit();
+                           
                         @endphp
                         <div class="carousel-item active div-slider ">
                             <img src="{{asset('uploads/image/'.$image->image)}}" class="d-block w-100 " alt="...">
@@ -194,7 +196,7 @@
             </div>
         </div>
     </div>
-    <div class="category card">
+    <div class="card">
         <div class="card-header">
              <h6>Browse Category</h6>
         </div>
@@ -205,49 +207,53 @@
                 @php
                     $chore_category=App\ChoreCategory::all();
                 @endphp
-                @foreach($chore_category as $chore_category)
-                <li style="float:left"><i class="fas fa-plus-circle">{{$chore_category->name}}</i></li>
-                @endforeach
+                @if($chore_category)
+                    @foreach($chore_category as $chore_category)
+                    <li style="float:left"><i class="fas fa-plus-circle">{{$chore_category->name}}</i></li>
+                    @endforeach
+                @endif
             </ul>
         </div>
 
     </div>
    
-    <div class="chore ">
+    <div class="chore">
         <div class="letest">
             latest chores
         </div>
         <hr>
-         @foreach($chores as $chores)
-        <a href="{{url('chores/details/'.$chores->id)}}">
-            <div class="chore-div ">
-                @php
-                    $image=App\Image::where('id',$chores->image_id)->first();
-                @endphp
-                <img src="{{asset('uploads/image/'.$image->image)}}" class="chore-img" alt="">
-                <div>
-                    @php
-                        if($chores->precidance==1){
-                        $p='Featured';
-                        }else{
-                            $p='Normal';
-                        } 
-                        if($chores->type==1){
-                                $c='Chore';
-                            }else{
-                                $c='Service';
-                            }
-                    @endphp
-                    <small class="featured badge badge-success">{{$p}}</small>
-                    <small class="type badge badge-danger">{{$c}}</small>
-                
-                </div>
-                <h6 style="padding: 6px;color: brown;font-size: 18px;">{{$chores->name}}</h6>
-                <small class="price">$ {{$chores->price}}</small>
+        @if($chores)
+            @foreach($chores as $chores)
+                <a href="{{url('chores/details/'.$chores->id)}}">
+                    <div class="chore-div ">
+                        @php
+                            $image=App\Image::where('id',$chores->image_id)->first();
+                        @endphp
+                        <img src="{{asset('uploads/image/'.$image->image)}}" class="chore-img" alt="">
+                        <div>
+                            @php
+                                if($chores->precidance==1){
+                                $p='Featured';
+                                }else{
+                                    $p='Normal';
+                                } 
+                                if($chores->type==1){
+                                        $c='Chore';
+                                    }else{
+                                        $c='Service';
+                                    }
+                            @endphp
+                            <small class="featured badge badge-success">{{$p}}</small>
+                            <small class="type badge badge-danger">{{$c}}</small>
+                        
+                        </div>
+                        <h6 style="padding: 6px;color: brown;font-size: 18px;">{{$chores->name}}</h6>
+                        <small class="price">$ {{$chores->price}}</small>
 
-            </div>
-        </a>
-         @endforeach
+                    </div>
+                </a>
+            @endforeach
+         @endif
 
     </div>
    
@@ -257,37 +263,37 @@
         </div>
        
             @if($chores_service)
-            @foreach($chores_service as $chores)
-            <a href="{{url('service/details/'.$chores->id)}}">
-                <div class="chore-div ">
-                    @php
-                        $image=App\Image::where('id',$chores->image_id)->first();
-                    @endphp
-                    <img src="{{asset('uploads/image/'.$image->image)}}" class="chore-img" alt="">
-                    <div>
+                @foreach($chores_service as $chores)
+                <a href="{{url('service/details/'.$chores->id)}}">
+                    <div class="chore-div ">
                         @php
-                            if($chores->precidance==1){
-                            $p='Featured';
-                            }else{
-                                $p='Normal';
-                            } 
-                            if($chores->type==1){
-                                $c='Chore';
-                            }else{
-                                $c='Service';
-                            }
+                            $image=App\Image::where('id',$chores->image_id)->first();
                         @endphp
-                        <small class="featured badge badge-success">{{$p}}</small>
-                        <small class="type badge badge-danger">{{$c}}</small>
-                    
-                    </div>
-                    <h6 style="padding: 6px;color: brown;font-size: 18px;">{{$chores->name}}</h6>
-                    <small class="price">$ {{$chores->price}}</small>
+                        <img src="{{asset('uploads/image/'.$image->image)}}" class="chore-img" alt="">
+                        <div>
+                            @php
+                                if($chores->precidance==1){
+                                $p='Featured';
+                                }else{
+                                    $p='Normal';
+                                } 
+                                if($chores->type==1){
+                                    $c='Chore';
+                                }else{
+                                    $c='Service';
+                                }
+                            @endphp
+                            <small class="featured badge badge-success">{{$p}}</small>
+                            <small class="type badge badge-danger">{{$c}}</small>
+                        
+                        </div>
+                        <h6 style="padding: 6px;color: brown;font-size: 18px;">{{$chores->name}}</h6>
+                        <small class="price">$ {{$chores->price}}</small>
 
-                </div>
-            </a>
-            
-            @endforeach
+                    </div>
+                </a>
+                
+                @endforeach
             @endif
         
 

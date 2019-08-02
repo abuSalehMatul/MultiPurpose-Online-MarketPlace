@@ -8,8 +8,8 @@
 @include('chore.style.choreContent')
 <div class="">
    @php
-       $chores=App\chore::where('type',1)->get();
-       $chores_service=App\chore::where('type',2)->get();
+       $chores=App\Chore::where('type',1)->get();
+       $chores_service=App\Chore::where('type',2)->get();
     //    print_r($chores[0]->id);
 
    @endphp
